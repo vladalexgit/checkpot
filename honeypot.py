@@ -18,7 +18,7 @@ class Honeypot:
     def scan(self):
 
         if self.scan_os:
-            if platform.system() is 'Windows':
+            if platform.system() == 'Windows':
                 # No sudo on Windows systems
                 self._nm.scan(hosts=self.address, arguments='-sV -O', sudo=False)
             else:
@@ -48,5 +48,5 @@ class Honeypot:
             return None
 
         for port, attributes in self._nm[self.host][protocol].items():
-            if attributes['name'] is service_name:
+            if attributes['name'] == service_name:
                 return port
