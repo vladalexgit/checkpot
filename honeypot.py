@@ -39,6 +39,10 @@ class Honeypot:
             if self._nm[self.host]['osmatch'] and self._nm[self.host]['osmatch'][0]['osclass']:
                 return "OS: " + self._nm[self.host]['osmatch'][0]['osclass'][0]['osfamily']
 
+    @property
+    def ip(self):
+        return self._nm[self.host]['addresses']['ipv4']
+
     def has_tcp(self, port_number):
         return self._nm[self.host].has_tcp(port_number)
 
