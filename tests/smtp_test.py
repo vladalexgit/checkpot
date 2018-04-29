@@ -6,8 +6,7 @@ from tests.test import TestResult
 
 class SMTPTest(Test):
 
-    def describe(self):
-        return "Tests SMTP service implementation"
+    description = "Tests SMTP service implementation"
 
     def run(self):
 

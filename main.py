@@ -1,8 +1,11 @@
-from honeypot import Honeypot
+from honeypots.honeypot import Honeypot
 from tests.smtp_test import SMTPTest
-from tests.test_results import TestResult
+from tests.test import TestResult
 
-hp = Honeypot('192.168.100.117', False)
+from test_platform import TestPlatform
+
+
+hp = Honeypot('192.168.100.117', True)
 
 tst = SMTPTest(hp)
 
