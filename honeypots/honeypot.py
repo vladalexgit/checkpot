@@ -26,6 +26,11 @@ class Honeypot:
         else:
             self._nm.scan(hosts=self.address, arguments='-sV')
 
+        # if int(self._nm.scanstats()['uphosts']) is 0:
+        #     print("No destination host reachable")
+        #     # TODO also add -Pn option?
+        #     sys.exit(0)
+
         hosts = self._nm.all_hosts()
         if hosts:
             self.host = hosts[0]

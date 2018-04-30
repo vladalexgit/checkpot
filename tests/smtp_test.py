@@ -6,6 +6,7 @@ from tests.test import TestResult
 
 class SMTPTest(Test):
 
+    name = "SMTP Test"
     description = "Tests SMTP service implementation"
 
     def run(self):
@@ -17,6 +18,8 @@ class SMTPTest(Test):
 
             if custom_port:
                 self.check_smtp_implemented(self.target_honeypot.ip, custom_port)
+
+        # TODO report test not aplicable
 
     def check_smtp_implemented(self, server_address, port=25):
 

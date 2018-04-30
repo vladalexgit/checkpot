@@ -12,12 +12,18 @@ class TestResult(Enum):
 class Test:
 
     result = TestResult.UNKNOWN
+
     default_report = "This test did not provide a report of it's findings"
     default_description = "No description defined for this test"
+    default_name = "UnknownName"
+
+    description = default_description
+    name = default_name
 
     def __init__(self, target_honeypot):
         assert isinstance(target_honeypot, Honeypot)  # for safety and autocomplete
-        self.reset()
+        self.result = TestResult.UNKNOWN
+        self.report = self.default_report
         self.target_honeypot = target_honeypot
 
     def run(self):
@@ -28,4 +34,4 @@ class Test:
 
     def reset(self):
         self.result = TestResult.UNKNOWN
-        self.report = "This test did not provide a report of it's findings"
+        self.report = self.default_report
