@@ -13,7 +13,7 @@ class Test:
 
     result = TestResult.UNKNOWN
 
-    default_report = "This test did not provide a report of it's findings"
+    default_report = "This test did not provide a report of its findings"
     default_description = "No description defined for this test"
     default_name = "UnknownName"
 
