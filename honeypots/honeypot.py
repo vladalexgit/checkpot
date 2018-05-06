@@ -22,14 +22,29 @@ class Honeypot:
                 # No sudo on Windows systems
                 self._nm.scan(hosts=self.address, arguments='-sV -O', sudo=False)
             else:
-                self._nm.scan(hosts=self.address, arguments='-sV -O', sudo=True)
+                try:
+                    # FIXME this is just a workaround for the bug shown in python-nmap-bug.log
+                    self._nm.scan(hosts=self.address, arguments='-sV -O', sudo=True)
+                except Exception as e:
+                    print(e.__class__, "occured trying again with get_last_output")
+                    self._nm.get_nmap_last_output()
+                    self._nm.scan(hosts=self.address, arguments='-sV -O', sudo=True)
+
         else:
-            self._nm.scan(hosts=self.address, arguments='-sV')
+            try:
+                # FIXME this is just a workaround for the bug shown in python-nmap-bug.log
+                self._nm.scan(hosts=self.address, arguments='-sV', sudo=False)
+            except Exception as e:
+                print(e.__class__, "occured trying again with get_last_output")
+                self._nm.get_nmap_last_output()
+                self._nm.scan(hosts=self.address, arguments='-sV', sudo=False)
 
         # if int(self._nm.scanstats()['uphosts']) is 0:
         #     print("No destination host reachable")
         #     # TODO also add -Pn option?
         #     sys.exit(0)
+
+        # TODO error on connection refused, check if nm[self.host]['status'][reason] = conn_refused
 
         hosts = self._nm.all_hosts()
         if hosts:
