@@ -1,7 +1,6 @@
 import socket
 
-from tests.test import Test
-from tests.test import TestResult
+from .test import *
 
 
 class HTTPTest(Test):

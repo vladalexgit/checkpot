@@ -1,5 +1,4 @@
 import nmap
-import sys
 import platform
 
 
