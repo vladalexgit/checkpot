@@ -1,57 +1,63 @@
-import docker
+import time
+
+from containers import manager
 
 from honeypots.honeypot import Honeypot
 from tests.test import TestResult
 from test_platform import TestPlatform
-from tests.smtp_test import SMTPTest
+
 from tests.http_test import HTTPTest
+from tests.smtp_test import SMTPTest
 
-client = docker.from_env()
 
-# TODO make sure the user is enrolled in the docker group
+# test artillery
 
-# build the images
+manager.start_honeypot('artillery')
 
-# TODO check if image already exists first and reuse it
-output = client.build(path='continuous_integration/containers/artillery', tag='artillery')
+time.sleep(5)  # TODO wait for container to start, catch some sort of signal
 
-# create containers based on images
+hp = Honeypot(manager.get_honeypot_ip('artillery'), False)
 
-container = client.create_container(image='artillery', detach=True)
-
-# start the containers
-
-client.start(container)
-
-# run the tests
-
-container_details = client.inspect_container(container)
-target_ip = container_details['NetworkSettings']['IPAddress']
-
-print(target_ip)
-
-# run the scan
-
-hp = Honeypot(target_ip, False)
-
-test_list = []
-
-print("Fingerprinting ...\n")
-
-test_list.append(SMTPTest(hp))
-test_list.append(HTTPTest(hp))
-
-tp = TestPlatform(test_list)
+tp = TestPlatform([SMTPTest(hp)])
 
 tp.run_tests()
 
 results = tp.get_results()
 
 for tname, treport, tresult in results:
-    print(tname, " ---> ", tresult)
-    print("\t", treport)
+    if tname == "SMTP Test":
+        if tresult == TestResult.WARNING:
+            print("artillery -> OK")
+        else:
+            print("artillery -> FAIL")
 
-print(tp.get_stats())
+            print(tname, " ---> ", tresult)
+            print("\t", treport)
 
+manager.stop_honeypot('artillery')
 
-client.stop(container)
+# test glastopf
+
+manager.start_honeypot('glastopf')
+
+time.sleep(5)  # TODO wait for container to start, catch some sort of signal
+
+hp = Honeypot(manager.get_honeypot_ip('glastopf'), False)
+
+tp = TestPlatform([HTTPTest(hp)])
+
+tp.run_tests()
+
+results = tp.get_results()
+
+for tname, treport, tresult in results:
+    if tname == "HTTP Test":
+        if tresult == TestResult.OK:
+            print("glastopf -> OK")
+        else:
+            print("glastopf -> FAIL")
+
+            print(tname, " ---> ", tresult)
+            print("\t", treport)
+
+manager.stop_honeypot('glastopf')
