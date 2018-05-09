@@ -15,14 +15,15 @@ def start_honeypot(name):
     try:
         client.inspect_container(name)
     except docker.errors.NotFound:
-        print("Container ", name, " not found, creating new container from image ...")
 
-        # create container based on image
+        print("Container ", name, " not found, creating new container from image ...")
 
         try:
             client.create_container(image=name, detach=True, name=name)
         except docker.errors.NotFound:
-            # build the image
+
+            print("Image not found, building image for ", name, " ...")
+
             output = client.build(path=os.path.join(os.path.dirname(__file__), name), tag=name)
 
             for line in output:
@@ -46,8 +47,8 @@ def get_honeypot_ip(name):
     return target_ip
 
 
-def stop_honeypot():
-    pass
+def stop_honeypot(name):
+    client.stop(name)
 
 
 def stop_all_honeypots():
