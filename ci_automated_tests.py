@@ -12,7 +12,15 @@ manager = Manager()
 
 
 def run_test(container_name, test_list, expected_results):
-
+    """
+    Starts a container and runs a list of tests against it.
+    Compares results with the expected results.
+    Stops the container.
+    :param container_name: target container
+    :param test_list: list of Test objects
+    :param expected_results: correct results to compare with
+    :return: boolean representing test pass/failure
+    """
     assert all(isinstance(r, TestResult) for r in expected_results)
 
     manager.start_honeypot(container_name)
@@ -25,11 +33,9 @@ def run_test(container_name, test_list, expected_results):
 
     tp.run_tests()
 
-    results = tp.get_results()
-
     manager.stop_honeypot(container_name)
 
-    for i, result in enumerate(results):
+    for i, result in enumerate(tp.results):
 
         tname, treport, tresult = result
 
@@ -43,6 +49,10 @@ def run_test(container_name, test_list, expected_results):
 
 
 def main():
+    """
+    Entry point for the Continuous Integration tools.
+    Write all tests here.
+    """
 
     # test artillery
     run_test('artillery', [SMTPTest(), HTTPTest()], [TestResult.WARNING, TestResult.NOT_APPLICABLE])

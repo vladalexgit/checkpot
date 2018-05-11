@@ -8,10 +8,13 @@ from tests.service_implementation import HTTPTest, SMTPTest
 
 
 def print_usage():
+    """Prints correct command line usage of the app"""
+
     print("Example usage: honeydetect -t <IP> -O -l 3")
 
 
 def main(argv):
+    """Entry point for the main application"""
 
     # get command line arguments and options
 
@@ -38,7 +41,7 @@ def main(argv):
         elif option in ('-l', '--level'):
             scan_level = int(value)
 
-    # run nmap scan
+    # run scan
 
     print("Running scan on " + target + " ...")
 

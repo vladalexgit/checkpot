@@ -3,9 +3,15 @@ from honeypots.honeypot import Honeypot
 
 
 class TestPlatform:
-
+    """
+    Holds a list of Tests and a reference to a Honeypot
+    Runs the list of tests on the Honeypot and generates statistics based on the results
+    """
     def __init__(self, test_list, target_honeypot):
-
+        """
+        :param test_list: list of Test objects
+        :param target_honeypot: Honeypot object to run Tests against
+        """
         assert isinstance(target_honeypot, Honeypot)  # for safety and autocomplete
         assert all(isinstance(t, Test) for t in test_list)
 
@@ -14,7 +20,10 @@ class TestPlatform:
         self.target_honeypot = target_honeypot
 
     def run_tests(self, verbose=False):
-
+        """
+        Runs the list of tests on the target Honeypot
+        :param verbose: print results of each test
+        """
         for test in self.test_list:
 
             test.target_honeypot = self.target_honeypot
@@ -29,10 +38,17 @@ class TestPlatform:
 
     @property
     def results(self):
+        """
+        Returns the results of each test
+        :return: list of tuples like (Test Name, Test Report, Test Result)
+        """
         return self.__results
 
     def get_stats(self):
-
+        """
+        Calculates statistics based on the last scan
+        :return: TODO
+        """
         ok = 0
         warnings = 0
         unknown = 0
