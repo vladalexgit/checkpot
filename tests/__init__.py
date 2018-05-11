@@ -1,1 +1,1 @@
-__all__ = ['test', 'http_test', 'smtp_test']
+__all__ = ['test', 'test_platform', 'service_implementation']

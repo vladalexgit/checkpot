@@ -3,18 +3,26 @@ import platform
 
 
 class Honeypot:
+    """
+    Holds all data known about one Honeypot.
+    Used for decoupling the acquisition of the data from its usages.
+    """
 
     def __init__(self, address, scan_os=False):
-
+        """
+        :param address: ip address of the target
+        :param scan_os: scan for Operating System information (requires elevated privileges)
+        """
         self.address = address
         self.scan_os = scan_os
         self.host = None
-
         self._nm = nmap.PortScanner()
         self.scan()
 
     def scan(self):
-
+        """
+        Runs a scan on this Honeypot for data acquisition.
+        """
         if self.scan_os:
             if platform.system() == 'Windows':
                 # No sudo on Windows systems, let UAC handle this
@@ -58,9 +66,20 @@ class Honeypot:
         return self._nm[self.host]['addresses']['ipv4']
 
     def has_tcp(self, port_number):
+        """
+        Checks if the Honeypot has a certain port open.
+        :param port_number: port number
+        :return: port status boolean
+        """
         return self._nm[self.host].has_tcp(port_number)
 
     def get_service_port(self, service_name, protocol):
+        """
+        Checks if the Honeypot has a certain service available.
+        :param service_name: name of the service to search for
+        :param protocol: 'tcp' or 'udp'
+        :return: port number or None
+        """
 
         if protocol not in self._nm[self.host]:
             return None

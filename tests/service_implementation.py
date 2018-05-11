@@ -4,11 +4,13 @@ from .test import *
 
 
 class SMTPTest(Test):
+    """Tests SMTP service implementation"""
 
     name = "SMTP Test"
     description = "Tests SMTP service implementation"
 
     def run(self):
+        """Verify service implements all methods in the SMTP specification"""
 
         if self.target_honeypot.has_tcp(25):
             self.check_smtp_implemented(self.target_honeypot.ip)
@@ -42,11 +44,13 @@ class SMTPTest(Test):
 
 
 class HTTPTest(Test):
+    """Tests HTTP service implementation"""
 
     name = "HTTP Test"
     description = "Tests HTTP service implementation"
 
     def run(self):
+        """Verify service implements all methods in the SMTP specification"""
 
         if self.target_honeypot.has_tcp(80):
             self.check_http_implemented(self.target_honeypot.ip)
