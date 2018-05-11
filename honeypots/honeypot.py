@@ -6,19 +6,19 @@ class Honeypot:
 
     def __init__(self, address, scan_os=False):
 
-        # load the nmap scanner
         self.address = address
         self.scan_os = scan_os
         self.host = None
 
-        self._nm = nmap.PortScanner()  # TODO maybe override exception descriptions
+        self._nm = nmap.PortScanner()
         self.scan()
 
     def scan(self):
 
         if self.scan_os:
             if platform.system() == 'Windows':
-                # No sudo on Windows systems
+                # No sudo on Windows systems, let UAC handle this
+                # FIXME workaround for the subnet python-nmap-bug.log also?
                 self._nm.scan(hosts=self.address, arguments='-sV -O', sudo=False)
             else:
                 try:
@@ -28,7 +28,6 @@ class Honeypot:
                     print(e.__class__, "occured trying again with get_last_output")
                     self._nm.get_nmap_last_output()
                     self._nm.scan(hosts=self.address, arguments='-sV -O', sudo=True)
-
         else:
             try:
                 # FIXME this is just a workaround for the bug shown in python-nmap-bug.log
@@ -38,19 +37,15 @@ class Honeypot:
                 self._nm.get_nmap_last_output()
                 self._nm.scan(hosts=self.address, arguments='-sV', sudo=False)
 
-        # if int(self._nm.scanstats()['uphosts']) is 0:
-        #     print("No destination host reachable")
-        #     # TODO also add -Pn option?
-        #     sys.exit(0)
-
-        # TODO error on connection refused, check if nm[self.host]['status'][reason] = conn_refused
-
         hosts = self._nm.all_hosts()
         if hosts:
             self.host = hosts[0]
         else:
-            # FIXME -> the scan failed, do something about it before user calls any other methods
             self.host = None
+            raise ScanFailure("Requested host not available")
+
+        # TODO error on connection refused, check if self._nm[self.host]['status']['reason'] = conn_refused
+        # TODO also add -Pn option?
 
     @property
     def os(self):
@@ -73,3 +68,15 @@ class Honeypot:
         for port, attributes in self._nm[self.host][protocol].items():
             if attributes['name'] == service_name:
                 return port
+
+
+class ScanFailure(Exception):
+
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
+
+    def __repr__(self):
+        return 'ScanFailure exception ' + self.value

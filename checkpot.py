@@ -2,15 +2,12 @@ import sys
 import getopt
 
 from honeypots.honeypot import Honeypot
-from tests.test import TestResult
-from test_platform import TestPlatform
 
-from tests.smtp_test import SMTPTest
-from tests.http_test import HTTPTest
+from tests.test_platform import TestPlatform
+from tests.service_implementation import HTTPTest, SMTPTest
 
 
 def print_usage():
-    # TODO elaborate this
     print("Example usage: honeydetect -t <IP> -O -l 3")
 
 
@@ -39,7 +36,7 @@ def main(argv):
         elif option in ('-O', '--osscan'):
             scan_os = True
         elif option in ('-l', '--level'):
-            scan_level = value
+            scan_level = int(value)
 
     # run nmap scan
 
@@ -52,20 +49,16 @@ def main(argv):
     print("Fingerprinting ...\n")
 
     if scan_level > 2:
-        test_list.append(SMTPTest(hp))
-        test_list.append(HTTPTest(hp))
+        test_list.append(SMTPTest())
+        test_list.append(HTTPTest())
 
-    tp = TestPlatform(test_list)
+    tp = TestPlatform(test_list, hp)
 
-    tp.run_tests()
+    tp.run_tests(verbose=True)
 
-    results = tp.get_results()
+    ok, warnings, unknown = tp.get_stats()
 
-    for tname, treport, tresult in results:
-        print(tname, " ---> ", tresult)
-        print("\t", treport)
-
-    print(tp.get_stats())
+    print("\nStats: OK -> ", ok, ", WARNING -> ", warnings, ", UNKNOWN -> ", unknown)
 
 
 if __name__ == '__main__':
