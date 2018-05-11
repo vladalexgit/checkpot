@@ -3,64 +3,75 @@ import docker
 import docker.errors
 
 
-client = docker.from_env()
+class Manager:
 
+    def __init__(self, verbose=True, logfile=None, custom_client=None):
 
-def start_honeypot(name):
+        if custom_client:
+            assert isinstance(custom_client, docker.Client)
+            self._client = custom_client
+        else:
+            self._client = docker.from_env()
 
-    # TODO make sure the user is enrolled in the docker group in the modules init
+        self._verbose = verbose
+        self._logfile = logfile
+        self._tag = "MANAGER"
 
-    # check if the container exists
+        # TODO download required images?
 
-    try:
-        client.inspect_container(name)
-    except docker.errors.NotFound:
+    def log(self, *args):
+            if self._verbose:
+                print(self._tag, " : ", *args)
 
-        print("Container ", name, " not found, creating new container from image ...")
+    def start_honeypot(self, name):
+
+        # check if the container exists
 
         try:
-            client.create_container(image=name, detach=True, name=name)
+            self._client.inspect_container(name)
         except docker.errors.NotFound:
 
-            print("Image not found, building image for ", name, " ...")
+            self.log("Container ", name, " not found, creating new container from image ...")
 
-            output = client.build(path=os.path.join(os.path.dirname(__file__), name), tag=name)
+            try:
+                self._client.create_container(image=name, detach=True, name=name)
+            except docker.errors.NotFound:
 
-            for line in output:
-                print(line)
+                self.log("Image not found, building image for ", name, " ...")
 
-            client.create_container(image=name, detach=True, name=name)
+                output = self._client.build(path=os.path.join(os.path.dirname(__file__), name), tag=name)
 
-    else:
-        print("Container ", name, " found")
+                for line in output:
+                    self.log(line)
 
-    # start the container
+                self._client.create_container(image=name, detach=True, name=name)
 
-    client.start(name)
+        else:
+            self.log("Container ", name, " found")
 
+        self.log("Starting container")
 
-def get_honeypot_ip(name):
+        self._client.start(name)
 
-    container_details = client.inspect_container(name)
-    target_ip = container_details['NetworkSettings']['IPAddress']
+    def get_honeypot_ip(self, name):
 
-    return target_ip
+        container_details = self._client.inspect_container(name)
+        target_ip = container_details['NetworkSettings']['IPAddress']
 
+        return target_ip
 
-def stop_honeypot(name):
-    client.stop(name)
+    def stop_honeypot(self, name):
+        self.log("Stopping container ", name)
+        self._client.stop(name)
 
+    def stop_all_honeypots(self):
+        pass
 
-def stop_all_honeypots():
-    pass
+    def cleanup_honeypot(self, name):
+        self.log("Cleaning container ", name)
+        self._client.stop(name)
+        self._client.remove_container(name, force=True)
+        self._client.remove_image(name, force=True)
 
-
-def cleanup_honeypot(name):
-
-    client.stop(name)
-    client.remove_container(name, force=True)
-    client.remove_image(name, force=True)
-
-
-def cleanup_all_honeypots():
-    pass
+    def cleanup_all_honeypots(self):
+        pass

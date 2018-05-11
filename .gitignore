@@ -1,7 +1,7 @@
 /__pycache__
 /tests/__pycache__
 /honeypots/__pycache__
-
+/containers/__pycache__
 
 # Taken from https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
 
