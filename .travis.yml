@@ -1,0 +1,15 @@
+language: python
+sudo: required
+
+python:
+  - 3.6
+
+services:
+  - docker
+
+install:
+  - sudo apt-get install -y nmap
+  - pip install -r requirements.txt
+
+script:
+  - python ci_automated_tests.py

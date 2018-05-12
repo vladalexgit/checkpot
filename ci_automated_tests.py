@@ -1,4 +1,5 @@
 import time
+import sys
 
 from containers.manager import Manager
 from honeypots.honeypot import Honeypot
@@ -41,11 +42,10 @@ def run_test(container_name, test_list, expected_results):
 
         if expected_results[i] != tresult:
             print("Test ", container_name, " -> FAILED:")
-            print("\t expected ", expected_results[i], " got ", tresult, " instead!")
-            return False
+            print("\ttest:", tname, " -> expected ", expected_results[i], " got ", tresult, " instead!")
+            sys.exit(1)  # exit failure
 
     print("Test ", container_name, " -> PASSED")
-    return True
 
 
 def main():
