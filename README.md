@@ -1,2 +1,2 @@
-# hpdetectprototype
-HpDetect Prototype
+# checkpot
+Honeypot Checker
