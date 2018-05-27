@@ -23,8 +23,6 @@ class Manager:
         self._logfile = logfile
         self._tag = "MANAGER"
 
-        # TODO download required images?
-
     def _log(self, *args):
         """
         Creates a new line in the log with given description
@@ -32,6 +30,24 @@ class Manager:
         """
         if self._verbose:
             print(self._tag, " : ", *args)
+
+    def build_honeypot(self, name):
+        """
+        Builds the required image (if it doesn't exist) and then creates a container from it
+        :param name: container name
+        """
+        try:
+            self._client.create_container(image=name, detach=True, name=name)
+        except docker.errors.NotFound:
+
+            self._log("Image not found, building image for ", name, " ...")
+
+            output = self._client.build(path=os.path.join(os.path.dirname(__file__), name), tag=name)
+
+            for line in output:
+                self._log(line)
+
+            self._client.create_container(image=name, detach=True, name=name)
 
     def start_honeypot(self, name):
         """
@@ -42,27 +58,12 @@ class Manager:
         try:
             self._client.inspect_container(name)
         except docker.errors.NotFound:
-
             self._log("Container ", name, " not found, creating new container from image ...")
-
-            try:
-                self._client.create_container(image=name, detach=True, name=name)
-            except docker.errors.NotFound:
-
-                self._log("Image not found, building image for ", name, " ...")
-
-                output = self._client.build(path=os.path.join(os.path.dirname(__file__), name), tag=name)
-
-                for line in output:
-                    self._log(line)
-
-                self._client.create_container(image=name, detach=True, name=name)
-
+            self.build_honeypot(name)
         else:
             self._log("Container ", name, " found")
 
         self._log("Starting container")
-
         self._client.start(name)
 
     def get_honeypot_ip(self, name):
@@ -86,9 +87,23 @@ class Manager:
 
     def stop_all_honeypots(self):
         """Stops all active containers"""
-        pass
+        available_honeypots = self.get_available_honeypots()
 
-    def cleanup_honeypot(self, name):
+        for hp in available_honeypots:
+            try:
+                self.stop_honeypot(hp)
+            except docker.errors.NotFound:
+                print("Container", hp, "not found")
+                continue
+
+    def get_available_honeypots(self):
+        """Returns a list with the names of all available honeypots"""
+        containers_folder = os.path.dirname(os.path.abspath(__file__))
+        # folders contained in this module represent the available honeypots
+        # folders starting with underscore are considered hidden
+        return [f.name for f in os.scandir(containers_folder) if f.is_dir() and f.name[0] != '_']
+
+    def clean_honeypot(self, name):
         """
         Removes container and underlying image for chosen container
         :param name: container name
@@ -98,9 +113,16 @@ class Manager:
         self._client.remove_container(name, force=True)
         self._client.remove_image(name, force=True)
 
-    def cleanup_all_honeypots(self):
+    def clean_all_honeypots(self):
         """
         Removes all containers and underlying images
         :return:
         """
-        pass
+        available_honeypots = self.get_available_honeypots()
+
+        for hp in available_honeypots:
+            try:
+                self.cleanup_honeypot(hp)
+            except docker.errors.NotFound:
+                print("Container", hp, "not found")
+                continue

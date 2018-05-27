@@ -7,6 +7,7 @@ from tests.test import TestResult
 from tests.test_platform import TestPlatform
 
 from tests.service_implementation import HTTPTest, SMTPTest
+from tests.direct_fingerprinting import DirectFingerprintTest
 
 
 manager = Manager()
@@ -30,6 +31,10 @@ def run_test(container_name, test_list, expected_results):
 
     hp = Honeypot(manager.get_honeypot_ip(container_name), False)
 
+    print("Collecting data ...")
+    hp.scan()
+
+    print("Running tests ...")
     tp = TestPlatform(test_list, hp)
 
     tp.run_tests()
@@ -55,10 +60,13 @@ def main():
     """
 
     # test artillery
-    run_test('artillery', [SMTPTest(), HTTPTest()], [TestResult.WARNING, TestResult.NOT_APPLICABLE])
+    run_test('artillery', [DirectFingerprintTest(), SMTPTest(), HTTPTest()], [TestResult.OK, TestResult.WARNING, TestResult.NOT_APPLICABLE])
 
     # test glastopf
-    run_test('glastopf', [SMTPTest(), HTTPTest()], [TestResult.NOT_APPLICABLE, TestResult.OK])
+    run_test('glastopf', [DirectFingerprintTest(), SMTPTest(), HTTPTest()], [TestResult.OK, TestResult.NOT_APPLICABLE, TestResult.OK])
+
+    # test dionaea
+    run_test('dionaea', [DirectFingerprintTest(), SMTPTest(), HTTPTest()], [TestResult.WARNING, TestResult.NOT_APPLICABLE, TestResult.OK])
 
 
 if __name__ == '__main__':
