@@ -27,7 +27,7 @@ def run_test(container_name, test_list, expected_results):
 
     manager.start_honeypot(container_name)
 
-    time.sleep(5)  # TODO wait for container to start, catch some sort of signal
+    time.sleep(10)  # TODO wait for container to start, catch some sort of signal
 
     hp = Honeypot(manager.get_honeypot_ip(container_name), False)
 

@@ -12,6 +12,10 @@ class DirectFingerprintTest(Test):
 
         ports = self.target_honeypot.get_all_ports('tcp')
 
+        if ports is None:
+            self.set_result(TestResult.UNKNOWN, "Port request returned None")
+            return
+
         for port in ports:
             product_description = self.target_honeypot.get_service_product('tcp', port)
 
