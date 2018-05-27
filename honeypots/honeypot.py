@@ -17,35 +17,44 @@ class Honeypot:
         self.scan_os = scan_os
         self.host = None
         self._nm = nmap.PortScanner()
-        self.scan()
 
-    def scan(self):
+    def scan(self, port_range=None):
         """
         Runs a scan on this Honeypot for data acquisition.
         """
+
+        args = '-sV'
+
+        if port_range:
+            args += ' -p '+port_range
+
         if self.scan_os:
+
+            args += ' -O'
+
             if platform.system() == 'Windows':
                 # No sudo on Windows systems, let UAC handle this
                 # FIXME workaround for the subnet python-nmap-bug.log also?
-                self._nm.scan(hosts=self.address, arguments='-sV -O', sudo=False)
+                self._nm.scan(hosts=self.address, arguments=args, sudo=False)
             else:
                 try:
                     # FIXME this is just a workaround for the bug shown in python-nmap-bug.log
-                    self._nm.scan(hosts=self.address, arguments='-sV -O', sudo=True)
+                    self._nm.scan(hosts=self.address, arguments=args, sudo=True)
                 except Exception as e:
                     print(e.__class__, "occured trying again with get_last_output")
                     self._nm.get_nmap_last_output()
-                    self._nm.scan(hosts=self.address, arguments='-sV -O', sudo=True)
+                    self._nm.scan(hosts=self.address, arguments=args, sudo=True)
         else:
             try:
                 # FIXME this is just a workaround for the bug shown in python-nmap-bug.log
-                self._nm.scan(hosts=self.address, arguments='-sV', sudo=False)
+                self._nm.scan(hosts=self.address, arguments=args, sudo=False)
             except Exception as e:
                 print(e.__class__, "occured trying again with get_last_output")
                 self._nm.get_nmap_last_output()
-                self._nm.scan(hosts=self.address, arguments='-sV', sudo=False)
+                self._nm.scan(hosts=self.address, arguments=args, sudo=False)
 
         hosts = self._nm.all_hosts()
+
         if hosts:
             self.host = hosts[0]
         else:
@@ -87,6 +96,29 @@ class Honeypot:
         for port, attributes in self._nm[self.host][protocol].items():
             if attributes['name'] == service_name:
                 return port
+
+    def get_all_ports(self, protocol):
+        """
+        Returns all open ports on the honeypot
+        :param protocol: 'tcp' / 'udp'
+        :return: list of ports
+        """
+        if protocol not in self._nm[self.host]:
+            return None
+        else:
+            return list((self._nm[self.host][protocol]).keys())
+
+    def get_service_product(self, protocol, port):
+        """
+        Get the product description for a certain port
+        :param protocol: 'tcp' / 'udp'
+        :param port: port number
+        :return: description string
+        """
+        if protocol not in self._nm[self.host]:
+            return None
+        else:
+            return self._nm[self.host][protocol][port]['product']
 
 
 class ScanFailure(Exception):

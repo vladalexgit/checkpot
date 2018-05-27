@@ -5,12 +5,17 @@ from honeypots.honeypot import Honeypot
 
 from tests.test_platform import TestPlatform
 from tests.service_implementation import HTTPTest, SMTPTest
+from tests.direct_fingerprinting import DirectFingerprintTest
 
 
 def print_usage():
     """Prints correct command line usage of the app"""
 
-    print("Example usage: honeydetect -t <IP> -O -l 3")
+    print("Usage: checkpot -t <target IP> <options> -O -l 3")
+    print("Options: ")
+    print("\t-O / --os-scan -> fingerprint OS (requires sudo)")
+    print("\t-l <level> / -level= <level> -> maximum scanning level (1/2/3)")
+    print("\t-cp / --common-ports -> restrict the scan only to the most common ports")
 
 
 def main(argv):
@@ -18,12 +23,13 @@ def main(argv):
 
     # get command line arguments and options
 
-    target = '127.0.0.1'
+    target = None
     scan_os = False
     scan_level = 5
+    common_ports = False
 
-    short_options = 't:l:O'
-    long_options = ['target=', 'level=', 'osscan']
+    short_options = 't:l:O:cp'
+    long_options = ['target=', 'level=', 'os-scan', 'common-ports']
 
     try:
         options, values = getopt.getopt(argv[1:], short_options, long_options)
@@ -40,6 +46,12 @@ def main(argv):
             scan_os = True
         elif option in ('-l', '--level'):
             scan_level = int(value)
+        elif option in ('-cp', '--common-ports'):
+            common_ports = True
+
+    if target is None:
+        print_usage()
+        sys.exit(2)
 
     # run scan
 
@@ -51,9 +63,22 @@ def main(argv):
 
     print("Fingerprinting ...\n")
 
-    if scan_level > 2:
+    # collect data
+
+    if not common_ports:
+        hp.scan()  # TODO restrict access to this
+    else:
+        hp.scan(port_range="20-25,53,80,443")
+
+    # run tests
+
+    if scan_level > 0:
+        test_list.append(DirectFingerprintTest())
+    if scan_level > 1:
         test_list.append(SMTPTest())
         test_list.append(HTTPTest())
+    if scan_level > 2:
+        pass
 
     tp = TestPlatform(test_list, hp)
 
