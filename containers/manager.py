@@ -122,7 +122,7 @@ class Manager:
 
         for hp in available_honeypots:
             try:
-                self.cleanup_honeypot(hp)
+                self.clean_honeypot(hp)
             except docker.errors.NotFound:
                 print("Container", hp, "not found")
                 continue

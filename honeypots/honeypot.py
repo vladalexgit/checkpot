@@ -68,7 +68,7 @@ class Honeypot:
     def os(self):
         if self.scan_os and self.host and 'osmatch' in self._nm[self.host]:
             if self._nm[self.host]['osmatch'] and self._nm[self.host]['osmatch'][0]['osclass']:
-                return "OS: " + self._nm[self.host]['osmatch'][0]['osclass'][0]['osfamily']
+                return self._nm[self.host]['osmatch'][0]['osclass'][0]['osfamily']
 
     @property
     def ip(self):

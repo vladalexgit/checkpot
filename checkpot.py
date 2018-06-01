@@ -5,13 +5,13 @@ from honeypots.honeypot import Honeypot
 
 from tests.test_platform import TestPlatform
 from tests.service_implementation import HTTPTest, SMTPTest
-from tests.direct_fingerprinting import DirectFingerprintTest
+from tests.direct_fingerprinting import DirectFingerprintTest, OSServiceCombinationTest, DefaultServiceCombinationCheck
 
 
 def print_usage():
     """Prints correct command line usage of the app"""
 
-    print("Usage: checkpot -t <target IP> <options> -O -l 3")
+    print("Usage: checkpot -t <target IP> <options>")
     print("Options: ")
     print("\t-O / --os-scan -> fingerprint OS (requires sudo)")
     print("\t-l <level> / -level= <level> -> maximum scanning level (1/2/3)")
@@ -74,7 +74,11 @@ def main(argv):
 
     if scan_level > 0:
         test_list.append(DirectFingerprintTest())
+        if scan_os:
+            test_list.append(OSServiceCombinationTest())
+        test_list.append(DefaultServiceCombinationCheck())
     if scan_level > 1:
+        pass
         test_list.append(SMTPTest())
         test_list.append(HTTPTest())
     if scan_level > 2:

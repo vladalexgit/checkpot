@@ -1,1 +1,1 @@
-FROM armedpot/armhf-honeytrap
+FROM honeytrap/honeytrap
