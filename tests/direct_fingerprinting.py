@@ -68,7 +68,7 @@ class OSServiceCombinationTest(Test):
                         return
 
 
-class DefaultServiceCombinationCheck(Test):
+class DefaultServiceCombinationTest(Test):
     """Check if the running services combination is the default configuration for popular Honeypots"""
 
     name = "Default Service Combination Test"
@@ -111,3 +111,37 @@ class DefaultServiceCombinationCheck(Test):
         else:
             self.set_result(TestResult.OK, "Target port configuration is below",
                             self.threshold, "to all known popular honeypots")
+
+
+class DuplicateServicesCheck(Test):
+    """Check if the machine is running duplicate services"""
+
+    name = "Duplicate Services Check"
+    description = "Check if the machine is running duplicate services"
+
+    def run(self):
+        """Check if the machine is running duplicate services"""
+
+        ports = self.target_honeypot.get_all_ports('tcp')
+
+        service_names = {}
+
+        for port in ports:
+
+            name = self.target_honeypot.get_service_name(port, 'tcp')
+
+            if name in service_names:
+                service_names[name].append(port)
+            else:
+                service_names[name] = [port]
+
+        report = ""
+
+        for service, assigned_ports in service_names.items():
+            if len(assigned_ports) > 1:
+                report += service + "->" + str(assigned_ports) + " "
+
+        if report:
+            self.set_result(TestResult.WARNING, "The following services run on multiple ports:", report)
+        else:
+            self.set_result(TestResult.OK, "No duplicate services found")

@@ -97,6 +97,18 @@ class Honeypot:
             if attributes['name'] == service_name:
                 return port
 
+    def get_service_name(self, port, protocol):
+        """
+        Get name of service running on requested port
+        :param port: target port
+        :param protocol: 'tcp' or 'udp'
+        :return: service name
+        """
+        if protocol not in self._nm[self.host]:
+            return None
+
+        return self._nm[self.host][protocol][port]["name"]
+
     def get_all_ports(self, protocol):
         """
         Returns all open ports on the honeypot
@@ -115,6 +127,7 @@ class Honeypot:
         :param port: port number
         :return: description string
         """
+        # TODO cache requests for all parsers
         if protocol not in self._nm[self.host]:
             return None
         else:
