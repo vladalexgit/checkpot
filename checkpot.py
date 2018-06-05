@@ -5,7 +5,7 @@ from honeypots.honeypot import Honeypot
 
 from tests.test_platform import TestPlatform
 from tests.service_implementation import HTTPTest, SMTPTest
-from tests.direct_fingerprinting import DirectFingerprintTest, OSServiceCombinationTest, DefaultServiceCombinationCheck
+from tests.direct_fingerprinting import DirectFingerprintTest, OSServiceCombinationTest, DefaultServiceCombinationTest, DuplicateServicesCheck
 
 
 def print_usage():
@@ -76,9 +76,9 @@ def main(argv):
         test_list.append(DirectFingerprintTest())
         if scan_os:
             test_list.append(OSServiceCombinationTest())
-        test_list.append(DefaultServiceCombinationCheck())
+        test_list.append(DefaultServiceCombinationTest())
+        test_list.append(DuplicateServicesCheck())
     if scan_level > 1:
-        pass
         test_list.append(SMTPTest())
         test_list.append(HTTPTest())
     if scan_level > 2:
