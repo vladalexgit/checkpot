@@ -22,7 +22,6 @@ class Honeypot:
         """
         Runs a scan on this Honeypot for data acquisition.
         """
-
         args = '-sV'
 
         if port_range:
@@ -82,20 +81,24 @@ class Honeypot:
         """
         return self._nm[self.host].has_tcp(port_number)
 
-    def get_service_port(self, service_name, protocol):
+    def get_service_ports(self, service_name, protocol):
         """
         Checks if the Honeypot has a certain service available.
         :param service_name: name of the service to search for
         :param protocol: 'tcp' or 'udp'
-        :return: port number or None
+        :return: list of port numbers
         """
+        results = []
 
+        # TODO a certain service can run on multiple ports, convert the output to a list
         if protocol not in self._nm[self.host]:
-            return None
+            return results
 
         for port, attributes in self._nm[self.host][protocol].items():
             if attributes['name'] == service_name:
-                return port
+                results.append(port)
+
+        return results
 
     def get_service_name(self, port, protocol):
         """
