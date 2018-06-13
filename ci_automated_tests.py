@@ -7,13 +7,16 @@ from tests.test import TestResult
 from tests.test_platform import TestPlatform
 
 from tests.service_implementation import HTTPTest, SMTPTest
-from tests.direct_fingerprinting import DirectFingerprintTest
+from tests.direct_fingerprinting import DirectFingerprintTest, OSServiceCombinationTest, DefaultServiceCombinationTest,\
+    DuplicateServicesCheck
+
+import argv_parser
 
 
 manager = Manager()
 
 
-def run_test(container_name, test_list, expected_results):
+def honeypot_test(container_name, test_list, expected_results):
     """
     Starts a container and runs a list of tests against it.
     Compares results with the expected results.
@@ -53,6 +56,33 @@ def run_test(container_name, test_list, expected_results):
     print("Test ", container_name, " -> PASSED")
 
 
+def interface_test():
+
+    parsed = argv_parser.parse(['checkpot.py', '-t', '172.17.0.2', '-O', '-p', '20-100,102'])
+    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 5, 'port_range': '20-100,102'}
+
+    if parsed != expected:
+        sys.exit(1)
+
+    parsed = argv_parser.parse(['checkpot.py', '-t', '172.17.0.2', '-p', '20-1000'])
+    expected = {'target': '172.17.0.2', 'scan_os': False, 'scan_level': 5, 'port_range': '20-1000'}
+
+    if parsed != expected:
+        sys.exit(1)
+
+    parsed = argv_parser.parse(['checkpot.py', '-t', '172.17.0.2', '-O', '-l', '3'])
+    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 3, 'port_range': None}
+
+    if parsed != expected:
+        sys.exit(1)
+
+    parsed = argv_parser.parse(['checkpot.py', '-O', '-t', '172.17.0.2', '-l', '3'])
+    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 3, 'port_range': None}
+
+    if parsed != expected:
+        sys.exit(1)
+
+
 def main():
     """
     Entry point for the Continuous Integration tools.
@@ -60,13 +90,19 @@ def main():
     """
 
     # test artillery
-    run_test('artillery', [DirectFingerprintTest(), SMTPTest(), HTTPTest()], [TestResult.OK, TestResult.WARNING, TestResult.NOT_APPLICABLE])
+    honeypot_test('artillery', [DirectFingerprintTest(), DefaultServiceCombinationTest(), SMTPTest(), HTTPTest(), DuplicateServicesCheck()],
+                  [TestResult.OK, TestResult.WARNING, TestResult.WARNING, TestResult.NOT_APPLICABLE, TestResult.OK])
 
     # test glastopf
-    run_test('glastopf', [DirectFingerprintTest(), SMTPTest(), HTTPTest()], [TestResult.OK, TestResult.NOT_APPLICABLE, TestResult.OK])
+    honeypot_test('glastopf', [DirectFingerprintTest(), SMTPTest(), HTTPTest(), DuplicateServicesCheck()],
+                  [TestResult.OK, TestResult.NOT_APPLICABLE, TestResult.OK, TestResult.OK])
 
     # test dionaea
-    run_test('dionaea', [DirectFingerprintTest(), SMTPTest(), HTTPTest()], [TestResult.WARNING, TestResult.NOT_APPLICABLE, TestResult.OK])
+    honeypot_test('dionaea', [DirectFingerprintTest(), DefaultServiceCombinationTest(), SMTPTest(), HTTPTest(), DuplicateServicesCheck()],
+                  [TestResult.WARNING, TestResult.WARNING, TestResult.NOT_APPLICABLE, TestResult.OK, TestResult.WARNING])
+
+    # test the interface
+    interface_test()
 
 
 if __name__ == '__main__':

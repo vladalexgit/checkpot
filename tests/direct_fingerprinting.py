@@ -28,18 +28,16 @@ class DirectFingerprintTest(Test):
 
 class OSServiceCombinationTest(Test):
     """Check if the OS and running services combination makes sense"""
+    # TODO make a high-interraction version of this test in level 2
 
     name = "OS Service combination test"
     description = "Check if the OS and running services combination makes sense"
 
-    windows_exclusive = ['ms-sql', 'microsoft-iis']
+    windows_exclusive = ['ms-sql', 'iis', 'windows', 'microsoft']
     linux_exclusive = []
 
     def run(self):
         """Check if the OS and running services combination makes sense"""
-
-        # print(self.target_honeypot)
-        # print(self.target_honeypot._nm[self.target_honeypot.host])
 
         os = self.target_honeypot.os
 
@@ -110,7 +108,7 @@ class DefaultServiceCombinationTest(Test):
             self.set_result(TestResult.WARNING, "Target port configuration is similar to:", results)
         else:
             self.set_result(TestResult.OK, "Target port configuration is below",
-                            self.threshold, "to all known popular honeypots")
+                            self.threshold, "percent similar to all known popular honeypots")
 
 
 class DuplicateServicesCheck(Test):

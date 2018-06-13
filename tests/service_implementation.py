@@ -12,15 +12,16 @@ class SMTPTest(Test):
     def run(self):
         """Verify service implements all methods in the SMTP specification"""
 
-        if self.target_honeypot.has_tcp(25):
-            self.check_smtp_implemented(self.target_honeypot.ip)
-        else:
-            custom_port = self.target_honeypot.get_service_port('smtp', 'tcp')
+        target_ports = self.target_honeypot.get_service_ports('smtp', 'tcp')
 
-            if custom_port:
-                self.check_smtp_implemented(self.target_honeypot.ip, custom_port)
-            else:
-                self.set_result(TestResult.NOT_APPLICABLE, "Service not present")
+        if target_ports:
+            for port in target_ports:
+                self.check_smtp_implemented(self.target_honeypot.ip, port)
+
+                if self.result == TestResult.WARNING:
+                    return
+        else:
+            self.set_result(TestResult.NOT_APPLICABLE, "Service not present")
 
     def check_smtp_implemented(self, server_address, port=25):
 
@@ -50,17 +51,19 @@ class HTTPTest(Test):
     description = "Tests HTTP service implementation"
 
     def run(self):
-        """Verify service implements all methods in the SMTP specification"""
+        """Verify service implements all methods in the HTTP specification"""
 
-        if self.target_honeypot.has_tcp(80):
-            self.check_http_implemented(self.target_honeypot.ip)
+        target_ports = self.target_honeypot.get_service_ports('http', 'tcp')
+
+        if target_ports:
+            for port in target_ports:
+                if port != 443:
+                    self.check_http_implemented(self.target_honeypot.ip, port)
+
+                    if self.result == TestResult.WARNING:
+                        return
         else:
-            custom_port = self.target_honeypot.get_service_port('http', 'tcp')
-
-            if custom_port:
-                self.check_http_implemented(self.target_honeypot.ip, custom_port)
-            else:
-                self.set_result(TestResult.NOT_APPLICABLE, "Service not present")
+            self.set_result(TestResult.NOT_APPLICABLE, "Service not present")
 
     def check_http_implemented(self, server_address, port=80):
 
