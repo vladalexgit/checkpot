@@ -8,6 +8,7 @@ from tests.test_platform import TestPlatform
 from tests.service_implementation import HTTPTest, SMTPTest
 from tests.direct_fingerprinting import DirectFingerprintTest, OSServiceCombinationTest, DefaultServiceCombinationTest,\
     DuplicateServicesCheck
+from tests.default_content import DefaultWebsiteContentTest
 
 
 def main(argv):
@@ -44,6 +45,7 @@ def main(argv):
         test_list.append(DefaultServiceCombinationTest())
         test_list.append(DuplicateServicesCheck())
     if options["scan_level"] > 1:
+        test_list.append(DefaultWebsiteContentTest())
         test_list.append(SMTPTest())
         test_list.append(HTTPTest())
     if options["scan_level"] > 2:

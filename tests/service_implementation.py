@@ -57,7 +57,7 @@ class HTTPTest(Test):
 
         if target_ports:
             for port in target_ports:
-                if port != 443:
+                if port != 443:  # TODO separate https when nmap parses incorrectly
                     self.check_http_implemented(self.target_honeypot.ip, port)
 
                     if self.result == TestResult.WARNING:
