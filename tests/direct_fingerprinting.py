@@ -65,6 +65,8 @@ class OSServiceCombinationTest(Test):
                         self.set_result(TestResult.WARNING, "Windows machine is running", product_description)
                         return
 
+        self.set_result(TestResult.OK, "Combination OK")
+
 
 class DefaultServiceCombinationTest(Test):
     """Check if the running services combination is the default configuration for popular Honeypots"""
@@ -99,7 +101,7 @@ class DefaultServiceCombinationTest(Test):
                     found += 1
 
             # compute similarity percent with known configuration
-            percent_similar = found / len(target_ports) * 100
+            percent_similar = found / len(self.default_ports[honeypot_name]) * 100
 
             if percent_similar > self.threshold:
                 results[honeypot_name] = percent_similar
