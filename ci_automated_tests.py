@@ -9,6 +9,7 @@ from tests.test_platform import TestPlatform
 from tests.service_implementation import HTTPTest, SMTPTest
 from tests.direct_fingerprinting import DirectFingerprintTest, OSServiceCombinationTest, DefaultServiceCombinationTest,\
     DuplicateServicesCheck
+from tests.default_content import DefaultWebsiteContentTest
 
 import argv_parser
 
@@ -94,8 +95,8 @@ def main():
                   [TestResult.OK, TestResult.WARNING, TestResult.WARNING, TestResult.NOT_APPLICABLE, TestResult.OK])
 
     # test glastopf
-    honeypot_test('glastopf', [DirectFingerprintTest(), SMTPTest(), HTTPTest(), DuplicateServicesCheck()],
-                  [TestResult.OK, TestResult.NOT_APPLICABLE, TestResult.OK, TestResult.OK])
+    honeypot_test('glastopf', [DirectFingerprintTest(), SMTPTest(), HTTPTest(), DuplicateServicesCheck(), DefaultWebsiteContentTest()],
+                  [TestResult.OK, TestResult.NOT_APPLICABLE, TestResult.OK, TestResult.OK, TestResult.WARNING])
 
     # test dionaea
     honeypot_test('dionaea', [DirectFingerprintTest(), DefaultServiceCombinationTest(), SMTPTest(), HTTPTest(), DuplicateServicesCheck()],
