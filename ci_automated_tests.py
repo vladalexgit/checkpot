@@ -107,7 +107,7 @@ def main():
 
     # test glastopf
     honeypot_test('glastopf', {DirectFingerprintTest(): TestResult.OK,
-                               DefaultServiceCombinationTest(): TestResult.WARNING,
+                               DefaultServiceCombinationTest(): TestResult.OK,
                                SMTPTest(): TestResult.NOT_APPLICABLE,
                                HTTPTest(): TestResult.OK,
                                DuplicateServicesCheck(): TestResult.OK,
@@ -128,7 +128,7 @@ def main():
                                SMTPTest(): TestResult.NOT_APPLICABLE,
                                HTTPTest(): TestResult.NOT_APPLICABLE,
                                DefaultBannerTest(): TestResult.WARNING,
-                               DefaultTemplateFileTest(): TestResult.UNKNOWN})
+                               DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE})
 
     # test conpot
     honeypot_test('conpot',
