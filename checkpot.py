@@ -8,7 +8,8 @@ from tests.test_platform import TestPlatform
 from tests.service_implementation import HTTPTest, SMTPTest
 from tests.direct_fingerprinting import DirectFingerprintTest, OSServiceCombinationTest, DefaultServiceCombinationTest,\
     DuplicateServicesCheck
-from tests.default_content import DefaultWebsiteContentTest
+from tests.default_content import DefaultWebsiteContentTest, DefaultBannerTest
+from tests.default_configuration import DefaultTemplateFileTest
 
 
 def main(argv):
@@ -21,13 +22,13 @@ def main(argv):
 
     # run scan
 
-    print("Running scan on " + options["target"] + " ...")
+    print("Running scan on " + options["target"])
 
     hp = Honeypot(options["target"], options["scan_os"])
 
     test_list = []
 
-    print("Fingerprinting ...\n")
+    print("Scanning ports ...\n")
 
     # collect data
 
@@ -48,6 +49,8 @@ def main(argv):
         test_list.append(DefaultWebsiteContentTest())
         test_list.append(SMTPTest())
         test_list.append(HTTPTest())
+        test_list.append(DefaultBannerTest())
+        test_list.append(DefaultTemplateFileTest())
     if options["scan_level"] > 2:
         pass
     if options["scan_level"] > 3:

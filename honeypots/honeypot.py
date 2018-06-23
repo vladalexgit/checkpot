@@ -136,6 +136,18 @@ class Honeypot:
         else:
             return self._nm[self.host][protocol][port]['product']
 
+    def run_nmap_script(self, script, port, protocol='tcp'):
+
+        tmp = nmap.PortScanner()
+        tmp.scan(hosts=self.address, arguments="--script " + script + " -p " + str(port))
+
+        port_info = tmp[self.address][protocol][int(port)]
+
+        if 'script' in port_info:
+            return port_info['script'][script.split('.')[0]]
+        else:
+            raise ScanFailure("Script execution failed")
+
 
 class ScanFailure(Exception):
 

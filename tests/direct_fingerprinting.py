@@ -28,7 +28,7 @@ class DirectFingerprintTest(Test):
 
 class OSServiceCombinationTest(Test):
     """Check if the OS and running services combination makes sense"""
-    # TODO make a high-interraction version of this test in level 2
+    # TODO make a high-interraction version of this test in level 2?
 
     name = "OS Service combination test"
     description = "Check if the OS and running services combination makes sense"
@@ -45,6 +45,10 @@ class OSServiceCombinationTest(Test):
 
         if ports is None:
             self.set_result(TestResult.UNKNOWN, "Port request returned None")
+            return
+
+        if os is None:
+            self.set_result(TestResult.UNKNOWN, "Failed to retrieve OS")
             return
 
         if os.lower() == 'linux':
