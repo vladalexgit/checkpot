@@ -3,32 +3,37 @@ import sys
 
 from containers.manager import Manager
 from honeypots.honeypot import Honeypot
+from tests.test import Test
 from tests.test import TestResult
 from tests.test_platform import TestPlatform
 
 from tests.service_implementation import HTTPTest, SMTPTest
-from tests.direct_fingerprinting import DirectFingerprintTest, OSServiceCombinationTest, DefaultServiceCombinationTest,\
+from tests.direct_fingerprinting import DirectFingerprintTest, OSServiceCombinationTest, DefaultServiceCombinationTest, \
     DuplicateServicesCheck
 from tests.default_content import DefaultWebsiteContentTest, DefaultBannerTest
 from tests.default_configuration import DefaultTemplateFileTest
 
 import argv_parser
 
-
 manager = Manager()
 
 
-def honeypot_test(container_name, test_list, expected_results, port_range=None):
+def honeypot_test(container_name, tests, port_range=None):
     """
     Starts a container and runs a list of tests against it.
     Compares results with the expected results.
     Stops the container.
     :param container_name: target container
-    :param test_list: list of Test objects
-    :param expected_results: correct results to compare with
+    :param tests: dict of Test objects and expected TestResult pairs
+    :param port_range: specify a custom port range for scan (e.g '20-100')
     :return: boolean representing test pass/failure
     """
-    assert all(isinstance(r, TestResult) for r in expected_results)
+
+    test_list = [key for key in tests]
+    expected_results = [tests[key] for key in tests]
+
+    assert all(isinstance(test, Test) for test in test_list)
+    assert all(isinstance(result, TestResult) for result in expected_results)
 
     manager.start_honeypot(container_name)
 
@@ -62,7 +67,6 @@ def honeypot_test(container_name, test_list, expected_results, port_range=None):
 
 
 def interface_test():
-
     parsed = argv_parser.parse(['checkpot.py', '-t', '172.17.0.2', '-O', '-p', '20-100,102'])
     expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 5, 'port_range': '20-100,102'}
 
@@ -93,30 +97,50 @@ def main():
     Entry point for the Continuous Integration tools.
     Write all tests here.
     """
-    # TODO use dicts to specify expected results
 
     # test artillery
-    honeypot_test('artillery', [DirectFingerprintTest(), DefaultServiceCombinationTest(), SMTPTest(), HTTPTest(), DuplicateServicesCheck()],
-                  [TestResult.OK, TestResult.WARNING, TestResult.WARNING, TestResult.NOT_APPLICABLE, TestResult.OK])
+    honeypot_test('artillery', {DirectFingerprintTest(): TestResult.OK,
+                                DefaultServiceCombinationTest(): TestResult.WARNING,
+                                SMTPTest(): TestResult.WARNING,
+                                HTTPTest(): TestResult.NOT_APPLICABLE,
+                                DuplicateServicesCheck(): TestResult.OK})
 
     # test glastopf
-    honeypot_test('glastopf', [DirectFingerprintTest(), SMTPTest(), HTTPTest(), DuplicateServicesCheck(), DefaultWebsiteContentTest()],
-                  [TestResult.OK, TestResult.NOT_APPLICABLE, TestResult.OK, TestResult.OK, TestResult.WARNING])
+    honeypot_test('glastopf', {DirectFingerprintTest(): TestResult.OK,
+                               DefaultServiceCombinationTest(): TestResult.WARNING,
+                               SMTPTest(): TestResult.NOT_APPLICABLE,
+                               HTTPTest(): TestResult.OK,
+                               DuplicateServicesCheck(): TestResult.OK,
+                               DefaultWebsiteContentTest(): TestResult.WARNING})
 
     # test dionaea
-    honeypot_test('dionaea', [DirectFingerprintTest(), DefaultServiceCombinationTest(), SMTPTest(), HTTPTest(), DuplicateServicesCheck()],
-                  [TestResult.WARNING, TestResult.WARNING, TestResult.NOT_APPLICABLE, TestResult.OK, TestResult.WARNING])
+    honeypot_test('dionaea', {DirectFingerprintTest(): TestResult.WARNING,
+                              DefaultServiceCombinationTest(): TestResult.WARNING,
+                              SMTPTest(): TestResult.NOT_APPLICABLE,
+                              HTTPTest(): TestResult.OK,
+                              DuplicateServicesCheck(): TestResult.WARNING})
 
     # test beartrap
-    honeypot_test('beartrap', [DirectFingerprintTest(), DefaultServiceCombinationTest(), DuplicateServicesCheck(),
-                               DefaultWebsiteContentTest(), SMTPTest(), HTTPTest(), DefaultBannerTest(),
-                               DefaultTemplateFileTest()],
-                  [TestResult.OK, TestResult.OK, TestResult.OK, TestResult.UNKNOWN, TestResult.NOT_APPLICABLE,
-                   TestResult.NOT_APPLICABLE, TestResult.WARNING, TestResult.UNKNOWN])
+    honeypot_test('beartrap', {DirectFingerprintTest(): TestResult.OK,
+                               DefaultServiceCombinationTest(): TestResult.OK,
+                               DuplicateServicesCheck(): TestResult.OK,
+                               DefaultWebsiteContentTest(): TestResult.UNKNOWN,
+                               SMTPTest(): TestResult.NOT_APPLICABLE,
+                               HTTPTest(): TestResult.NOT_APPLICABLE,
+                               DefaultBannerTest(): TestResult.WARNING,
+                               DefaultTemplateFileTest(): TestResult.UNKNOWN})
 
     # test conpot
-    honeypot_test('conpot', [DirectFingerprintTest(), DefaultServiceCombinationTest(), DuplicateServicesCheck(), DefaultWebsiteContentTest(), SMTPTest(), HTTPTest(), DefaultBannerTest(), DefaultTemplateFileTest()],
-                 [TestResult.OK, TestResult.OK, TestResult.OK, TestResult.UNKNOWN, TestResult.NOT_APPLICABLE, TestResult.WARNING, TestResult.UNKNOWN, TestResult.WARNING], port_range='0-1000')
+    honeypot_test('conpot',
+                  {DirectFingerprintTest(): TestResult.OK,
+                   DefaultServiceCombinationTest(): TestResult.OK,
+                   DuplicateServicesCheck(): TestResult.OK,
+                   DefaultWebsiteContentTest(): TestResult.UNKNOWN,
+                   SMTPTest(): TestResult.NOT_APPLICABLE,
+                   HTTPTest(): TestResult.WARNING,
+                   DefaultBannerTest(): TestResult.UNKNOWN,
+                   DefaultTemplateFileTest(): TestResult.WARNING},
+                  port_range='0-1000')
 
     # test the interface
     interface_test()
