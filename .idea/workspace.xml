@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="aea894fe-df90-42d6-804d-01bd642bfabe" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/ci_automated_tests.py" afterPath="$PROJECT_DIR$/ci_automated_tests.py" />
+      <change beforePath="$PROJECT_DIR$/containers/conpot/Dockerfile" afterPath="$PROJECT_DIR$/containers/conpot/Dockerfile" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,18 +27,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="service_implementation.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/service_implementation.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="checkpot.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/checkpot.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -52,8 +40,8 @@
       <file leaf-file-name="honeypot.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/honeypots/honeypot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3552">
-              <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+            <state relative-caret-position="1416">
+              <caret line="60" column="61" lean-forward="false" selection-start-line="60" selection-start-column="61" selection-end-line="60" selection-end-column="61" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -61,14 +49,44 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="purge_docker.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/containers/purge_docker.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ci_automated_tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ci_automated_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="140" column="59" lean-forward="true" selection-start-line="140" selection-start-column="59" selection-end-line="140" selection-end-column="59" />
+            <state relative-caret-position="235">
+              <caret line="101" column="71" lean-forward="true" selection-start-line="101" selection-start-column="71" selection-end-line="101" selection-end-column="71" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="manager.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/containers/manager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="259">
+              <caret line="61" column="37" lean-forward="true" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Dockerfile" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/containers/conpot/Dockerfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -88,7 +106,7 @@
       <file leaf-file-name="default_configuration.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/default_configuration.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
+            <state relative-caret-position="-389">
               <caret line="15" column="8" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
@@ -102,16 +120,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="24">
               <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1440">
-              <caret line="62" column="8" lean-forward="false" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -171,7 +179,6 @@
         <option value="$PROJECT_DIR$/containers/dionaea/Dockerfile" />
         <option value="$PROJECT_DIR$/containers/glastopf/Dockerfile" />
         <option value="$PROJECT_DIR$/containers/cowrie/Dockerfile" />
-        <option value="$PROJECT_DIR$/containers/conpot/Dockerfile" />
         <option value="$PROJECT_DIR$/containers/manager.py" />
         <option value="$PROJECT_DIR$/containers/honeytrap/Dockerfile" />
         <option value="$PROJECT_DIR$/tests/test.py" />
@@ -184,6 +191,8 @@
         <option value="$PROJECT_DIR$/tests/default_configuration.py" />
         <option value="$PROJECT_DIR$/tests/default_content.py" />
         <option value="$PROJECT_DIR$/tests/direct_fingerprinting.py" />
+        <option value="$PROJECT_DIR$/containers/purge_docker.sh" />
+        <option value="$PROJECT_DIR$/containers/conpot/Dockerfile" />
         <option value="$PROJECT_DIR$/ci_automated_tests.py" />
       </list>
     </option>
@@ -215,12 +224,24 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="checkpot" type="b2602c69:ProjectViewProjectNode" />
               <item name="checkpot" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="checkpot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="checkpot" type="462c0819:PsiDirectoryNode" />
+              <item name="containers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="checkpot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="checkpot" type="462c0819:PsiDirectoryNode" />
+              <item name="containers" type="462c0819:PsiDirectoryNode" />
+              <item name="conpot" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="checkpot" type="b2602c69:ProjectViewProjectNode" />
@@ -237,7 +258,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -625,7 +645,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tests/smtp_test.py" />
     <entry file="file://$PROJECT_DIR$/tests/http_test.py" />
     <entry file="file://$USER_HOME$/.PyCharmCE2017.3/system/python_stubs/-1393898577/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -755,13 +774,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/containers/manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1529">
-          <caret line="105" column="35" lean-forward="false" selection-start-line="105" selection-start-column="35" selection-end-line="105" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/source/checkpot.rst">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -853,13 +865,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/containers/conpot/Dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_platform.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="696">
@@ -871,16 +876,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8904">
           <caret line="375" column="0" lean-forward="false" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/honeypots/honeypot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3552">
-          <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -898,16 +893,6 @@
           <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/default_configuration.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="15" column="8" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -946,10 +931,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/honeypots/honeypot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1416">
+          <caret line="60" column="61" lean-forward="false" selection-start-line="60" selection-start-column="61" selection-end-line="60" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/containers/purge_docker.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/containers/conpot/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/containers/manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="61" column="37" lean-forward="true" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/default_configuration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-389">
+          <caret line="15" column="8" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ci_automated_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="140" column="59" lean-forward="true" selection-start-line="140" selection-start-column="59" selection-end-line="140" selection-end-column="59" />
+        <state relative-caret-position="235">
+          <caret line="101" column="71" lean-forward="true" selection-start-line="101" selection-start-column="71" selection-end-line="101" selection-end-column="71" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
