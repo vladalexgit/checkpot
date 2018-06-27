@@ -140,7 +140,7 @@ def main():
                    HTTPTest(): TestResult.WARNING,
                    DefaultBannerTest(): TestResult.UNKNOWN,
                    DefaultTemplateFileTest(): TestResult.WARNING},
-                  port_range='0-1000')
+                  port_range='0-501,503-1000')
 
     # test the interface
     interface_test()
