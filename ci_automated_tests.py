@@ -10,7 +10,7 @@ from tests.test_platform import TestPlatform
 from tests.service_implementation import HTTPTest, SMTPTest
 from tests.direct_fingerprinting import DirectFingerprintTest, OSServiceCombinationTest, DefaultServiceCombinationTest, \
     DuplicateServicesCheck
-from tests.default_content import DefaultWebsiteContentTest, DefaultBannerTest
+from tests.default_http import DefaultWebsiteContentTest, DefaultBannerTest
 from tests.default_configuration import DefaultTemplateFileTest
 
 import argv_parser

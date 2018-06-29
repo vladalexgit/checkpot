@@ -4,11 +4,14 @@ import argv_parser
 
 from honeypots.honeypot import Honeypot
 
+
+# TODO refine import structure
 from tests.test_platform import TestPlatform
 from tests.service_implementation import HTTPTest, SMTPTest
 from tests.direct_fingerprinting import DirectFingerprintTest, OSServiceCombinationTest, DefaultServiceCombinationTest,\
     DuplicateServicesCheck
-from tests.default_content import DefaultWebsiteContentTest, DefaultBannerTest
+from tests.default_http import DefaultGlastopfWebsiteTest, DefaultGlastopfStylesheetTest
+from tests.default_ftp import DefaultFTPBannerTest
 from tests.default_configuration import DefaultTemplateFileTest
 
 
@@ -46,10 +49,11 @@ def main(argv):
         test_list.append(DefaultServiceCombinationTest())
         test_list.append(DuplicateServicesCheck())
     if options["scan_level"] > 1:
-        test_list.append(DefaultWebsiteContentTest())
+        test_list.append(DefaultGlastopfWebsiteTest())
+        test_list.append(DefaultGlastopfStylesheetTest())
         test_list.append(SMTPTest())
         test_list.append(HTTPTest())
-        test_list.append(DefaultBannerTest())
+        test_list.append(DefaultFTPBannerTest())
         test_list.append(DefaultTemplateFileTest())
     if options["scan_level"] > 2:
         pass
