@@ -1,5 +1,7 @@
 import nmap
 import platform
+import urllib.request
+import urllib.error
 
 
 class Honeypot:
@@ -7,6 +9,10 @@ class Honeypot:
     Holds all data known about one Honeypot.
     Used for decoupling the acquisition of the data from its usages.
     """
+
+    scan_id = 0
+    websites = []  # cached web page data for current honeypot
+    css = [] # cached css data for current honeypot
 
     def __init__(self, address, scan_os=False):
         """
@@ -22,7 +28,7 @@ class Honeypot:
         """
         Runs a scan on this Honeypot for data acquisition.
         """
-        args = '-sV'
+        args = '-sV -Pn -n -T5'  # FIXME make these params selectable
 
         if port_range:
             args += ' -p '+port_range
@@ -86,11 +92,10 @@ class Honeypot:
         Checks if the Honeypot has a certain service available.
         :param service_name: name of the service to search for
         :param protocol: 'tcp' or 'udp'
-        :return: list of port numbers
+        :return: list of port numbers (a certain service can run on multiple ports)
         """
         results = []
 
-        # TODO a certain service can run on multiple ports, convert the output to a list
         if protocol not in self._nm[self.host]:
             return results
 
@@ -147,6 +152,73 @@ class Honeypot:
             return port_info['script'][script.split('.')[0]]
         else:
             raise ScanFailure("Script execution failed")
+
+    def get_websites(self):
+
+        if self.websites and self.scan_id == id(self.host):
+            # if cache is not empty and we are still on the most recent scan
+            return self.websites
+
+        # refresh cache
+
+        self.websites = []
+
+        target_ports = self.get_service_ports('http', 'tcp')
+        target_ports += self.get_service_ports('https', 'tcp')
+
+        for port in target_ports:
+
+            try:
+
+                request = urllib.request.urlopen('http://' + self.ip + ':' + str(port) + '/',
+                                                 timeout=5)
+
+                if request.headers.get_content_charset() is None:
+                    content = request.read()
+                else:
+                    content = request.read().decode(request.headers.get_content_charset())
+
+                self.websites.append(content)
+
+            except urllib.error.URLError as e:
+                print('Failed to fetch homepage for site', self.ip, str(port), e.reason)
+
+        return self.websites
+
+    def get_websites_css(self):
+
+        # TODO create a Website class containing stylesheet and others?
+        # TODO test theese
+
+        if self.css and self.scan_id == id(self.host):
+            # if cache is not empty and we are still on the most recent scan
+            return self.css
+
+        # refresh cache
+
+        self.css = []
+
+        target_ports = self.get_service_ports('http', 'tcp')
+        target_ports += self.get_service_ports('https', 'tcp')
+
+        for port in target_ports:
+
+            try:
+
+                request = urllib.request.urlopen('http://' + self.ip + ':' + str(port) + '/style.css',
+                                                 timeout=5)
+
+                if request.headers.get_content_charset() is None:
+                    content = request.read()
+                else:
+                    content = request.read().decode(request.headers.get_content_charset())
+
+                self.css.append(content)
+
+            except urllib.error.URLError as e:
+                print('Failed to fetch stylesheet for site', self.ip, str(port), e.reason)
+
+        return self.css
 
 
 class ScanFailure(Exception):

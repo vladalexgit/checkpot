@@ -7,7 +7,6 @@ import re
 import difflib
 
 
-
 class DefaultGlastopfWebsiteTest(Test):
     name = "Default Glastopf Website Content Test"
     description = "Test unchanged source for website content"
@@ -59,7 +58,7 @@ class DefaultGlastopfStylesheetTest(Test):
         """Check if content matches known content"""
 
         try:
-            request = urllib.request.urlopen('https://raw.githubusercontent.com/mushorg/glastopf/master/glastopf/modules/handlers/emulators/data/style/style.css', 10)
+            request = urllib.request.urlopen('https://raw.githubusercontent.com/mushorg/glastopf/master/glastopf/modules/handlers/emulators/data/style/style.css', timeout=10)
             specimen_stylesheet = request.read().decode(request.headers.get_content_charset())
 
         except urllib.error.URLError:
