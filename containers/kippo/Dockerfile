@@ -6,7 +6,7 @@ RUN apt-get install -y git openssl python-dev python-openssl python-pyasn1 pytho
 
 RUN pip2 install twisted==15.1.0
 
-RUN mkdir kipposource #custom folder because homedir of user kippo causes a conflict
+#custom folder because homedir of user kippo causes a conflict
 RUN git clone https://github.com/desaster/kippo.git /kipposource
 
 RUN mv /kipposource/kippo.cfg.dist /kipposource/kippo.cfg
