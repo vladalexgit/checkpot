@@ -14,10 +14,10 @@ class Manager:
         """
 
         if custom_client:
-            assert isinstance(custom_client, docker.Client)
+            assert isinstance(custom_client, docker.DockerClient)
             self._client = custom_client
         else:
-            self._client = docker.from_env()
+            self._client = docker.APIClient()
 
         self._verbose = verbose
         self._logfile = logfile
@@ -54,17 +54,22 @@ class Manager:
         Starts the chosen container
         :param name: container name
         """
-        # check if the container exists
-        try:
-            self._client.inspect_container(name)
-        except docker.errors.NotFound:
-            self._log("Container ", name, " not found, creating new container from image ...")
-            self.build_honeypot(name)
-        else:
-            self._log("Container ", name, " found")
 
-        self._log("Starting container")
-        self._client.start(name)
+        if name == "honeypy":
+            self._log("Starting container")
+            docker.from_env().containers.run(name, cap_add='NET_ADMIN', detach=True, name=name)
+        else:
+            # check if the container exists
+            try:
+                self._client.inspect_container(name)
+            except docker.errors.NotFound:
+                self._log("Container ", name, " not found, creating new container from image ...")
+                self.build_honeypot(name)
+            else:
+                self._log("Container ", name, " found")
+
+            self._log("Starting container")
+            self._client.start(name)
 
     def get_honeypot_ip(self, name):
         """
@@ -96,7 +101,8 @@ class Manager:
                 print("Container", hp, "not found")
                 continue
 
-    def get_available_honeypots(self):
+    @staticmethod
+    def get_available_honeypots():
         """Returns a list with the names of all available honeypots"""
         containers_folder = os.path.dirname(os.path.abspath(__file__))
         # folders contained in this module represent the available honeypots
