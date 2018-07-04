@@ -2,6 +2,7 @@ import nmap
 import platform
 import urllib.request
 import urllib.error
+import socket
 
 
 class Honeypot:
@@ -40,6 +41,7 @@ class Honeypot:
             if platform.system() == 'Windows':
                 # No sudo on Windows systems, let UAC handle this
                 # FIXME workaround for the subnet python-nmap-bug.log also?
+                # FIXME somehow this also makes the command history of the terminal vanish?
                 self._nm.scan(hosts=self.address, arguments=args, sudo=False)
             else:
                 try:
@@ -153,6 +155,19 @@ class Honeypot:
         else:
             raise ScanFailure("Script execution failed")
 
+    def get_banner(self, port, protocol='tcp'):
+
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(5)
+
+        try:
+            s.connect((self.address, port))
+            recv = s.recv(1024)
+        except socket.error as e:
+            raise ScanFailure("Banner grab failed for port", port, e)
+
+        return recv
+
     def get_websites(self):
 
         if self.websites and self.scan_id == id(self.host):
@@ -188,7 +203,8 @@ class Honeypot:
     def get_websites_css(self):
 
         # TODO create a Website class containing stylesheet and others?
-        # TODO test theese
+        # TODO test these
+        # TODO add docstrings when the structure is final
 
         if self.css and self.scan_id == id(self.host):
             # if cache is not empty and we are still on the most recent scan
@@ -223,8 +239,8 @@ class Honeypot:
 
 class ScanFailure(Exception):
 
-    def __init__(self, value):
-        self.value = value
+    def __init__(self, *report):
+        self.value = " ".join(str(r) for r in report)
 
     def __str__(self):
         return repr(self.value)

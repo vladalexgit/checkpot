@@ -12,7 +12,7 @@ from tests.direct_fingerprinting import DirectFingerprintTest, OSServiceCombinat
     DuplicateServicesCheck
 from tests.default_http import DefaultGlastopfWebsiteTest, DefaultGlastopfStylesheetTest
 from tests.default_ftp import DefaultFTPBannerTest
-from tests.default_configuration import DefaultTemplateFileTest
+from tests.default_configuration import DefaultTemplateFileTest, DefaultServiceBannerTest
 
 
 def main(argv):
@@ -49,6 +49,7 @@ def main(argv):
         test_list.append(DefaultServiceCombinationTest())
         test_list.append(DuplicateServicesCheck())
     if options["scan_level"] > 1:
+        test_list.append(DefaultServiceBannerTest())
         test_list.append(DefaultGlastopfWebsiteTest())
         test_list.append(DefaultGlastopfStylesheetTest())
         test_list.append(SMTPTest())
