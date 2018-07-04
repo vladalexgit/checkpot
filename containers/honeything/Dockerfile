@@ -6,6 +6,4 @@ RUN pip install setuptools pycurl
 
 RUN cd honeything && python setup.py install #because the script uses ./ internally
 
-CMD service honeything start
-
-#FIXME not working...
+CMD python honeything/src/HoneyThing.py
