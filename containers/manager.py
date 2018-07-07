@@ -42,12 +42,18 @@ class Manager:
 
             self._log("Image not found, building image for ", name, " ...")
 
+            container_path = os.path.join(os.path.dirname(__file__), name)
+
+            if not os.path.exists(os.path.join(container_path, 'Dockerfile')):
+                raise BuildError("Dockerfile for container ", name, "not found")
+
             output = self._client.build(path=os.path.join(os.path.dirname(__file__), name), tag=name)
 
             for line in output:
                 self._log(line)
 
-            self._client.create_container(image=name, detach=True, name=name)
+            if name != "honeypy":
+                self._client.create_container(image=name, detach=True, name=name)
 
     def start_honeypot(self, name):
         """
@@ -55,20 +61,24 @@ class Manager:
         :param name: container name
         """
 
+        # check if the container exists
+        try:
+            self._client.inspect_container(name)
+        except docker.errors.NotFound:
+            self._log("Container ", name, " not found, creating new container from image ...")
+            try:
+                self.build_honeypot(name)
+            except BuildError as e:
+                self._log("Build failed:", e)
+                return
+        else:
+            self._log("Container ", name, " found")
+
+        self._log("Starting container")
+
         if name == "honeypy":
-            self._log("Starting container")
             docker.from_env().containers.run(name, cap_add='NET_ADMIN', detach=True, name=name)
         else:
-            # check if the container exists
-            try:
-                self._client.inspect_container(name)
-            except docker.errors.NotFound:
-                self._log("Container ", name, " not found, creating new container from image ...")
-                self.build_honeypot(name)
-            else:
-                self._log("Container ", name, " found")
-
-            self._log("Starting container")
             self._client.start(name)
 
     def get_honeypot_ip(self, name):
@@ -132,3 +142,19 @@ class Manager:
             except docker.errors.NotFound:
                 print("Container", hp, "not found")
                 continue
+
+
+class BuildError(Exception):
+    """Raised when build fails"""
+
+    def __init__(self, *report):
+        """
+        :param report: description of the error
+        """
+        self.value = " ".join(str(r) for r in report)
+
+    def __str__(self):
+        return repr(self.value)
+
+    def __repr__(self):
+        return 'BuildError exception ' + self.value

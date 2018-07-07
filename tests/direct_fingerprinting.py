@@ -28,7 +28,7 @@ class DirectFingerprintTest(Test):
 
 class OSServiceCombinationTest(Test):
     """Check if the OS and running services combination makes sense"""
-    # TODO make a high-interraction version of this test in level 2?
+    # TODO make a high interaction version of this test in level 2?
 
     name = "OS Service combination test"
     description = "Check if the OS and running services combination makes sense"
@@ -79,6 +79,9 @@ class DefaultServiceCombinationTest(Test):
     description = "Check if the running services combination is the default configuration for popular Honeypots"
 
     # currently known honeypot configurations
+    # this only makes sense for honeypots with many open ports
+
+    # TODO update this ASAP
     default_ports = {"artillery": [21, 22, 25, 53, 110, 1433, 1723, 5800, 5900, 8080, 10000, 16993, 44443],
                      "dionaea": [21, 42, 80, 135, 443, 445, 1433, 1723, 3306, 5060, 5061]
                      }
@@ -92,8 +95,12 @@ class DefaultServiceCombinationTest(Test):
         results = {}
 
         target_ports = self.target_honeypot.get_all_ports('tcp')
-        # print(target_ports)
+        target_ports += self.target_honeypot.get_all_ports('udp')
+        print(target_ports)  # TODO
         # return
+
+        if not target_ports:
+            self.set_result(TestResult.NOT_APPLICABLE, "No open ports found")
 
         for honeypot_name in self.default_ports:
             # go through all known configurations and compare with current configuration

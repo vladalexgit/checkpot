@@ -7,13 +7,10 @@ from tests.test import Test
 from tests.test import TestResult
 from tests.test_platform import TestPlatform
 
-from tests.service_implementation import HTTPTest, SMTPTest
-from tests.direct_fingerprinting import DirectFingerprintTest, OSServiceCombinationTest, DefaultServiceCombinationTest, \
-    DuplicateServicesCheck
-from tests.default_http import DefaultWebsiteContentTest, DefaultBannerTest
-from tests.default_configuration import DefaultTemplateFileTest
-
 import argv_parser
+
+from tests import *
+
 
 manager = Manager()
 
@@ -67,28 +64,43 @@ def honeypot_test(container_name, tests, port_range=None):
 
 
 def interface_test():
+    print("Testing argument parser ...")
+
+    # TODO add tests for long options too
+
     parsed = argv_parser.parse(['checkpot.py', '-t', '172.17.0.2', '-O', '-p', '20-100,102'])
-    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 5, 'port_range': '20-100,102'}
+    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 5, 'port_range': '20-100,102', 'fast': False}
 
     if parsed != expected:
+        print("ERROR: parsed != expected")
         sys.exit(1)
 
     parsed = argv_parser.parse(['checkpot.py', '-t', '172.17.0.2', '-p', '20-1000'])
-    expected = {'target': '172.17.0.2', 'scan_os': False, 'scan_level': 5, 'port_range': '20-1000'}
+    expected = {'target': '172.17.0.2', 'scan_os': False, 'scan_level': 5, 'port_range': '20-1000', 'fast': False}
 
     if parsed != expected:
+        print("ERROR: parsed != expected")
         sys.exit(1)
 
     parsed = argv_parser.parse(['checkpot.py', '-t', '172.17.0.2', '-O', '-l', '3'])
-    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 3, 'port_range': None}
+    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 3, 'port_range': None, 'fast': False}
 
     if parsed != expected:
+        print("ERROR: parsed != expected")
+        sys.exit(1)
+
+    parsed = argv_parser.parse(['checkpot.py', '-O', '-t', '172.17.0.2', '-l', '3', '-f'])
+    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 3, 'port_range': None, 'fast': True}
+
+    if parsed != expected:
+        print("ERROR: parsed != expected")
         sys.exit(1)
 
     parsed = argv_parser.parse(['checkpot.py', '-O', '-t', '172.17.0.2', '-l', '3'])
-    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 3, 'port_range': None}
+    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 3, 'port_range': None, 'fast': False}
 
     if parsed != expected:
+        print("ERROR: parsed != expected")
         sys.exit(1)
 
 
@@ -98,49 +110,61 @@ def main():
     Write all tests here.
     """
 
-    # test artillery
-    honeypot_test('artillery', {DirectFingerprintTest(): TestResult.OK,
-                                DefaultServiceCombinationTest(): TestResult.WARNING,
-                                SMTPTest(): TestResult.WARNING,
-                                HTTPTest(): TestResult.NOT_APPLICABLE,
-                                DuplicateServicesCheck(): TestResult.OK})
+    # TODO update tests
 
-    # test glastopf
-    honeypot_test('glastopf', {DirectFingerprintTest(): TestResult.OK,
-                               DefaultServiceCombinationTest(): TestResult.OK,
-                               SMTPTest(): TestResult.NOT_APPLICABLE,
-                               HTTPTest(): TestResult.OK,
-                               DuplicateServicesCheck(): TestResult.OK,
-                               DefaultWebsiteContentTest(): TestResult.WARNING})
+    # # test artillery
+    # honeypot_test('artillery', {DirectFingerprintTest(): TestResult.OK,
+    #                             DefaultServiceCombinationTest(): TestResult.WARNING,
+    #                             SMTPTest(): TestResult.WARNING,
+    #                             HTTPTest(): TestResult.NOT_APPLICABLE,
+    #                             DuplicateServicesCheck(): TestResult.OK})
+    #
+    # # test glastopf
+    # honeypot_test('glastopf', {DirectFingerprintTest(): TestResult.OK,
+    #                            DefaultServiceCombinationTest(): TestResult.OK,
+    #                            SMTPTest(): TestResult.NOT_APPLICABLE,
+    #                            HTTPTest(): TestResult.OK,
+    #                            DuplicateServicesCheck(): TestResult.OK,
+    #                            DefaultWebsiteContentTest(): TestResult.WARNING})
+    #
+    # # test dionaea
+    # honeypot_test('dionaea', {DirectFingerprintTest(): TestResult.WARNING,
+    #                           DefaultServiceCombinationTest(): TestResult.WARNING,
+    #                           SMTPTest(): TestResult.NOT_APPLICABLE,
+    #                           HTTPTest(): TestResult.OK,
+    #                           DuplicateServicesCheck(): TestResult.WARNING})
+    #
+    # # test beartrap
+    # honeypot_test('beartrap', {DirectFingerprintTest(): TestResult.OK,
+    #                            DefaultServiceCombinationTest(): TestResult.OK,
+    #                            DuplicateServicesCheck(): TestResult.OK,
+    #                            DefaultWebsiteContentTest(): TestResult.UNKNOWN,
+    #                            SMTPTest(): TestResult.NOT_APPLICABLE,
+    #                            HTTPTest(): TestResult.NOT_APPLICABLE,
+    #                            DefaultBannerTest(): TestResult.WARNING,
+    #                            DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE})
+    #
+    # # test conpot
+    # honeypot_test('conpot',
+    #               {DirectFingerprintTest(): TestResult.OK,
+    #                DefaultServiceCombinationTest(): TestResult.OK,
+    #                DuplicateServicesCheck(): TestResult.OK,
+    #                DefaultWebsiteContentTest(): TestResult.UNKNOWN,
+    #                SMTPTest(): TestResult.NOT_APPLICABLE,
+    #                HTTPTest(): TestResult.WARNING,
+    #                DefaultBannerTest(): TestResult.UNKNOWN,
+    #                DefaultTemplateFileTest(): TestResult.WARNING},
+    #               port_range='0-501,503-1000')
 
-    # test dionaea
-    honeypot_test('dionaea', {DirectFingerprintTest(): TestResult.WARNING,
-                              DefaultServiceCombinationTest(): TestResult.WARNING,
-                              SMTPTest(): TestResult.NOT_APPLICABLE,
-                              HTTPTest(): TestResult.OK,
-                              DuplicateServicesCheck(): TestResult.WARNING})
+    # TODO alphabetic order
 
-    # test beartrap
-    honeypot_test('beartrap', {DirectFingerprintTest(): TestResult.OK,
-                               DefaultServiceCombinationTest(): TestResult.OK,
-                               DuplicateServicesCheck(): TestResult.OK,
-                               DefaultWebsiteContentTest(): TestResult.UNKNOWN,
-                               SMTPTest(): TestResult.NOT_APPLICABLE,
-                               HTTPTest(): TestResult.NOT_APPLICABLE,
-                               DefaultBannerTest(): TestResult.WARNING,
-                               DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE})
+    # test kippo
+    honeypot_test('kippo',
+                  {old_version_bugs.KippoErrorMessageBugTest(): TestResult.OK},
+                  port_range='2222')
 
-    # test conpot
-    honeypot_test('conpot',
-                  {DirectFingerprintTest(): TestResult.OK,
-                   DefaultServiceCombinationTest(): TestResult.OK,
-                   DuplicateServicesCheck(): TestResult.OK,
-                   DefaultWebsiteContentTest(): TestResult.UNKNOWN,
-                   SMTPTest(): TestResult.NOT_APPLICABLE,
-                   HTTPTest(): TestResult.WARNING,
-                   DefaultBannerTest(): TestResult.UNKNOWN,
-                   DefaultTemplateFileTest(): TestResult.WARNING},
-                  port_range='0-501,503-1000')
+    # test amun
+    # TODO
 
     # test the interface
     interface_test()

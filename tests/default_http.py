@@ -4,7 +4,79 @@ from bs4 import BeautifulSoup
 import urllib.request
 import urllib.error
 import re
-import difflib
+import hashlib
+
+
+class DefaultStylesheetTest(Test):
+
+    name = "Default Website Stylesheet Test"
+    description = "Test unchanged website stylesheet"
+
+    def run(self):
+        """Check if content matches known content"""
+
+        default_hashes = {
+            '1118635ac91417296e67cd0f3e6f9927e5f502e328b92bb3888b3b789a49a257': "glastopf"
+        }
+
+        css = self.target_honeypot.get_websites_css()
+
+        if not css:
+            self.set_result(TestResult.NOT_APPLICABLE, "No stylesheet found")
+
+        for style in css:
+
+            if isinstance(style, bytes):
+                hash_obj = hashlib.sha256(style)
+            else:
+                hash_obj = hashlib.sha256(style.encode())
+
+            digest = hash_obj.hexdigest()
+
+            if digest in default_hashes:
+                self.set_result(TestResult.WARNING, "Default stylesheet used for", default_hashes[digest])
+
+        if self.result == TestResult.UNKNOWN:
+            self.set_result(TestResult.OK, "No default stylesheet matched")
+
+
+class DefaultWebsiteTest(Test):
+
+    name = "Default Website Test"
+    description = "Test unchanged website content"
+
+    def run(self):
+        """Check if webpage has a known hash"""
+
+        # TODO conpot has current time, hash everything except that?
+        # TODO use bs4 and test partial hashes for such cases
+
+        default_hashes = {
+            'c59e04f46e25c454e65544c236abd9d71705cc4e5c4b4b7dc3ff83fec0e9402f': "shockpot",
+            'd405fe3c5b902342565cbf5523bb44a78c6bfb15b38a40c81a5f7bf4d8eb7838': "honeything",
+            '351190a71ddca564e471600c3d403fd8042e6888c8c6abe9cdfe536cef005e82': "dionaea",
+            '576137c8755b80c0751baa18c8306465fa02c641c683caf8b6d19469a5b96b86': "amun"
+        }
+
+        sites = self.target_honeypot.get_websites()
+
+        if not sites:
+            self.set_result(TestResult.NOT_APPLICABLE, "No website found")
+
+        for content in sites:
+
+            if isinstance(content, bytes):
+                hash_obj = hashlib.sha256(content)
+            else:
+                hash_obj = hashlib.sha256(content.encode())
+
+            digest = hash_obj.hexdigest()
+
+            if digest in default_hashes:
+                self.set_result(TestResult.WARNING, "Default website used for", default_hashes[digest])
+
+        if self.result == TestResult.UNKNOWN:
+            self.set_result(TestResult.OK, "No default website matched")
 
 
 class DefaultGlastopfWebsiteTest(Test):
@@ -22,6 +94,9 @@ class DefaultGlastopfWebsiteTest(Test):
             return
 
         sites = self.target_honeypot.get_websites()
+
+        if not sites:
+            self.set_result(TestResult.NOT_APPLICABLE, "No website found")
 
         for content in sites:
 
@@ -48,33 +123,3 @@ class DefaultGlastopfWebsiteTest(Test):
                 self.set_result(TestResult.WARNING, "Default Glastopf content source was used")
             else:
                 self.set_result(TestResult.OK, "No default content found")
-
-
-class DefaultGlastopfStylesheetTest(Test):
-    name = "Default Glastopf Website Stylesheet Test"
-    description = "Test unchanged website stylesheet"
-
-    def run(self):
-        """Check if content matches known content"""
-
-        try:
-            request = urllib.request.urlopen('https://raw.githubusercontent.com/mushorg/glastopf/master/glastopf/modules/handlers/emulators/data/style/style.css', timeout=10)
-            specimen_stylesheet = request.read().decode(request.headers.get_content_charset())
-
-        except urllib.error.URLError:
-            self.set_result(TestResult.UNKNOWN, "Failed to fetch specimen stylesheet")
-            return
-
-        css = self.target_honeypot.get_websites_css()
-
-        for style in css:
-
-            similarity = difflib.SequenceMatcher(None, style, specimen_stylesheet)
-            percent_similar = similarity.ratio()
-
-            if percent_similar > 0.8:
-                self.set_result(TestResult.WARNING, "Page stylesheet matches Glastopf ",
-                                str(percent_similar * 100), " percent")
-            else:
-                self.set_result(TestResult.OK, "No default content found")
-

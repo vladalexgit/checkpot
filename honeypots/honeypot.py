@@ -3,6 +3,7 @@ import platform
 import urllib.request
 import urllib.error
 import socket
+import time
 
 
 class Honeypot:
@@ -13,7 +14,7 @@ class Honeypot:
 
     scan_id = 0
     websites = []  # cached web page data for current honeypot
-    css = [] # cached css data for current honeypot
+    css = []  # cached css data for current honeypot
 
     def __init__(self, address, scan_os=False):
         """
@@ -25,11 +26,17 @@ class Honeypot:
         self.host = None
         self._nm = nmap.PortScanner()
 
-    def scan(self, port_range=None):
+    def scan(self, port_range=None, fast=False):
         """
         Runs a scan on this Honeypot for data acquisition.
         """
-        args = '-sV -Pn -n -T5'  # FIXME make these params selectable
+        print("NMAP scan started...")
+        start_time = time.time()
+
+        args = '-sV -n'
+
+        if fast:
+            args += ' -Pn -T5'
 
         if port_range:
             args += ' -p '+port_range
@@ -37,6 +44,7 @@ class Honeypot:
         if self.scan_os:
 
             args += ' -O'
+            print("NMAP args:", args)
 
             if platform.system() == 'Windows':
                 # No sudo on Windows systems, let UAC handle this
@@ -52,6 +60,9 @@ class Honeypot:
                     self._nm.get_nmap_last_output()
                     self._nm.scan(hosts=self.address, arguments=args, sudo=True)
         else:
+
+            print("NMAP args:", args)
+
             try:
                 # FIXME this is just a workaround for the bug shown in python-nmap-bug.log
                 self._nm.scan(hosts=self.address, arguments=args, sudo=False)
@@ -59,6 +70,9 @@ class Honeypot:
                 print(e.__class__, "occured trying again with get_last_output")
                 self._nm.get_nmap_last_output()
                 self._nm.scan(hosts=self.address, arguments=args, sudo=False)
+
+        end_time = time.time()
+        print("NMAP scan time:", end_time-start_time)
 
         hosts = self._nm.all_hosts()
 
@@ -144,6 +158,14 @@ class Honeypot:
             return self._nm[self.host][protocol][port]['product']
 
     def run_nmap_script(self, script, port, protocol='tcp'):
+        """
+        Runs a .nse script on the specified port range
+        :param script: <script_name>.nse
+        :param port: port / port range
+        :param protocol: 'tcp'/'udp'
+        :return: script output as string
+        :raises: ScanFailure
+        """
 
         tmp = nmap.PortScanner()
         tmp.scan(hosts=self.address, arguments="--script " + script + " -p " + str(port))
@@ -156,7 +178,13 @@ class Honeypot:
             raise ScanFailure("Script execution failed")
 
     def get_banner(self, port, protocol='tcp'):
-
+        """
+        Grab banner on specified port
+        :param port: port number
+        :param protocol: 'tcp' / 'udp'
+        :return: banner as string
+        :raises: ScanFailure
+        """
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(5)
 
@@ -169,6 +197,10 @@ class Honeypot:
         return recv
 
     def get_websites(self):
+        """
+        Gets websites for all active web servers found on the target
+        :return: list of website content strings
+        """
 
         if self.websites and self.scan_id == id(self.host):
             # if cache is not empty and we are still on the most recent scan
@@ -179,7 +211,7 @@ class Honeypot:
         self.websites = []
 
         target_ports = self.get_service_ports('http', 'tcp')
-        target_ports += self.get_service_ports('https', 'tcp')
+        # TODO target_ports += self.get_service_ports('https', 'tcp')
 
         for port in target_ports:
 
@@ -201,10 +233,11 @@ class Honeypot:
         return self.websites
 
     def get_websites_css(self):
-
+        """
+        Gets website stylesheet for all active web servers found on the target
+        :return: list of stylesheet strings
+        """
         # TODO create a Website class containing stylesheet and others?
-        # TODO test these
-        # TODO add docstrings when the structure is final
 
         if self.css and self.scan_id == id(self.host):
             # if cache is not empty and we are still on the most recent scan
@@ -215,7 +248,7 @@ class Honeypot:
         self.css = []
 
         target_ports = self.get_service_ports('http', 'tcp')
-        target_ports += self.get_service_ports('https', 'tcp')
+        # target_ports += self.get_service_ports('https', 'tcp')
 
         for port in target_ports:
 
@@ -238,8 +271,12 @@ class Honeypot:
 
 
 class ScanFailure(Exception):
+    """Raised when one of the data gathering methods fails"""
 
     def __init__(self, *report):
+        """
+        :param report: description of the error
+        """
         self.value = " ".join(str(r) for r in report)
 
     def __str__(self):
