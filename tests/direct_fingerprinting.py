@@ -81,7 +81,6 @@ class DefaultServiceCombinationTest(Test):
     # currently known honeypot configurations
     # this only makes sense for honeypots with many open ports
 
-    # TODO update this ASAP
     default_ports = {"amun": [21, 23, 25, 42, 80, 105, 110, 135, 139, 143, 443, 445, 554, 587, 617, 1023, 1025, 1080,
                               1111, 1581, 1900, 2101, 2103, 2105, 2107, 2380, 2555, 2745, 2954, 2967, 2968, 3127, 3128,
                               3268, 3372, 3389, 3628, 5000, 5168, 5554, 6070, 6101, 6129, 7144, 7547, 8080, 9999, 10203,
@@ -101,8 +100,6 @@ class DefaultServiceCombinationTest(Test):
 
         target_ports = self.target_honeypot.get_all_ports('tcp')
         target_ports += self.target_honeypot.get_all_ports('udp')
-        print(target_ports)  # TODO
-        # return
 
         if not target_ports:
             self.set_result(TestResult.NOT_APPLICABLE, "No open ports found")

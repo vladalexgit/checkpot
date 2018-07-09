@@ -140,7 +140,7 @@ class Honeypot:
         :return: list of ports
         """
         if protocol not in self._nm[self.host]:
-            return [] # TODO test this
+            return []
         else:
             return list((self._nm[self.host][protocol]).keys())
 

@@ -1,4 +1,3 @@
-import sys
 import getopt
 import ipaddress
 
