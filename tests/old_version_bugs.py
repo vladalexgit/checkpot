@@ -27,19 +27,30 @@ class KippoErrorMessageBugTest(Test):
             # http://www.hackinsight.org/news,155.html
 
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.connect((self.target_honeypot.ip, port))
-            banner = s.recv(1024) # TODO use banner?
-            s.send(b'\n\n\n\n\n\n\n\n')
-            response = s.recv(1024)
-            s.close()
+            s.settimeout(5)
+
+            try:
+                s.connect((self.target_honeypot.ip, port))
+                banner = s.recv(1024)  # TODO use banner?
+                s.send(b'\n\n\n\n\n\n\n\n')
+                response = s.recv(1024)
+                s.close()
+            except socket.error:
+                self.set_result(TestResult.UNKNOWN, "Can't communicate with ports")
+                return
 
             if b'168430090' in response:
                 self.set_result(TestResult.WARNING, "Old unpatched version of Kippo detected,"
                                                     " please update to the latest version")
+                return
 
             if b'bad packet length' in response:
                 self.set_result(TestResult.WARNING, "Old unpatched version of Kippo detected,"
                                                     " please update to the latest version")
+                return
 
             if b'Protocol mismatch' in response:
                 self.set_result(TestResult.OK, "SSH protocol OK!")
+                return
+
+            self.set_result(TestResult.WARNING, "Reply is unknown, protocol not implemented correctly?")

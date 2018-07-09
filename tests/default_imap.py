@@ -15,7 +15,7 @@ class DefaultIMAPBannerTest(Test):
             b'a200 Lotus Domino 6.5.4 7.0.2 IMAP4\r\n': "amun"
         }
 
-        target_ports = self.target_honeypot.get_service_ports('telnet', 'tcp')
+        target_ports = self.target_honeypot.get_service_ports('imap', 'tcp')
 
         if not target_ports:
             self.set_result(TestResult.NOT_APPLICABLE, "No open ports found!")

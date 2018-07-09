@@ -14,7 +14,7 @@ class DefaultFTPBannerTest(Test):
         known_banners = {
             b'220 DiskStation FTP server ready.\r\n': "dionaea",
             b'220 Welcome to my FTP Server\r\n': "amun",
-            b'220 BearTrap-ftpd Service ready': "beartrap"
+            b'220 BearTrap-ftpd Service ready\r\n': "beartrap"
         }
 
         target_ports = self.target_honeypot.get_service_ports('ftp', 'tcp')

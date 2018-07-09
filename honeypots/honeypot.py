@@ -140,7 +140,7 @@ class Honeypot:
         :return: list of ports
         """
         if protocol not in self._nm[self.host]:
-            return None
+            return [] # TODO test this
         else:
             return list((self._nm[self.host][protocol]).keys())
 
@@ -227,8 +227,8 @@ class Honeypot:
 
                 self.websites.append(content)
 
-            except urllib.error.URLError as e:
-                print('Failed to fetch homepage for site', self.ip, str(port), e.reason)
+            except (urllib.error.URLError, socket.error) as e:
+                print('Failed to fetch homepage for site', self.ip, str(port), e)
 
         return self.websites
 
@@ -264,8 +264,8 @@ class Honeypot:
 
                 self.css.append(content)
 
-            except urllib.error.URLError as e:
-                print('Failed to fetch stylesheet for site', self.ip, str(port), e.reason)
+            except (urllib.error.URLError, socket.error) as e:
+                print('Failed to fetch stylesheet for site', self.ip, str(port), e)
 
         return self.css
 

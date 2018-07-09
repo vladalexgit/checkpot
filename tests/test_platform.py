@@ -34,6 +34,21 @@ class TestPlatform:
                 print(test.name, " ---> ", test.result)
                 print("\t", test.report)
 
+        print("direct_fingerprinting.DirectFingerprintTest():", self.test_list[0].result)
+        print("direct_fingerprinting.DefaultServiceCombinationTest():", self.test_list[1].result)
+        print("direct_fingerprinting.DuplicateServicesCheck():", self.test_list[2].result)
+        print("default_ftp.DefaultFTPBannerTest():", self.test_list[3].result)
+        print("service_implementation.HTTPTest():", self.test_list[4].result)
+        print("default_http.DefaultWebsiteTest():", self.test_list[5].result)
+        print("default_http.DefaultGlastopfWebsiteTest():", self.test_list[6].result)
+        print("default_http.DefaultStylesheetTest():", self.test_list[7].result)
+        print("default_imap.DefaultIMAPBannerTest():", self.test_list[8].result)
+        print("default_smtp.DefaultSMTPBannerTest():", self.test_list[9].result)
+        print("service_implementation.SMTPTest():", self.test_list[10].result)
+        print("default_telnet.DefaultTelnetBannerTest():", self.test_list[11].result)
+        print("old_version_bugs.KippoErrorMessageBugTest():", self.test_list[12].result)
+        print("default_templates.DefaultTemplateFileTest():", self.test_list[13].result)
+
         self.__results = [(test.name, test.report, test.result) for test in self.test_list]
 
     @property

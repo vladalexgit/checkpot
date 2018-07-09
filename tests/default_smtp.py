@@ -5,8 +5,8 @@ from honeypots.honeypot import ScanFailure
 
 class DefaultSMTPBannerTest(Test):
 
-    name = "Default Telnet Banner Test"
-    description = "Tests usage of default telnet banners"
+    name = "Default SMTP Banner Test"
+    description = "Tests usage of default SMTP banners"
 
     def run(self):
         """Check if content matches any known content"""
@@ -15,7 +15,7 @@ class DefaultSMTPBannerTest(Test):
             b'220 mail.example.com SMTP Mailserver\r\n': "amun",
         }
 
-        target_ports = self.target_honeypot.get_service_ports('telnet', 'tcp')
+        target_ports = self.target_honeypot.get_service_ports('smtp', 'tcp')
 
         if not target_ports:
             self.set_result(TestResult.NOT_APPLICABLE, "No open ports found!")
