@@ -180,7 +180,7 @@ def main():
                       default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
                       service_implementation.HTTPTest(): TestResult.OK,
                       default_http.DefaultWebsiteTest(): TestResult.OK,
-                      default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
+                      default_http.DefaultGlastopfWebsiteTest(): TestResult.OK,
                       default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
                       default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
                       default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
