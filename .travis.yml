@@ -10,6 +10,10 @@ services:
 install:
   - sudo apt-get install -y nmap
   - pip install -r requirements.txt
+  - echo { >> /etc/docker/daemon.json
+  - echo "    \"userland-proxy\": false" >> /etc/docker/daemon.json
+  - echo } >> /etc/docker/daemon.json
+  - sudo service docker restart
 
 script:
   - python ci_automated_tests.py
