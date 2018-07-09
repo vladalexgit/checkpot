@@ -11,7 +11,6 @@ install:
   - sudo apt-get install -y nmap
   - pip install -r requirements.txt
   - echo { | sudo tee /etc/docker/daemon.json
-  - echo "userland-proxy": false | sudo tee -a /etc/docker/daemon.json
   - echo } | sudo tee -a /etc/docker/daemon.json
   - sudo service docker restart
 
