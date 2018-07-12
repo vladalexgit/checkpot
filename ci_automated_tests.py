@@ -20,6 +20,7 @@ def honeypot_test(container_name, tests, port_range=None):
     Starts a container and runs a list of tests against it.
     Compares results with the expected results.
     Stops the container.
+
     :param container_name: target container
     :param tests: dict of Test objects and expected TestResult pairs
     :param port_range: specify a custom port range for scan (e.g '20-100')
@@ -64,6 +65,7 @@ def honeypot_test(container_name, tests, port_range=None):
 
 
 def interface_test():
+    """Test argument parsing"""
     print("Testing argument parser ...")
 
     # TODO add tests for long options too
@@ -186,9 +188,9 @@ def main():
                       default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
                       service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
                       default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE
+                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
                       # TODO on travis service is detected as TCPWRAPPED
-                      # default_templates.DefaultTemplateFileTest(): TestResult.WARNING
+                      default_templates.DefaultTemplateFileTest(): TestResult.WARNING
                   },
                   port_range='0-501,503-1000')
 

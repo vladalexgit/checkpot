@@ -26,6 +26,7 @@ class Manager:
     def _log(self, *args):
         """
         Creates a new line in the log with given description
+
         :param args: log description
         """
         if self._verbose:
@@ -34,6 +35,7 @@ class Manager:
     def build_honeypot(self, name):
         """
         Builds the required image (if it doesn't exist) and then creates a container from it
+
         :param name: container name
         """
         try:
@@ -58,6 +60,7 @@ class Manager:
     def start_honeypot(self, name):
         """
         Starts the chosen container
+
         :param name: container name
         """
 
@@ -84,6 +87,7 @@ class Manager:
     def get_honeypot_ip(self, name):
         """
         Gets the IP address of a running container
+
         :param name: container name
         :return: container ip address
         """
@@ -95,6 +99,7 @@ class Manager:
     def stop_honeypot(self, name):
         """
         Stops the chosen container
+
         :param name: container name
         """
         self._log("Stopping container ", name)
@@ -122,6 +127,7 @@ class Manager:
     def clean_honeypot(self, name):
         """
         Removes container and underlying image for chosen container
+
         :param name: container name
         """
         self._log("Cleaning container ", name)
@@ -132,7 +138,6 @@ class Manager:
     def clean_all_honeypots(self):
         """
         Removes all containers and underlying images
-        :return:
         """
         available_honeypots = self.get_available_honeypots()
 

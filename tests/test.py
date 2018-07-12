@@ -29,6 +29,7 @@ class Test:
     def __init__(self, target_honeypot=None):
         """
         Instantiate a new Test
+
         :param target_honeypot: optional target Honeypot (can also be set later)
         """
         self.__target_honeypot = target_honeypot
@@ -38,6 +39,7 @@ class Test:
         """
         All tests must implement their own run() method and write docstrings for it.
         run() should never be called directly, the TestPlatform takes care of all initialisations.
+
         :return: this method returns nothing, however, before return set_result() should be called
         """
         pass
@@ -63,6 +65,7 @@ class Test:
     def set_result(self, result=TestResult.UNKNOWN, *report):
         """
         Stores the result and report of this test
+
         :param result: result of the test
         :param report: accurate report of findings the test has made
         """

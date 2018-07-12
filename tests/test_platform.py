@@ -22,6 +22,7 @@ class TestPlatform:
     def run_tests(self, verbose=False):
         """
         Runs the list of tests on the target Honeypot
+
         :param verbose: print results of each test
         """
         for test in self.test_list:
@@ -40,6 +41,7 @@ class TestPlatform:
     def results(self):
         """
         Returns the results of each test
+
         :return: list of tuples like (Test Name, Test Report, Test Result)
         """
         return self.__results
@@ -47,6 +49,7 @@ class TestPlatform:
     def get_stats(self):
         """
         Calculates statistics based on the last scan
+
         :return: tuple containing number of ok, warnings, unknown
         """
         ok = 0

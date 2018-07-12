@@ -18,9 +18,9 @@ All our tests are based on default settings or bugs that can be changed/avoided 
 
 ## Disclaimer
 
-####USE CHECKPOT AT YOUR OWN RISK!
+#### USE CHECKPOT AT YOUR OWN RISK!
  
-####THE AUTHORS OF THIS TOOL ARE NOT RESPONSIBLE FOR WHAT YOU CHOOSE TO DO WITH IT! YOU USE THIS TOOL AT YOUR OWN RISK!
+#### THE AUTHORS OF THIS TOOL ARE NOT RESPONSIBLE FOR WHAT YOU CHOOSE TO DO WITH IT! YOU USE THIS TOOL AT YOUR OWN RISK!
  
 Keep in mind that this tool is based on port scanning and interacts with services on the target system in most cases. Even a simple port scan can be illegal in some jurisdictions. Please consult all laws that apply to your use case and make sure you understand exactly how the app works before you use it.
  

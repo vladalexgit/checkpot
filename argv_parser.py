@@ -16,8 +16,9 @@ def print_usage():
 def parse(argv):
     """
     Parses command line arguments and returns dict of requested options
+
     :param argv:
-    :return:
+    :return: options dict
     """
 
     parsed = {
