@@ -1,5 +1,5 @@
-checkpot
-========
+Checkpot's modules
+==================
 
 .. toctree::
    :maxdepth: 4
