@@ -3,7 +3,6 @@ import platform
 import urllib.request
 import urllib.error
 import socket
-import time
 
 
 class Honeypot:
@@ -16,24 +15,34 @@ class Honeypot:
     websites = []  # cached web page data for current honeypot
     css = []  # cached css data for current honeypot
 
-    def __init__(self, address, scan_os=False):
+    def __init__(self, address, scan_os=False, verbose_scan=True):
         """
         :param address: ip address of the target
         :param scan_os: scan for Operating System information (requires elevated privileges)
+        :param verbose_scan: print progress bars and stats when running a scan
         """
         self.address = address
         self.scan_os = scan_os
         self.host = None
-        self._nm = nmap.PortScanner()
+
+        if verbose_scan:
+            try:
+                self._nm = nmap.PrintProgressPortScanner()
+            except AttributeError:
+                # not running the modded version of python-nmap
+                print("\nWARNING: Cannot display progress bars as you have an unsupported version of python-nmap. "
+                      "Please install from requirements.txt.")
+                print("Example: pip install -r requirements.txt\n")
+                self._nm = nmap.PortScanner()
+        else:
+            self._nm = nmap.PortScanner()
 
     def scan(self, port_range=None, fast=False):
         """
         Runs a scan on this Honeypot for data acquisition.
         """
-        print("NMAP scan started...")
-        start_time = time.time()
 
-        args = '-sV -n'
+        args = '-sV -n --stats-every 1s'
 
         if fast:
             args += ' -Pn -T5'
@@ -44,7 +53,6 @@ class Honeypot:
         if self.scan_os:
 
             args += ' -O'
-            print("NMAP args:", args)
 
             if platform.system() == 'Windows':
                 # No sudo on Windows systems, let UAC handle this
@@ -61,8 +69,6 @@ class Honeypot:
                     self._nm.scan(hosts=self.address, arguments=args, sudo=True)
         else:
 
-            print("NMAP args:", args)
-
             try:
                 # FIXME this is just a workaround for the bug shown in python-nmap-bug.log
                 self._nm.scan(hosts=self.address, arguments=args, sudo=False)
@@ -70,9 +76,6 @@ class Honeypot:
                 print(e.__class__, "occured trying again with get_last_output")
                 self._nm.get_nmap_last_output()
                 self._nm.scan(hosts=self.address, arguments=args, sudo=False)
-
-        end_time = time.time()
-        print("NMAP scan time:", end_time-start_time)
 
         hosts = self._nm.all_hosts()
 
@@ -227,7 +230,7 @@ class Honeypot:
 
                 self.websites.append(content)
 
-            except (urllib.error.URLError, socket.error) as e:
+            except Exception as e:
                 print('Failed to fetch homepage for site', self.ip, str(port), e)
 
         return self.websites

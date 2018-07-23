@@ -3,6 +3,8 @@ from .test import *
 from bs4 import BeautifulSoup
 import urllib.request
 import urllib.error
+import http
+import ssl
 import re
 import hashlib
 
@@ -123,3 +125,34 @@ class DefaultGlastopfWebsiteTest(Test):
                 self.set_result(TestResult.WARNING, "Default Glastopf content source was used")
             else:
                 self.set_result(TestResult.OK, "No default content found")
+
+
+class CertificateValidationTest(Test):
+    name = "Certificate Validation Test"
+    description = "Check validity of SSL certificates"
+
+    def run(self):
+        """Check validity of SSL certificates"""
+
+        target_ports = self.target_honeypot.get_service_ports('https', 'tcp')
+        target_ports += self.target_honeypot.get_service_ports('ssl/http', 'tcp')
+
+        for port in target_ports:
+
+            conn = http.client.HTTPSConnection(self.target_honeypot.ip, port=port, timeout=5)
+
+            try:
+                conn.request('GET', '/')
+            except ssl.SSLError as e:
+                if e.reason == "CERTIFICATE_VERIFY_FAILED":
+                    self.set_result(TestResult.WARNING, "Certificate invalid for", self.target_honeypot.ip, ":", port)
+
+                else:
+                    self.set_result(TestResult.WARNING, "Other certificate error:", e.reason,
+                                    "for", self.target_honeypot.ip, ":", port)
+                return
+            except Exception as e:
+                self.set_result(TestResult.WARNING, "Connection failed with exception ", e)
+                return
+
+            self.set_result(TestResult.OK, "Certificates Valid")

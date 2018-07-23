@@ -91,6 +91,7 @@ class Manager:
         :param name: container name
         :return: container ip address
         """
+        # TODO graceful exit when container does not exist
         container_details = self._client.inspect_container(name)
         target_ip = container_details['NetworkSettings']['IPAddress']
 
@@ -102,6 +103,7 @@ class Manager:
 
         :param name: container name
         """
+        # TODO graceful exit when container does not exist
         self._log("Stopping container ", name)
         self._client.stop(name)
 

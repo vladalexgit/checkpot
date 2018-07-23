@@ -1,7 +1,7 @@
 import sys
 
 import argv_parser
-from honeypots.honeypot import Honeypot
+from honeypots.honeypot import Honeypot, ScanFailure
 from tests.test_platform import TestPlatform
 
 from tests import *
@@ -27,10 +27,14 @@ def main(argv):
 
     # collect data
 
-    if options["port_range"]:
-        hp.scan(port_range=options["port_range"], fast=options["fast"])  # TODO restrict access to this?
-    else:
-        hp.scan()
+    try:
+        if options["port_range"]:
+            hp.scan(port_range=options["port_range"], fast=options["fast"])  # TODO restrict access to this?
+        else:
+            hp.scan()
+    except ScanFailure as e:
+        print("Scan failed: " + str(e))
+        sys.exit(1)
 
     # run tests
 
@@ -51,6 +55,7 @@ def main(argv):
         test_list.append(default_http.DefaultWebsiteTest())
         test_list.append(default_http.DefaultGlastopfWebsiteTest())
         test_list.append(default_http.DefaultStylesheetTest())
+        test_list.append(default_http.CertificateValidationTest())
 
         test_list.append(default_imap.DefaultIMAPBannerTest())
 

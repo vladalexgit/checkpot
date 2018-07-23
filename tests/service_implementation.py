@@ -100,5 +100,5 @@ class HTTPTest(Test):
                 self.set_result(TestResult.OK, "http service responded with 200/OK")
                 return
             else:
-                self.set_result(TestResult.WARNING, "http service responded with unknown sequence: ", recv[:15])
+                self.set_result(TestResult.WARNING, "http service responded with unknown sequence: ", recv)
                 return
