@@ -1,4 +1,5 @@
 import sys
+from termcolor import colored
 
 import argv_parser
 from honeypots.honeypot import Honeypot, ScanFailure
@@ -77,10 +78,6 @@ def main(argv):
     tp = TestPlatform(test_list, hp)
 
     tp.run_tests(verbose=True)
-
-    ok, warnings, unknown = tp.get_stats()
-
-    print("\nStats: OK -> ", ok, ", WARNING -> ", warnings, ", UNKNOWN -> ", unknown)
 
 
 if __name__ == '__main__':

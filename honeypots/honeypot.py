@@ -11,6 +11,8 @@ class Honeypot:
     Used for decoupling the acquisition of the data from its usages.
     """
 
+    __debug = False  # enables debug prints
+
     scan_id = 0
     websites = []  # cached web page data for current honeypot
     css = []  # cached css data for current honeypot
@@ -64,7 +66,8 @@ class Honeypot:
                     # FIXME this is just a workaround for the bug shown in python-nmap-bug.log
                     self._nm.scan(hosts=self.address, arguments=args, sudo=True)
                 except Exception as e:
-                    print(e.__class__, "occured trying again with get_last_output")
+                    if self.__debug:
+                        print(e.__class__, "occured trying again with get_last_output")
                     self._nm.get_nmap_last_output()
                     self._nm.scan(hosts=self.address, arguments=args, sudo=True)
         else:
@@ -73,7 +76,8 @@ class Honeypot:
                 # FIXME this is just a workaround for the bug shown in python-nmap-bug.log
                 self._nm.scan(hosts=self.address, arguments=args, sudo=False)
             except Exception as e:
-                print(e.__class__, "occured trying again with get_last_output")
+                if self.__debug:
+                    print(e.__class__, "occured trying again with get_last_output")
                 self._nm.get_nmap_last_output()
                 self._nm.scan(hosts=self.address, arguments=args, sudo=False)
 
@@ -231,7 +235,8 @@ class Honeypot:
                 self.websites.append(content)
 
             except Exception as e:
-                print('Failed to fetch homepage for site', self.ip, str(port), e)
+                if self.__debug:
+                    print('Failed to fetch homepage for site', self.ip, str(port), e)
 
         return self.websites
 
@@ -268,7 +273,8 @@ class Honeypot:
                 self.css.append(content)
 
             except (urllib.error.URLError, socket.error) as e:
-                print('Failed to fetch stylesheet for site', self.ip, str(port), e)
+                if self.__debug:
+                    print('Failed to fetch stylesheet for site', self.ip, str(port), e)
 
         return self.css
 

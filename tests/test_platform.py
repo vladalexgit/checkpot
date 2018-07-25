@@ -1,5 +1,6 @@
 from .test import Test, TestResult
 from honeypots.honeypot import Honeypot
+from termcolor import colored, cprint
 
 
 class TestPlatform:
@@ -25,6 +26,9 @@ class TestPlatform:
 
         :param verbose: print results of each test
         """
+        if verbose:
+            self.print_header()
+
         for test in self.test_list:
 
             test.target_honeypot = self.target_honeypot
@@ -32,10 +36,12 @@ class TestPlatform:
             test.run()
 
             if verbose:
-                print(test.name, " ---> ", test.result)
-                print("\t", test.report)
+                self.print_results(test.result, test.name, test.karma, test.report)
 
-        self.__results = [(test.name, test.report, test.result) for test in self.test_list]
+        self.__results = [(test.name, test.report, test.result, test.karma) for test in self.test_list]
+
+        if verbose:
+            self.print_stats()
 
     @property
     def results(self):
@@ -55,8 +61,12 @@ class TestPlatform:
         ok = 0
         warnings = 0
         unknown = 0
+        kp = 0
 
-        for tname, treport, tresult in self.__results:
+        for tname, treport, tresult, tkarma in self.__results:
+
+            kp += tkarma
+
             if tresult == TestResult.WARNING:
                 warnings += 1
             elif tresult == TestResult.OK:
@@ -64,4 +74,51 @@ class TestPlatform:
             elif tresult == TestResult.UNKNOWN:
                 unknown += 1
 
-        return ok, warnings, unknown
+        return ok, warnings, unknown, kp
+
+    @staticmethod
+    def print_results(test_result, test_name, test_karma, test_report):
+
+        assert isinstance(test_result, TestResult)
+
+        if test_result == TestResult.OK:
+            text = "[OK]"
+            color = "green"
+        elif test_result == TestResult.WARNING:
+            text = "[WARNING]"
+            color = "red"
+        elif test_result == TestResult.UNKNOWN:
+            text = "[UNKNOWN]"
+            color = "yellow"
+        elif test_result == TestResult.NOT_APPLICABLE:
+            text = "[NOT APPLICABLE]"
+            color = "blue"
+        else:
+            text = str(test_result)
+            color = "white"
+
+        print("{:40}".format(test_name) + " " +
+              "{:^25}".format(colored(text, color=color)) + " " +
+              "{:>+10}".format(test_karma))
+
+        print("\n> " + test_report + "\n")
+
+    @staticmethod
+    def print_header():
+        print("-"*80)
+        print(colored("{:40}".format("Test Name:"), color="magenta") + " " +
+              colored("{:25}".format("  Test Result:"), color="magenta") + " " +
+              colored("{:<10}".format("KP:"), color="magenta"), "\n")
+
+    def print_stats(self):
+        ok, warnings, unknown, kp = self.get_stats()
+        print("\nStats:",
+              "\t", colored("OK", color="green"), "->", ok, "\n"
+              "\t", colored("WARNING", color="red"), "->", warnings, "\n"
+              "\t", colored("UNKNOWN", color="yellow"), "->", unknown, "\n")
+
+        kpcolor = "green"
+        if kp < 0:
+            kpcolor = "red"
+
+        print("Total Karma Points ->", colored(kp, color=kpcolor), "\n")
