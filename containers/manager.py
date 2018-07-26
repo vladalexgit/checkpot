@@ -120,6 +120,13 @@ class Manager:
                 print("Container", hp, "not found")
                 continue
 
+    def build_all_honeypots(self):
+        """Builds all available containers"""
+        available_honeypots = self.get_available_honeypots()
+
+        for hp in available_honeypots:
+            self.build_honeypot(hp)
+
     @staticmethod
     def get_available_honeypots():
         """Returns a list with the names of all available honeypots"""

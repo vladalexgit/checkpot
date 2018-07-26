@@ -16,6 +16,7 @@ install:
 
 
 script:
+  - python containers/build_all.py
   - docker run -v /var/run/docker.sock:/var/run/docker.sock --name checkpot checkpot
 #  - python nmap_scan_all.py && cat _batch_scan_*.xml nmap_scan_all.out
 #  - python ci_automated_tests.py
