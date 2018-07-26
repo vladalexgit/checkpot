@@ -15,5 +15,5 @@ install:
   #- sudo service docker restart
 
 script:
-  - python nmap_scan_all.py && pastebinit -P -b pastebin.com _batch_scan_* nmap_scan_all.out nmap_scan_all.err
+  - python nmap_scan_all.py && cat _batch_scan_*.xml nmap_scan_all.out
 
