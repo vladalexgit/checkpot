@@ -10,8 +10,10 @@ services:
 install:
   - sudo apt-get install -y nmap
   - pip install -r requirements.txt
+  - sudo apt-get install pastebinit
   #- sudo cp .travis_docker_config /etc/docker/daemon.json
   #- sudo service docker restart
 
 script:
-  - python nmap_scan_all.py
+  - python nmap_scan_all.py && pastebinit -P -b pastebin.com _batch_scan_* nmap_scan_all.out nmap_scan_all.err
+
