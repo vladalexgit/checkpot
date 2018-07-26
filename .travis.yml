@@ -14,4 +14,4 @@ install:
   #- sudo service docker restart
 
 script:
-  - python ci_automated_tests.py
+  - python nmap_scan_all.py

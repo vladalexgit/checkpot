@@ -51,6 +51,8 @@ class Manager:
 
             output = self._client.build(path=os.path.join(os.path.dirname(__file__), name), tag=name)
 
+            # TODO decode output
+
             for line in output:
                 self._log(line)
 
@@ -77,7 +79,7 @@ class Manager:
         else:
             self._log("Container ", name, " found")
 
-        self._log("Starting container")
+        self._log("Starting container", name)
 
         if name == "honeypy":
             docker.from_env().containers.run(name, cap_add='NET_ADMIN', detach=True, name=name)

@@ -54,11 +54,11 @@ def honeypot_test(container_name, tests, port_range=None):
 
     for i, result in enumerate(tp.results):
 
-        tname, treport, tresult = result
+        tname, treport, tresult, tkarma = result
 
         if expected_results[i] != tresult:
             print("Test ", container_name, " -> FAILED:")
-            print("\ttest:", tname, " -> expected ", expected_results[i], " got ", tresult, " instead!")
+            print("\ttest:", tname, " -> expected ", expected_results[i], " got ", tresult, " instead!\n", treport)
             sys.exit(1)  # exit failure
 
     print("Test ", container_name, " -> PASSED")
@@ -149,7 +149,7 @@ def main():
                       default_smtp.DefaultSMTPBannerTest(): TestResult.OK,
                       service_implementation.SMTPTest(): TestResult.WARNING,
                       default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.WARNING,
+                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.WARNING  # TODO TestResult.UNKNOWN,  # because of random reply
                       default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
                   },
                   port_range='-')
@@ -174,25 +174,25 @@ def main():
                   })
 
     # test conpot
-    # honeypot_test('conpot',
-    #               {
-    #                   direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
-    #                   direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
-    #                   direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
-    #                   default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
-    #                   service_implementation.HTTPTest(): TestResult.OK,
-    #                   default_http.DefaultWebsiteTest(): TestResult.OK,
-    #                   default_http.DefaultGlastopfWebsiteTest(): TestResult.OK,
-    #                   default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
-    #                   default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
-    #                   default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
-    #                   service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
-    #                   default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
-    #                   old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
-    #                   # TODO on travis service is detected as TCPWRAPPED
-    #                   default_templates.DefaultTemplateFileTest(): TestResult.WARNING
-    #               },
-    #               port_range='0-501,503-1000')
+    honeypot_test('conpot',
+                  {
+                      direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
+                      direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
+                      direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
+                      default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
+                      service_implementation.HTTPTest(): TestResult.OK,
+                      default_http.DefaultWebsiteTest(): TestResult.OK,
+                      default_http.DefaultGlastopfWebsiteTest(): TestResult.OK,
+                      default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
+                      default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
+                      default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
+                      service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
+                      default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
+                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
+                      # TODO on travis service is detected as TCPWRAPPED
+                      default_templates.DefaultTemplateFileTest(): TestResult.WARNING
+                  },
+                  port_range='0-501,503-1000')
 
     # test cowrie
     honeypot_test('cowrie',
@@ -253,25 +253,25 @@ def main():
                       default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
                   })
 
-    # test dionaea
-    # honeypot_test('honeypy',
-    #               {
-    #                   direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
-    #                   direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.WARNING,
-    #                   direct_fingerprinting.DuplicateServicesCheck(): TestResult.WARNING,
-    #                   default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
-    #                   service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
-    #                   default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
-    #                   default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
-    #                   default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
-    #                   default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
-    #                   default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
-    #                   service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
-    #                   default_telnet.DefaultTelnetBannerTest(): TestResult.WARNING,
-    #                   old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
-    #                   default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
-    #               },
-    #               port_range='-')
+    # test honeypy
+    honeypot_test('honeypy',
+                  {
+                      direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
+                      direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.WARNING,
+                      direct_fingerprinting.DuplicateServicesCheck(): TestResult.WARNING,
+                      default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
+                      service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
+                      default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
+                      default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
+                      default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
+                      default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
+                      default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
+                      service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
+                      default_telnet.DefaultTelnetBannerTest(): TestResult.WARNING,
+                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
+                      default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
+                  },
+                  port_range='-')
 
     # test dionaea
     honeypot_test('honeything',
