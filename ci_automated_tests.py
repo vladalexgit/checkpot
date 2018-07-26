@@ -37,7 +37,7 @@ def honeypot_test(container_name, tests, port_range=None):
 
     time.sleep(10)  # TODO wait for container to start, catch some sort of signal
 
-    hp = Honeypot(manager.get_honeypot_ip(container_name), False)
+    hp = Honeypot(manager.get_honeypot_ip(container_name), scan_os=False, verbose_scan=False)
 
     print("Collecting data ...")
     if port_range:

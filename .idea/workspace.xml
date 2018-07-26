@@ -21,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
-      <file leaf-file-name=".travis.yml" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".travis.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="480">
+              <caret line="20" column="33" lean-forward="true" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -36,16 +36,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="purge_docker.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/containers/purge_docker.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -71,55 +61,67 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="manager.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/containers/manager.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1201">
-              <caret line="84" column="49" lean-forward="false" selection-start-line="84" selection-start-column="45" selection-end-line="84" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="nmap_scan_all.out" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nmap_scan_all.out">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="424" column="0" lean-forward="false" selection-start-line="424" selection-start-column="0" selection-end-line="432" selection-end-column="17" />
+            <state relative-caret-position="368">
+              <caret line="432" column="17" lean-forward="true" selection-start-line="432" selection-start-column="17" selection-end-line="432" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ci_automated_tests.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ci_automated_tests.py">
+      <file leaf-file-name="nmap_scan_all.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nmap_scan_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2424">
-              <caret line="151" column="86" lean-forward="false" selection-start-line="151" selection-start-column="86" selection-end-line="151" selection-end-column="86" />
+            <state relative-caret-position="528">
+              <caret line="22" column="32" lean-forward="false" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
               <folding>
-                <marker date="1532632578229" expanded="true" signature="1436:1469" ph="..." />
-                <marker date="1532632578229" expanded="true" signature="14168:14218" ph="..." />
+                <element signature="e#0#11#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda3/envs/honeyenv/lib/python3.6/site-packages/nmap/__init__.py">
+      <file leaf-file-name="Dockerfile" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Dockerfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="798">
-              <caret line="40" column="8" lean-forward="false" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="8" />
+            <state relative-caret-position="72">
+              <caret line="3" column="17" lean-forward="true" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nmap.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda3/envs/honeyenv/lib/python3.6/site-packages/nmap/nmap.py">
+      <file leaf-file-name="Dockerfile" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/containers/kippo/Dockerfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="706" column="42" lean-forward="false" selection-start-line="706" selection-start-column="33" selection-end-line="706" selection-end-column="44" />
+            <state relative-caret-position="120">
+              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="manager.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/containers/manager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="630">
+              <caret line="38" column="35" lean-forward="true" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ci_automated_tests.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ci_automated_tests.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="282">
+              <caret line="393" column="20" lean-forward="true" selection-start-line="393" selection-start-column="20" selection-end-line="393" selection-end-column="20" />
+              <folding>
+                <marker date="1532637651327" expanded="true" signature="1464:1497" ph="..." />
+                <marker date="1532637651327" expanded="true" signature="14196:14246" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -155,6 +157,7 @@
       <find>write</find>
       <find>pbar</find>
       <find>print</find>
+      <find>fold</find>
     </findStrings>
     <replaceStrings>
       <replace>parsed</replace>
@@ -168,8 +171,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/containers/__init__.py" />
-        <option value="$PROJECT_DIR$/containers/mtpot/Dockerfile" />
         <option value="$PROJECT_DIR$/containers/shockpot/shockpot.conf" />
         <option value="$PROJECT_DIR$/containers/shockpot/Dockerfile" />
         <option value="$PROJECT_DIR$/containers/amun/amun.conf" />
@@ -217,8 +218,10 @@
         <option value="$PROJECT_DIR$/tests/test_platform.py" />
         <option value="$PROJECT_DIR$/containers/manager.py" />
         <option value="$PROJECT_DIR$/nmap_scan_all.py" />
-        <option value="$PROJECT_DIR$/ci_automated_tests.py" />
+        <option value="$PROJECT_DIR$/containers/_checkpot/Dockerfile" />
+        <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/.travis.yml" />
+        <option value="$PROJECT_DIR$/ci_automated_tests.py" />
       </list>
     </option>
   </component>
@@ -258,16 +261,6 @@
               <item name="checkpot" type="b2602c69:ProjectViewProjectNode" />
               <item name="checkpot" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="checkpot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="checkpot" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="checkpot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="checkpot" type="462c0819:PsiDirectoryNode" />
-              <item name="honeypots" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -281,15 +274,15 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/tests" />
+      <recent name="$PROJECT_DIR$/honeypots" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/docs/source/images" />
       <recent name="$PROJECT_DIR$/containers/dionaea" />
       <recent name="$PROJECT_DIR$/automated_tests" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/tests" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/honeypots" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -546,7 +539,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="89" y="3" width="2473" height="1313" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26488706" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912534" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -557,7 +549,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942238" sideWeight="0.49856263" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942238" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42148015" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42148015" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3998195" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -712,20 +704,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/docs/source/tests.rst">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/source/honeypots.rst">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/source/containers.rst">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -1008,26 +986,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/containers/manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1201">
-          <caret line="84" column="49" lean-forward="false" selection-start-line="84" selection-start-column="45" selection-end-line="84" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/envs/honeyenv/lib/python3.6/site-packages/nmap/nmap.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="706" column="42" lean-forward="false" selection-start-line="706" selection-start-column="33" selection-end-line="706" selection-end-column="44" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nmap_scan_all.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1344">
-          <caret line="22" column="32" lean-forward="false" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -1065,28 +1028,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nmap_scan_all.out">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="424" column="0" lean-forward="false" selection-start-line="424" selection-start-column="0" selection-end-line="432" selection-end-column="17" />
+        <state relative-caret-position="368">
+          <caret line="432" column="17" lean-forward="true" selection-start-line="432" selection-start-column="17" selection-end-line="432" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nmap_scan_all.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="22" column="32" lean-forward="false" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/containers/kippo/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/containers/manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="38" column="35" lean-forward="true" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="3" column="17" lean-forward="true" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="20" column="33" lean-forward="true" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ci_automated_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2424">
-          <caret line="151" column="86" lean-forward="false" selection-start-line="151" selection-start-column="86" selection-end-line="151" selection-end-column="86" />
+        <state relative-caret-position="282">
+          <caret line="393" column="20" lean-forward="true" selection-start-line="393" selection-start-column="20" selection-end-line="393" selection-end-column="20" />
           <folding>
-            <marker date="1532632578229" expanded="true" signature="1436:1469" ph="..." />
-            <marker date="1532632578229" expanded="true" signature="14168:14218" ph="..." />
+            <marker date="1532637651327" expanded="true" signature="1464:1497" ph="..." />
+            <marker date="1532637651327" expanded="true" signature="14196:14246" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.travis.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
