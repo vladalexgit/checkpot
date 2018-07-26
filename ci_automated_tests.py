@@ -149,7 +149,7 @@ def main():
                       default_smtp.DefaultSMTPBannerTest(): TestResult.OK,
                       service_implementation.SMTPTest(): TestResult.WARNING,
                       default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.WARNING  # TODO TestResult.UNKNOWN,  # because of random reply
+                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.WARNING,  # TODO TestResult.UNKNOWN,  # because of random reply
                       default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
                   },
                   port_range='-')
