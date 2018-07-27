@@ -8,15 +8,31 @@ services:
   - docker
 
 install:
-#  - sudo apt-get install -y nmap
+  #- sudo apt-get install -y nmap
+  # install newer vesrsion of nmap
+  - sudo apt-get install build-essential checkinstall libpcre3-dev liblua5.2-dev
+  - mkdir -p /usr/local/src/nmap
+  - cd /usr/local/src/nmap
+  - wget http://nmap.org/dist/nmap-7.01.tar.bz2
+  - tar xvjf nmap-7.01.tar.bz2
+  - cd nmap-7.01
+  - ./configure
+  - make
+  - checkinstall
+
   - pip install -r requirements.txt
+
   #- sudo cp .travis_docker_config /etc/docker/daemon.json
   #- sudo service docker restart
-  - docker image build --tag checkpot .
+
+  # - docker image build --tag checkpot .
 
 
 script:
-  - python containers/build_all.py
-  - docker run -v /var/run/docker.sock:/var/run/docker.sock --name checkpot checkpot
+#  - python containers/build_all.py
+#  - docker run -v /var/run/docker.sock:/var/run/docker.sock --name checkpot checkpot
+
 #  - python nmap_scan_all.py && cat _batch_scan_*.xml nmap_scan_all.out
+
 #  - python ci_automated_tests.py
+   - echo hello
