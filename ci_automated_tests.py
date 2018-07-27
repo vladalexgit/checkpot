@@ -37,7 +37,7 @@ def honeypot_test(container_name, tests, port_range=None):
 
     time.sleep(10)  # TODO wait for container to start, catch some sort of signal
 
-    hp = Honeypot(manager.get_honeypot_ip(container_name), scan_os=False, verbose_scan=False)
+    hp = Honeypot(manager.get_honeypot_ip(container_name), scan_os=False, verbose_scan=True)
 
     print("Collecting data ...")
     if port_range:
@@ -115,24 +115,24 @@ def main():
     """
 
     # test amun
-    honeypot_test('amun',
-                  {
-                      direct_fingerprinting.DirectFingerprintTest(): TestResult.WARNING,
-                      direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.WARNING,
-                      direct_fingerprinting.DuplicateServicesCheck(): TestResult.WARNING,
-                      default_ftp.DefaultFTPBannerTest(): TestResult.WARNING,
-                      service_implementation.HTTPTest(): TestResult.OK,
-                      default_http.DefaultWebsiteTest(): TestResult.WARNING,
-                      default_http.DefaultGlastopfWebsiteTest(): TestResult.OK,
-                      default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
-                      default_imap.DefaultIMAPBannerTest(): TestResult.WARNING,
-                      default_smtp.DefaultSMTPBannerTest(): TestResult.WARNING,
-                      service_implementation.SMTPTest(): TestResult.OK,
-                      default_telnet.DefaultTelnetBannerTest(): TestResult.UNKNOWN,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
-                      default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
-                  },
-                  port_range='-')
+    # honeypot_test('amun',
+    #               {
+    #                   direct_fingerprinting.DirectFingerprintTest(): TestResult.WARNING,
+    #                   direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.WARNING,
+    #                   direct_fingerprinting.DuplicateServicesCheck(): TestResult.WARNING,
+    #                   default_ftp.DefaultFTPBannerTest(): TestResult.WARNING,
+    #                   service_implementation.HTTPTest(): TestResult.OK,
+    #                   default_http.DefaultWebsiteTest(): TestResult.WARNING,
+    #                   default_http.DefaultGlastopfWebsiteTest(): TestResult.OK,
+    #                   default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
+    #                   default_imap.DefaultIMAPBannerTest(): TestResult.WARNING,
+    #                   default_smtp.DefaultSMTPBannerTest(): TestResult.WARNING,
+    #                   service_implementation.SMTPTest(): TestResult.OK,
+    #                   default_telnet.DefaultTelnetBannerTest(): TestResult.UNKNOWN,
+    #                   old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
+    #                   default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
+    #               },
+    #               port_range='-')
 
     # test artillery
     honeypot_test('artillery',
