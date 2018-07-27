@@ -11,7 +11,7 @@ install:
   #- sudo apt-get install -y nmap
   # install newer vesrsion of nmap
   - sudo apt-get install build-essential checkinstall libpcre3-dev liblua5.2-dev
-  - mkdir -p /usr/local/src/nmap
+  - sudo mkdir -p /usr/local/src/nmap
   - cd /usr/local/src/nmap
   - wget http://nmap.org/dist/nmap-7.01.tar.bz2
   - tar xvjf nmap-7.01.tar.bz2
