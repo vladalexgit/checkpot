@@ -20,7 +20,8 @@ install:
   - make
   - echo "y" > inputfile && echo "port scanner" >> inputfile && echo $'\n' >> inputfile && echo "n" >> inputfile && echo "y" >> inputfile
   - sudo checkinstall < inputfile
-
+  - cd ../..
+  - nmap --version
 
   - pip install -r requirements.txt
 
@@ -36,5 +37,4 @@ script:
 
 #  - python nmap_scan_all.py && cat _batch_scan_*.xml nmap_scan_all.out
 
-#  - python ci_automated_tests.py
-   - echo hello
+  - python ci_automated_tests.py
