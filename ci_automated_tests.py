@@ -114,7 +114,7 @@ def main():
     Write all tests here.
     """
 
-    test amun
+    # test amun
     honeypot_test('amun',
                   {
                       direct_fingerprinting.DirectFingerprintTest(): TestResult.WARNING,
