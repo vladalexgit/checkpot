@@ -18,7 +18,9 @@ install:
   - cd nmap-7.01
   - ./configure
   - make
-  - checkinstall
+  - echo "y" > inputfile && echo "port scanner" >> inputfile && echo $'\n' >> inputfile && echo "n" >> inputfile && echo "y" >> inputfile
+  - checkinstall < inputfile
+
 
   - pip install -r requirements.txt
 
