@@ -6,7 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aea894fe-df90-42d6-804d-01bd642bfabe" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.travis.yml" afterPath="$PROJECT_DIR$/.travis.yml" />
+      <change beforePath="$PROJECT_DIR$/ci_automated_tests.py" afterPath="$PROJECT_DIR$/ci_automated_tests.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,7 +32,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".travis.yml" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".travis.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="589">
@@ -116,14 +116,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ci_automated_tests.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ci_automated_tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ci_automated_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="39" column="92" lean-forward="false" selection-start-line="39" selection-start-column="92" selection-end-line="39" selection-end-column="92" />
+            <state relative-caret-position="637">
+              <caret line="267" column="30" lean-forward="true" selection-start-line="267" selection-start-column="30" selection-end-line="267" selection-end-column="30" />
               <folding>
-                <marker date="1532696252552" expanded="true" signature="1463:1496" ph="..." />
-                <marker date="1532696252552" expanded="true" signature="14231:14281" ph="..." />
+                <marker date="1532876529889" expanded="true" signature="1463:1496" ph="..." />
+                <marker date="1532876529889" expanded="true" signature="14201:14251" ph="..." />
               </folding>
             </state>
           </provider>
@@ -221,10 +221,10 @@
         <option value="$PROJECT_DIR$/containers/manager.py" />
         <option value="$PROJECT_DIR$/containers/__init__.py" />
         <option value="$PROJECT_DIR$/containers/build_all.py" />
-        <option value="$PROJECT_DIR$/ci_automated_tests.py" />
         <option value="$PROJECT_DIR$/checkpot.py" />
         <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/.travis.yml" />
+        <option value="$PROJECT_DIR$/ci_automated_tests.py" />
       </list>
     </option>
   </component>
@@ -1100,17 +1100,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ci_automated_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="39" column="92" lean-forward="false" selection-start-line="39" selection-start-column="92" selection-end-line="39" selection-end-column="92" />
-          <folding>
-            <marker date="1532696252552" expanded="true" signature="1463:1496" ph="..." />
-            <marker date="1532696252552" expanded="true" signature="14231:14281" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/checkpot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
@@ -1142,6 +1131,17 @@
         <state relative-caret-position="589">
           <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ci_automated_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="637">
+          <caret line="267" column="30" lean-forward="true" selection-start-line="267" selection-start-column="30" selection-end-line="267" selection-end-column="30" />
+          <folding>
+            <marker date="1532876529889" expanded="true" signature="1463:1496" ph="..." />
+            <marker date="1532876529889" expanded="true" signature="14201:14251" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
