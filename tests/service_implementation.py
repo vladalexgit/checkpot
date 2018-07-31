@@ -2,6 +2,8 @@ import socket
 
 from .test import *
 
+import urllib
+
 
 class SMTPTest(Test):
     """Tests SMTP service implementation"""
@@ -57,7 +59,7 @@ class HTTPTest(Test):
 
         if target_ports:
             for port in target_ports:
-                if port != 443:
+                if port != 443:  # TODO separate https when nmap parses incorrectly
                     self.check_http_implemented(self.target_honeypot.ip, port)
 
                     if self.result == TestResult.WARNING:
@@ -67,26 +69,36 @@ class HTTPTest(Test):
 
     def check_http_implemented(self, server_address, port=80):
 
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(10)
+        # try a simple urllib.request first
 
         try:
-            s.connect((server_address, port))
-        except socket.error as exception:
-            self.set_result(TestResult.WARNING, "failed to connect to http server: ", exception.strerror)
-            return
 
-        try:
-            s.sendall(b'GET / HTTP/1.1\r\n\r\n')  # s.sendall(b'HEAD / HTTP/1.1\r\n\r\n')
-        except socket.error as exception:
-            self.set_result(TestResult.WARNING, "sending GET request to http server failed: ", exception.strerror)
-            return
+            request = urllib.request.urlopen('http://' + self.target_honeypot.ip + ':' + str(port) + '/',
+                                             timeout=5)
+            self.set_result(TestResult.OK, "HTTP implemented")
 
-        recv = s.recv(4096)
+        except Exception as e:
 
-        if recv[:15] == b'HTTP/1.1 200 OK':
-            self.set_result(TestResult.OK, "http service responded with 200/OK")
-            return
-        else:
-            self.set_result(TestResult.WARNING, "http service responded with unknown sequence: ", recv[:15])
-            return
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.settimeout(10)
+
+            try:
+                s.connect((server_address, port))
+            except socket.error as exception:
+                self.set_result(TestResult.WARNING, "failed to connect to http server: ", exception.strerror)
+                return
+
+            try:
+                s.sendall(b'GET / HTTP/1.1\r\n\r\n')  # s.sendall(b'HEAD / HTTP/1.1\r\n\r\n')
+            except socket.error as exception:
+                self.set_result(TestResult.WARNING, "sending GET request to http server failed: ", exception.strerror)
+                return
+
+            recv = s.recv(4096)
+
+            if recv[:15] == b'HTTP/1.1 200 OK':
+                self.set_result(TestResult.OK, "http service responded with 200/OK")
+                return
+            else:
+                self.set_result(TestResult.WARNING, "http service responded with unknown sequence: ", recv)
+                return

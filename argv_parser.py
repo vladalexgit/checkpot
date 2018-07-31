@@ -1,4 +1,3 @@
-import sys
 import getopt
 import ipaddress
 
@@ -11,24 +10,27 @@ def print_usage():
     print("\t-O / --os-scan -> fingerprint OS (requires sudo)")
     print("\t-l <level> / -level= <level> -> maximum scanning level (1/2/3)")
     print("\t-p / --ports -> scan a specific range of ports (e.g. 20-100). For all ports use -p-")
+    print("\t-f / --fast -> Uses -Pn and -T5 for faster scans on local connections")
 
 
 def parse(argv):
     """
     Parses command line arguments and returns dict of requested options
+
     :param argv:
-    :return:
+    :return: options dict
     """
 
     parsed = {
         "target": None,
         "scan_os": False,
         "scan_level": 5,
-        "port_range": None
+        "port_range": None,
+        "fast": False
     }
 
-    short_options = 't:l:Op:'
-    long_options = ['target=', 'level=', 'os-scan', 'ports']
+    short_options = 't:l:Op:f'
+    long_options = ['target=', 'level=', 'os-scan', 'ports', 'fast']
 
     try:
         options, values = getopt.getopt(argv[1:], short_options, long_options)
@@ -47,6 +49,8 @@ def parse(argv):
             parsed["scan_os"] = True
         elif option in ('-p', '--ports'):
             parsed["port_range"] = value
+        elif option in ('-f', '--fast'):
+            parsed["fast"] = True
 
     # validate target
     # TODO convert this to use exceptions if it gets too big

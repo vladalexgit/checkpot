@@ -28,7 +28,7 @@ class DirectFingerprintTest(Test):
 
 class OSServiceCombinationTest(Test):
     """Check if the OS and running services combination makes sense"""
-    # TODO make a high-interraction version of this test in level 2
+    # TODO make a high interaction version of this test in level 2?
 
     name = "OS Service combination test"
     description = "Check if the OS and running services combination makes sense"
@@ -45,6 +45,10 @@ class OSServiceCombinationTest(Test):
 
         if ports is None:
             self.set_result(TestResult.UNKNOWN, "Port request returned None")
+            return
+
+        if os is None:
+            self.set_result(TestResult.UNKNOWN, "Failed to retrieve OS")
             return
 
         if os.lower() == 'linux':
@@ -65,6 +69,8 @@ class OSServiceCombinationTest(Test):
                         self.set_result(TestResult.WARNING, "Windows machine is running", product_description)
                         return
 
+        self.set_result(TestResult.OK, "Combination OK")
+
 
 class DefaultServiceCombinationTest(Test):
     """Check if the running services combination is the default configuration for popular Honeypots"""
@@ -73,8 +79,15 @@ class DefaultServiceCombinationTest(Test):
     description = "Check if the running services combination is the default configuration for popular Honeypots"
 
     # currently known honeypot configurations
-    default_ports = {"artillery": [21, 22, 25, 53, 110, 1433, 1723, 5800, 5900, 8080, 10000, 16993, 44443],
-                     "dionaea": [21, 42, 80, 135, 443, 445, 1433, 1723, 3306, 5060, 5061]
+    # this only makes sense for honeypots with many open ports
+
+    default_ports = {"amun": [21, 23, 25, 42, 80, 105, 110, 135, 139, 143, 443, 445, 554, 587, 617, 1023, 1025, 1080,
+                              1111, 1581, 1900, 2101, 2103, 2105, 2107, 2380, 2555, 2745, 2954, 2967, 2968, 3127, 3128,
+                              3268, 3372, 3389, 3628, 5000, 5168, 5554, 6070, 6101, 6129, 7144, 7547, 8080, 9999, 10203,
+                              27347, 38292, 41523],
+                     "artillery": [21, 22, 25, 53, 110, 1433, 1723, 5800, 5900, 8080, 10000, 16993, 44443],
+                     "dionaea": [21, 42, 80, 135, 443, 445, 1433, 1723, 3306, 5060, 5061],
+                     "honeypy": [7, 8, 23, 24, 2048, 4096, 10007, 10008, 10009, 10010]
                      }
 
     # Any percent above this threshold will be shown as a warning
@@ -86,8 +99,10 @@ class DefaultServiceCombinationTest(Test):
         results = {}
 
         target_ports = self.target_honeypot.get_all_ports('tcp')
-        # print(target_ports)
-        # return
+        target_ports += self.target_honeypot.get_all_ports('udp')
+
+        if not target_ports:
+            self.set_result(TestResult.NOT_APPLICABLE, "No open ports found")
 
         for honeypot_name in self.default_ports:
             # go through all known configurations and compare with current configuration
@@ -99,7 +114,7 @@ class DefaultServiceCombinationTest(Test):
                     found += 1
 
             # compute similarity percent with known configuration
-            percent_similar = found / len(target_ports) * 100
+            percent_similar = found / len(self.default_ports[honeypot_name]) * 100
 
             if percent_similar > self.threshold:
                 results[honeypot_name] = percent_similar

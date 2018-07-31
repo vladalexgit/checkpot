@@ -3,13 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to checkpot's documentation!
+Welcome to Checkpot's documentation!
 ====================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   behind_the_scenes
+   guides_for_contributors
    modules
 
 Indices and tables

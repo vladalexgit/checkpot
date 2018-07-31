@@ -1,5 +1,8 @@
 import nmap
 import platform
+import urllib.request
+import urllib.error
+import socket
 
 
 class Honeypot:
@@ -8,21 +11,43 @@ class Honeypot:
     Used for decoupling the acquisition of the data from its usages.
     """
 
-    def __init__(self, address, scan_os=False):
+    __debug = False  # enables debug prints
+
+    scan_id = 0
+    websites = []  # cached web page data for current honeypot
+    css = []  # cached css data for current honeypot
+
+    def __init__(self, address, scan_os=False, verbose_scan=True):
         """
         :param address: ip address of the target
         :param scan_os: scan for Operating System information (requires elevated privileges)
+        :param verbose_scan: print progress bars and stats when running a scan
         """
         self.address = address
         self.scan_os = scan_os
         self.host = None
-        self._nm = nmap.PortScanner()
 
-    def scan(self, port_range=None):
+        if verbose_scan:
+            try:
+                self._nm = nmap.PrintProgressPortScanner()
+            except AttributeError:
+                # not running the modded version of python-nmap
+                print("\nWARNING: Cannot display progress bars as you have an unsupported version of python-nmap. "
+                      "Please install from requirements.txt.")
+                print("Example: pip install -r requirements.txt\n")
+                self._nm = nmap.PortScanner()
+        else:
+            self._nm = nmap.PortScanner()
+
+    def scan(self, port_range=None, fast=False):
         """
         Runs a scan on this Honeypot for data acquisition.
         """
-        args = '-sV'
+
+        args = '-sV -n --stats-every 1s'
+
+        if fast:
+            args += ' -Pn -T5'
 
         if port_range:
             args += ' -p '+port_range
@@ -34,21 +59,25 @@ class Honeypot:
             if platform.system() == 'Windows':
                 # No sudo on Windows systems, let UAC handle this
                 # FIXME workaround for the subnet python-nmap-bug.log also?
+                # FIXME somehow this also makes the command history of the terminal vanish?
                 self._nm.scan(hosts=self.address, arguments=args, sudo=False)
             else:
                 try:
                     # FIXME this is just a workaround for the bug shown in python-nmap-bug.log
                     self._nm.scan(hosts=self.address, arguments=args, sudo=True)
                 except Exception as e:
-                    print(e.__class__, "occured trying again with get_last_output")
+                    if self.__debug:
+                        print(e.__class__, "occured trying again with get_last_output")
                     self._nm.get_nmap_last_output()
                     self._nm.scan(hosts=self.address, arguments=args, sudo=True)
         else:
+
             try:
                 # FIXME this is just a workaround for the bug shown in python-nmap-bug.log
                 self._nm.scan(hosts=self.address, arguments=args, sudo=False)
             except Exception as e:
-                print(e.__class__, "occured trying again with get_last_output")
+                if self.__debug:
+                    print(e.__class__, "occured trying again with get_last_output")
                 self._nm.get_nmap_last_output()
                 self._nm.scan(hosts=self.address, arguments=args, sudo=False)
 
@@ -86,11 +115,10 @@ class Honeypot:
         Checks if the Honeypot has a certain service available.
         :param service_name: name of the service to search for
         :param protocol: 'tcp' or 'udp'
-        :return: list of port numbers
+        :return: list of port numbers (a certain service can run on multiple ports)
         """
         results = []
 
-        # TODO a certain service can run on multiple ports, convert the output to a list
         if protocol not in self._nm[self.host]:
             return results
 
@@ -119,7 +147,7 @@ class Honeypot:
         :return: list of ports
         """
         if protocol not in self._nm[self.host]:
-            return None
+            return []
         else:
             return list((self._nm[self.host][protocol]).keys())
 
@@ -136,11 +164,129 @@ class Honeypot:
         else:
             return self._nm[self.host][protocol][port]['product']
 
+    def run_nmap_script(self, script, port, protocol='tcp'):
+        """
+        Runs a .nse script on the specified port range
+        :param script: <script_name>.nse
+        :param port: port / port range
+        :param protocol: 'tcp'/'udp'
+        :return: script output as string
+        :raises: ScanFailure
+        """
+
+        tmp = nmap.PortScanner()
+        tmp.scan(hosts=self.address, arguments="--script " + script + " -p " + str(port))
+
+        port_info = tmp[self.address][protocol][int(port)]
+
+        if 'script' in port_info:
+            return port_info['script'][script.split('.')[0]]
+        else:
+            raise ScanFailure("Script execution failed")
+
+    def get_banner(self, port, protocol='tcp'):
+        """
+        Grab banner on specified port
+        :param port: port number
+        :param protocol: 'tcp' / 'udp'
+        :return: banner as string
+        :raises: ScanFailure
+        """
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(5)
+
+        try:
+            s.connect((self.address, port))
+            recv = s.recv(1024)
+        except socket.error as e:
+            raise ScanFailure("Banner grab failed for port", port, e)
+
+        return recv
+
+    def get_websites(self):
+        """
+        Gets websites for all active web servers found on the target
+        :return: list of website content strings
+        """
+
+        if self.websites and self.scan_id == id(self.host):
+            # if cache is not empty and we are still on the most recent scan
+            return self.websites
+
+        # refresh cache
+
+        self.websites = []
+
+        target_ports = self.get_service_ports('http', 'tcp')
+        # TODO target_ports += self.get_service_ports('https', 'tcp')
+
+        for port in target_ports:
+
+            try:
+
+                request = urllib.request.urlopen('http://' + self.ip + ':' + str(port) + '/',
+                                                 timeout=5)
+
+                if request.headers.get_content_charset() is None:
+                    content = request.read()
+                else:
+                    content = request.read().decode(request.headers.get_content_charset())
+
+                self.websites.append(content)
+
+            except Exception as e:
+                if self.__debug:
+                    print('Failed to fetch homepage for site', self.ip, str(port), e)
+
+        return self.websites
+
+    def get_websites_css(self):
+        """
+        Gets website stylesheet for all active web servers found on the target
+        :return: list of stylesheet strings
+        """
+        # TODO create a Website class containing stylesheet and others?
+
+        if self.css and self.scan_id == id(self.host):
+            # if cache is not empty and we are still on the most recent scan
+            return self.css
+
+        # refresh cache
+
+        self.css = []
+
+        target_ports = self.get_service_ports('http', 'tcp')
+        # target_ports += self.get_service_ports('https', 'tcp')
+
+        for port in target_ports:
+
+            try:
+
+                request = urllib.request.urlopen('http://' + self.ip + ':' + str(port) + '/style.css',
+                                                 timeout=5)
+
+                if request.headers.get_content_charset() is None:
+                    content = request.read()
+                else:
+                    content = request.read().decode(request.headers.get_content_charset())
+
+                self.css.append(content)
+
+            except (urllib.error.URLError, socket.error) as e:
+                if self.__debug:
+                    print('Failed to fetch stylesheet for site', self.ip, str(port), e)
+
+        return self.css
+
 
 class ScanFailure(Exception):
+    """Raised when one of the data gathering methods fails"""
 
-    def __init__(self, value):
-        self.value = value
+    def __init__(self, *report):
+        """
+        :param report: description of the error
+        """
+        self.value = " ".join(str(r) for r in report)
 
     def __str__(self):
         return repr(self.value)

@@ -21,13 +21,13 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'checkpot'
-copyright = '2018, Vlad Florea'
-author = 'Vlad Florea'
+copyright = '2018, Vlad Florea, The Honeynet Project'
+author = 'Vlad Florea, The Honeynet Project'
 
 # The short X.Y version
-version = '0.01'
+version = '0.1'
 # The full version, including alpha/beta/rc tags
-release = 'pre-alpha'
+release = '0.1-alpha'
 
 
 # -- General configuration ---------------------------------------------------
@@ -173,3 +173,15 @@ todo_include_todos = True
 
 # command:
 # sphinx-apidoc -f -o source/ ../
+
+# override skip methods to also document __init__() params
+
+
+def skip(app, what, name, obj, skip, options):
+    if name == "__init__":
+        return False
+    return skip
+
+
+def setup(app):
+    app.connect("autodoc-skip-member", skip)

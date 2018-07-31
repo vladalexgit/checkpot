@@ -1,1 +1,1 @@
-FROM dinotools/dionaea-docker:0.6
+FROM dinotools/dionaea-docker

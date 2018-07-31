@@ -4,8 +4,8 @@ containers package
 Submodules
 ----------
 
-containers.manager module
--------------------------
+containers\.manager module
+--------------------------
 
 .. automodule:: containers.manager
     :members:

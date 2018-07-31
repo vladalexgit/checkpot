@@ -4,8 +4,8 @@ honeypots package
 Submodules
 ----------
 
-honeypots.honeypot module
--------------------------
+honeypots\.honeypot module
+--------------------------
 
 .. automodule:: honeypots.honeypot
     :members:

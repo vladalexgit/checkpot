@@ -20,15 +20,19 @@ class Test:
     default_report = "This test did not provide a report of its findings"
     default_description = "No description defined for this test"
     default_name = "UnknownName"
+    default_karma = 10
 
     description = default_description
     name = default_name
+    karma_value = default_karma # number of karma points this test is worth
     __report = default_report
     __result = TestResult.UNKNOWN
+    __karma = 0 # final karma determined automatically after the test has submitted its results
 
     def __init__(self, target_honeypot=None):
         """
         Instantiate a new Test
+
         :param target_honeypot: optional target Honeypot (can also be set later)
         """
         self.__target_honeypot = target_honeypot
@@ -38,6 +42,7 @@ class Test:
         """
         All tests must implement their own run() method and write docstrings for it.
         run() should never be called directly, the TestPlatform takes care of all initialisations.
+
         :return: this method returns nothing, however, before return set_result() should be called
         """
         pass
@@ -60,14 +65,28 @@ class Test:
     def report(self):
         return self.__report
 
+    @property
+    def karma(self):
+        return self.__karma
+
     def set_result(self, result=TestResult.UNKNOWN, *report):
         """
         Stores the result and report of this test
+
         :param result: result of the test
         :param report: accurate report of findings the test has made
         """
+        assert isinstance(result, TestResult)
+
         self.__result = result
         self.__report = " ".join(str(r) for r in report)
+
+        if result ==  TestResult.OK:
+            self.__karma = self.karma_value
+        if result == TestResult.WARNING:
+            self.__karma = -self.karma_value
+        elif result == TestResult.UNKNOWN or result == TestResult.NOT_APPLICABLE:
+            self.__karma = 0
 
     def reset(self):
         """
