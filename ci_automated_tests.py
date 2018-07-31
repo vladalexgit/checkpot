@@ -37,7 +37,7 @@ def honeypot_test(container_name, tests, port_range=None):
 
     time.sleep(10)  # TODO wait for container to start, catch some sort of signal
 
-    hp = Honeypot(manager.get_honeypot_ip(container_name), scan_os=False, verbose_scan=True)
+    hp = Honeypot(manager.get_honeypot_ip(container_name), scan_os=False, verbose_scan=False)
 
     print("Collecting data ...")
     if port_range:
@@ -149,7 +149,7 @@ def main():
                       default_smtp.DefaultSMTPBannerTest(): TestResult.OK,
                       service_implementation.SMTPTest(): TestResult.WARNING,
                       default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.WARNING,  # TODO TestResult.UNKNOWN,  # because of random reply
+                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.WARNING,  # random reply
                       default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
                   },
                   port_range='-')

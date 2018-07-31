@@ -1,5 +1,4 @@
 import sys
-from termcolor import colored
 
 import argv_parser
 from honeypots.honeypot import Honeypot, ScanFailure
