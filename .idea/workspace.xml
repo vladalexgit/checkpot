@@ -89,11 +89,11 @@
       <file leaf-file-name="ci_automated_tests.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ci_automated_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="245" column="84" lean-forward="true" selection-start-line="245" selection-start-column="84" selection-end-line="245" selection-end-column="84" />
+            <state relative-caret-position="653">
+              <caret line="388" column="92" lean-forward="true" selection-start-line="388" selection-start-column="92" selection-end-line="388" selection-end-column="92" />
               <folding>
-                <marker date="1532878789059" expanded="true" signature="1463:1496" ph="..." />
-                <marker date="1532878789059" expanded="true" signature="14484:14543" ph="..." />
+                <marker date="1533040002305" expanded="true" signature="1463:1496" ph="..." />
+                <marker date="1533040002305" expanded="true" signature="14122:14172" ph="..." />
               </folding>
             </state>
           </provider>
@@ -592,7 +592,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942238" sideWeight="0.49856263" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942238" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5523466" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.9395307" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3998195" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -675,7 +675,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ci_automated_tests.py</url>
-          <line>245</line>
+          <line>244</line>
           <option name="timeStamp" value="89" />
         </line-breakpoint>
       </breakpoints>
@@ -1141,11 +1141,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ci_automated_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="245" column="84" lean-forward="true" selection-start-line="245" selection-start-column="84" selection-end-line="245" selection-end-column="84" />
+        <state relative-caret-position="653">
+          <caret line="388" column="92" lean-forward="true" selection-start-line="388" selection-start-column="92" selection-end-line="388" selection-end-column="92" />
           <folding>
-            <marker date="1532878789059" expanded="true" signature="1463:1496" ph="..." />
-            <marker date="1532878789059" expanded="true" signature="14484:14543" ph="..." />
+            <marker date="1533040002305" expanded="true" signature="1463:1496" ph="..." />
+            <marker date="1533040002305" expanded="true" signature="14122:14172" ph="..." />
           </folding>
         </state>
       </provider>
