@@ -134,8 +134,17 @@ class CertificateValidationTest(Test):
     def run(self):
         """Check validity of SSL certificates"""
 
-        target_ports = self.target_honeypot.get_service_ports('https', 'tcp')
-        target_ports += self.target_honeypot.get_service_ports('ssl/http', 'tcp')
+        # FIXME NMAP does not report https correctly when using -oX
+        # target_ports = self.target_honeypot.get_service_ports('https', 'tcp')
+        # target_ports += self.target_honeypot.get_service_ports('ssl/http', 'tcp')
+        target_ports = []
+
+        if self.target_honeypot.has_tcp(443):
+            target_ports += [443]
+
+        if not target_ports:
+            self.set_result(TestResult.NOT_APPLICABLE, "Port 443 not open")
+            return
 
         for port in target_ports:
 
