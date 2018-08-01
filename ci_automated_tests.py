@@ -1,5 +1,7 @@
 import time
 import sys
+from termcolor import colored, cprint
+from datetime import timedelta
 
 from containers.manager import Manager
 from honeypots.honeypot import Honeypot
@@ -12,7 +14,7 @@ import argv_parser
 from tests import *
 
 
-manager = Manager()
+manager = Manager(verbose=True)
 
 
 def honeypot_test(container_name, tests, port_range=None):
@@ -39,13 +41,18 @@ def honeypot_test(container_name, tests, port_range=None):
 
     hp = Honeypot(manager.get_honeypot_ip(container_name), scan_os=False, verbose_scan=False)
 
-    print("Collecting data ...")
+    print(">", colored("Collecting data ...", color="yellow"))
+    print("> Test", colored(container_name, color="yellow"), "started at:",
+          colored(time.strftime("%H:%M:%S", time.gmtime()), color="blue"))
+
+    start_time = time.time()
+
     if port_range:
         hp.scan(port_range)
     else:
         hp.scan()
 
-    print("Running tests ...")
+    print(">", colored("Running tests ...", color="yellow"))
     tp = TestPlatform(test_list, hp)
 
     tp.run_tests()
@@ -57,11 +64,18 @@ def honeypot_test(container_name, tests, port_range=None):
         tname, treport, tresult, tkarma = result
 
         if expected_results[i] != tresult:
-            print("Test ", container_name, " -> FAILED:")
+            print("Test ", colored(container_name, color="yellow"), "->", colored("FAILED:", color="red"))
             print("\ttest:", tname, " -> expected ", expected_results[i], " got ", tresult, " instead!\n", treport)
+            print("> Test ended at:", colored(time.strftime("%H:%M:%S", time.gmtime()), color="blue"))
+            end_time = time.time()
+            print("Elapsed time =", colored(timedelta(seconds=end_time - start_time), color="blue"), "\n")
             sys.exit(1)  # exit failure
 
-    print("Test ", container_name, " -> PASSED")
+    print("Test ", container_name, "->", colored("PASSED", color="green"))
+
+    print("> Test ended at:", colored(time.strftime("%H:%M:%S", time.gmtime()), color="blue"))
+    end_time = time.time()
+    print("Elapsed time =", colored(timedelta(seconds=end_time - start_time), color="blue"), "\n")
 
 
 def interface_test():

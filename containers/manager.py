@@ -1,6 +1,8 @@
 import os
 import docker
 import docker.errors
+import ast
+from termcolor import colored
 
 
 class Manager:
@@ -30,7 +32,7 @@ class Manager:
         :param args: log description
         """
         if self._verbose:
-            print(self._tag, " : ", *args)
+            print(colored(self._tag, color="magenta"), " : ", *args)
 
     def build_honeypot(self, name):
         """
@@ -51,10 +53,10 @@ class Manager:
 
             output = self._client.build(path=os.path.join(os.path.dirname(__file__), name), tag=name)
 
-            # TODO decode output
-
             for line in output:
-                self._log(line)
+                # log is supplied as dict containing the required string
+                # TODO parsed = ast.literal_eval(line.decode('utf-8').replace('\r\n', ''))
+                self._log(line.decode('utf-8').replace('\r', '').replace('\n', ''))
 
             if name != "honeypy":
                 self._client.create_container(image=name, detach=True, name=name)
