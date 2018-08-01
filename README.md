@@ -38,7 +38,7 @@ _This tool is still in very early stages of development. Please keep this in min
    
         `git clone https://www.github.com/honeynet/checkpot.git`
    
-   4. Install `python3.6` and `pip` using apt-get or tools like virtualenv or conda
+   4. Install `python3` (recommended version 3.5 or greater) and `pip` using apt-get or tools like virtualenv or conda
    
    5. Install `mercurial` using apt-get (or your distribution's default package manager). Mercurial is required for the download of some dependencies during the next step.
    
