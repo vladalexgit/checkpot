@@ -41,7 +41,7 @@ class Manager:
         :param name: container name
         """
         try:
-            self._client.create_container(image=name, detach=True, name=name)
+            self._client.inspect_image(name)
         except docker.errors.NotFound:
 
             self._log("Image not found, building image for ", name, " ...")
