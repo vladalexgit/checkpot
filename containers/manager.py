@@ -8,11 +8,12 @@ from termcolor import colored
 class Manager:
     """Facilitates working with honeypot containers"""
 
-    def __init__(self, verbose=True, logfile=None, custom_client=None):
+    def __init__(self, verbose=True, logfile=None, custom_client=None, build_info=True):
         """
         :param verbose: generate logs related to container operations
         :param logfile: write logs to a file
         :param custom_client: specify a custom Docker Client
+        :param build_info: show log during image build phase
         """
 
         if custom_client:
@@ -23,6 +24,7 @@ class Manager:
 
         self._verbose = verbose
         self._logfile = logfile
+        self._build_info = build_info
         self._tag = "MANAGER"
 
     def _log(self, *args):
@@ -32,7 +34,12 @@ class Manager:
         :param args: log description
         """
         if self._verbose:
-            print(colored(self._tag, color="magenta"), " : ", *args)
+
+            if self._logfile:
+                with open(self._logfile, 'a') as f:
+                    print(*args, file=f)
+            else:
+                print(colored(self._tag, color="magenta"), " : ", *args)
 
     def build_honeypot(self, name):
         """
@@ -53,10 +60,11 @@ class Manager:
 
             output = self._client.build(path=os.path.join(os.path.dirname(__file__), name), tag=name)
 
-            for line in output:
-                # log is supplied as dict containing the required string
-                # TODO parsed = ast.literal_eval(line.decode('utf-8').replace('\r\n', ''))
-                self._log(line.decode('utf-8').replace('\r', '').replace('\n', ''))
+            if self._build_info:
+                for line in output:
+                    # log is supplied as dict containing the required string
+                    # TODO parsed = ast.literal_eval(line.decode('utf-8').replace('\r\n', ''))
+                    self._log(line.decode('utf-8').replace('\r', '').replace('\n', ''))
 
             if name != "honeypy":
                 self._client.create_container(image=name, detach=True, name=name)

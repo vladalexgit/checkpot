@@ -14,7 +14,7 @@ import argv_parser
 from tests import *
 
 
-manager = Manager(verbose=True)
+manager = Manager(verbose=True, build_info=False)
 
 
 def honeypot_test(container_name, tests, port_range=None):
