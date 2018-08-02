@@ -7,6 +7,7 @@ class DefaultFTPBannerTest(Test):
 
     name = "Default FTP Banner Test"
     description = "Tests usage of default service banners"
+    karma_value = 100
 
     def run(self):
         """Check if banner matches any known banner"""

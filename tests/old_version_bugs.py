@@ -4,8 +4,10 @@ import socket
 
 
 class KippoErrorMessageBugTest(Test):
+
     name = "Kippo Error Message Bug Test"
     description = "Tests presence of an obsolte version of kippo"
+    karma_value = 100
 
     def run(self):
         """Check if content matches any known content"""

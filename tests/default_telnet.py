@@ -7,6 +7,7 @@ class DefaultTelnetBannerTest(Test):
 
     name = "Default Telnet Banner Test"
     description = "Tests usage of default telnet banners"
+    karma_value = 100
 
     def run(self):
         """Check if content matches any known content"""

@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/tests/default_templates.py" line="46" />
+    <bookmark url="file://$PROJECT_DIR$/tests/default_templates.py" line="47" />
     <bookmark url="file://$PROJECT_DIR$/docs/source/automated_testing_description.rst" line="18" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aea894fe-df90-42d6-804d-01bd642bfabe" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/ci_automated_tests.py" afterPath="$PROJECT_DIR$/ci_automated_tests.py" />
-      <change beforePath="$PROJECT_DIR$/containers/manager.py" afterPath="$PROJECT_DIR$/containers/manager.py" />
+      <change beforePath="$PROJECT_DIR$/tests/default_ftp.py" afterPath="$PROJECT_DIR$/tests/default_ftp.py" />
+      <change beforePath="$PROJECT_DIR$/tests/default_http.py" afterPath="$PROJECT_DIR$/tests/default_http.py" />
+      <change beforePath="$PROJECT_DIR$/tests/default_imap.py" afterPath="$PROJECT_DIR$/tests/default_imap.py" />
+      <change beforePath="$PROJECT_DIR$/tests/default_smtp.py" afterPath="$PROJECT_DIR$/tests/default_smtp.py" />
+      <change beforePath="$PROJECT_DIR$/tests/default_telnet.py" afterPath="$PROJECT_DIR$/tests/default_telnet.py" />
+      <change beforePath="$PROJECT_DIR$/tests/default_templates.py" afterPath="$PROJECT_DIR$/tests/default_templates.py" />
+      <change beforePath="$PROJECT_DIR$/tests/direct_fingerprinting.py" afterPath="$PROJECT_DIR$/tests/direct_fingerprinting.py" />
+      <change beforePath="$PROJECT_DIR$/tests/old_version_bugs.py" afterPath="$PROJECT_DIR$/tests/old_version_bugs.py" />
+      <change beforePath="$PROJECT_DIR$/tests/service_implementation.py" afterPath="$PROJECT_DIR$/tests/service_implementation.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,37 +28,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
-      <file leaf-file-name="ci_automated_tests.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ci_automated_tests.py">
+      <file leaf-file-name="test_platform.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/test_platform.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="16" column="48" lean-forward="false" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+            <state relative-caret-position="408">
+              <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <marker date="1533206764709" expanded="true" signature="1805:1838" ph="..." />
-                <marker date="1533206764709" expanded="true" signature="15681:15731" ph="..." />
+                <element signature="e#0#34#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="manager.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/containers/manager.py">
+      <file leaf-file-name="default_imap.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/default_imap.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="15" column="60" lean-forward="true" selection-start-line="15" selection-start-column="60" selection-end-line="15" selection-end-column="60" />
+            <state relative-caret-position="216">
+              <caret line="9" column="20" lean-forward="false" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
               <folding>
-                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#0#19#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Dockerfile" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <file leaf-file-name="default_smtp.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/default_smtp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="11" column="22" lean-forward="false" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+            <state relative-caret-position="168">
+              <caret line="9" column="21" lean-forward="false" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -61,8 +65,8 @@
       <file leaf-file-name="default_telnet.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/default_telnet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="216">
+              <caret line="9" column="21" lean-forward="false" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -70,51 +74,57 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="typing.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda3/envs/honeyenv/lib/python3.6/typing.py">
+      <file leaf-file-name="default_templates.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/default_templates.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="2315" column="12" lean-forward="true" selection-start-line="2315" selection-start-column="12" selection-end-line="2315" selection-end-column="12" />
+            <state relative-caret-position="-42">
+              <caret line="8" column="21" lean-forward="false" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="direct_fingerprinting.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/direct_fingerprinting.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="222">
+              <caret line="136" column="20" lean-forward="false" selection-start-line="136" selection-start-column="20" selection-end-line="136" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build_all.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/containers/build_all.py">
+      <file leaf-file-name="old_version_bugs.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/old_version_bugs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="-282">
+              <caret line="9" column="21" lean-forward="false" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="datetime.pyi" pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/datetime.pyi">
+      <file leaf-file-name="service_implementation.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/service_implementation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3120">
-              <caret line="132" column="13" lean-forward="false" selection-start-line="132" selection-start-column="13" selection-end-line="132" selection-end-column="13" />
-              <folding />
+            <state relative-caret-position="-354">
+              <caret line="54" column="20" lean-forward="false" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="termcolor.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda3/envs/honeyenv/lib/python3.6/site-packages/termcolor.py">
+      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2784">
-              <caret line="117" column="4" lean-forward="false" selection-start-line="117" selection-start-column="4" selection-end-line="117" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".travis.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.travis.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="864">
-              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state relative-caret-position="286">
+              <caret line="50" column="8" lean-forward="false" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -179,7 +189,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/containers/amun/amun.conf" />
         <option value="$PROJECT_DIR$/containers/amun/Dockerfile" />
         <option value="$PROJECT_DIR$/containers/kippo/Dockerfile" />
         <option value="$PROJECT_DIR$/containers/telnet_iot_honeypot/Dockerfile" />
@@ -194,13 +203,7 @@
         <option value="$PROJECT_DIR$/tests/default_configuration.py" />
         <option value="$PROJECT_DIR$/andrew_morris_kippo.py" />
         <option value="$PROJECT_DIR$/tests/__init__.py" />
-        <option value="$PROJECT_DIR$/tests/default_telnet.py" />
-        <option value="$PROJECT_DIR$/tests/default_smtp.py" />
-        <option value="$PROJECT_DIR$/tests/default_imap.py" />
-        <option value="$PROJECT_DIR$/tests/old_version_bugs.py" />
-        <option value="$PROJECT_DIR$/tests/default_ftp.py" />
         <option value="$PROJECT_DIR$/.travis_docker_config" />
-        <option value="$PROJECT_DIR$/tests/direct_fingerprinting.py" />
         <option value="$PROJECT_DIR$/docs/source/conf.py" />
         <option value="$PROJECT_DIR$/argv_parser.py" />
         <option value="$PROJECT_DIR$/docs/source/modules.rst" />
@@ -211,7 +214,6 @@
         <option value="$PROJECT_DIR$/docs/source/test_platform_description.rst" />
         <option value="$PROJECT_DIR$/docs/source/automated_testing_description.rst" />
         <option value="$PROJECT_DIR$/docs/source/adding_containers.rst" />
-        <option value="$PROJECT_DIR$/tests/service_implementation.py" />
         <option value="$USER_HOME$/BitBucket/python-nmap/nmap/nmap.py" />
         <option value="$USER_HOME$/BitBucket/python-nmap/setup.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
@@ -225,11 +227,19 @@
         <option value="$PROJECT_DIR$/containers/build_all.py" />
         <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/checkpot.py" />
-        <option value="$PROJECT_DIR$/tests/default_http.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/ci_automated_tests.py" />
         <option value="$PROJECT_DIR$/containers/manager.py" />
+        <option value="$PROJECT_DIR$/tests/default_ftp.py" />
+        <option value="$PROJECT_DIR$/tests/default_http.py" />
+        <option value="$PROJECT_DIR$/tests/default_imap.py" />
+        <option value="$PROJECT_DIR$/tests/default_smtp.py" />
+        <option value="$PROJECT_DIR$/tests/default_telnet.py" />
+        <option value="$PROJECT_DIR$/tests/default_templates.py" />
+        <option value="$PROJECT_DIR$/tests/direct_fingerprinting.py" />
+        <option value="$PROJECT_DIR$/tests/old_version_bugs.py" />
+        <option value="$PROJECT_DIR$/tests/service_implementation.py" />
       </list>
     </option>
   </component>
@@ -272,7 +282,7 @@
             <path>
               <item name="checkpot" type="b2602c69:ProjectViewProjectNode" />
               <item name="checkpot" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -608,7 +618,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/tests/default_http.py</url>
-          <line>137</line>
+          <line>143</line>
           <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -701,56 +711,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/containers/purge_docker.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/default_smtp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/default_ftp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="1" column="25" lean-forward="false" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/containers/kippo/Dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="4" column="45" lean-forward="false" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/containers/artillery/Dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="90" lean-forward="false" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="95" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/honeyenv/lib/python3.6/site-packages/tqdm/_tqdm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="645" column="0" lean-forward="false" selection-start-line="645" selection-start-column="0" selection-end-line="645" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/file" />
     <entry file="file://$PROJECT_DIR$/nmap_scan_all.err" />
     <entry file="file://$PROJECT_DIR$/nmap_scan_all.out" />
@@ -790,13 +750,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_batch_scan_amun.err" />
     <entry file="file://$PROJECT_DIR$/nmap_scan_all.py" />
-    <entry file="file://$PROJECT_DIR$/tests/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="50" column="8" lean-forward="false" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -804,14 +757,6 @@
             <caret line="42" column="59" lean-forward="true" selection-start-line="42" selection-start-column="59" selection-end-line="42" selection-end-column="59" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/default_http.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="141" column="37" lean-forward="false" selection-start-line="141" selection-start-column="37" selection-end-line="141" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -870,16 +815,8 @@
         <state relative-caret-position="1224">
           <caret line="57" column="42" lean-forward="false" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="65" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_platform.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="35" lean-forward="false" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -933,16 +870,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/default_telnet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hello.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -971,12 +898,114 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ci_automated_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="16" column="48" lean-forward="false" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+        <state relative-caret-position="4206">
+          <caret line="419" column="24" lean-forward="true" selection-start-line="419" selection-start-column="24" selection-end-line="419" selection-end-column="24" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
             <marker date="1533206764709" expanded="true" signature="1805:1838" ph="..." />
             <marker date="1533206764709" expanded="true" signature="15681:15731" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/default_ftp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="21" lean-forward="false" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/default_http.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="137" column="20" lean-forward="false" selection-start-line="137" selection-start-column="20" selection-end-line="137" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/default_imap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="20" lean-forward="false" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/default_smtp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="9" column="21" lean-forward="false" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/default_telnet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="21" lean-forward="false" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/default_templates.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-42">
+          <caret line="8" column="21" lean-forward="false" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/direct_fingerprinting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="136" column="20" lean-forward="false" selection-start-line="136" selection-start-column="20" selection-end-line="136" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/old_version_bugs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-282">
+          <caret line="9" column="21" lean-forward="false" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/service_implementation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-354">
+          <caret line="54" column="20" lean-forward="false" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="50" column="8" lean-forward="false" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_platform.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
