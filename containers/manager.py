@@ -49,7 +49,7 @@ class Manager:
         """
         try:
             self._client.inspect_image(name)
-        except docker.errors.NotFound:
+        except docker.errors.ImageNotFound:
 
             self._log("Image not found, building image for ", name, " ...")
 
