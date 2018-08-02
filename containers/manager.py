@@ -60,10 +60,10 @@ class Manager:
 
             output = self._client.build(path=os.path.join(os.path.dirname(__file__), name), tag=name)
 
-            if self._build_info:
-                for line in output:
-                    # log is supplied as dict containing the required string
-                    # TODO parsed = ast.literal_eval(line.decode('utf-8').replace('\r\n', ''))
+            for line in output:
+                # log is supplied as dict containing the required string
+                # TODO parsed = ast.literal_eval(line.decode('utf-8').replace('\r\n', ''))
+                if self._build_info:
                     self._log(line.decode('utf-8').replace('\r', '').replace('\n', ''))
 
             if name != "honeypy":
