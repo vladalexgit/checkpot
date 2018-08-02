@@ -25,9 +25,9 @@ copyright = '2018, Vlad Florea, The Honeynet Project'
 author = 'Vlad Florea, The Honeynet Project'
 
 # The short X.Y version
-version = '0.1'
+version = '1.0'
 # The full version, including alpha/beta/rc tags
-release = '0.1-alpha'
+release = '1.0-beta'
 
 
 # -- General configuration ---------------------------------------------------
