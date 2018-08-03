@@ -7,6 +7,8 @@ class DefaultSMTPBannerTest(Test):
 
     name = "Default SMTP Banner Test"
     description = "Tests usage of default SMTP banners"
+    karma_value = 100
+    doc_file = "default_banner.html"
 
     def run(self):
         """Check if content matches any known content"""

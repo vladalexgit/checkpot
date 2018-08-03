@@ -38,13 +38,15 @@ _This tool is still in very early stages of development. Please keep this in min
    
         `git clone https://www.github.com/honeynet/checkpot.git`
    
-   4. Install python3 and pip using apt-get or tools like virtualenv or conda
+   4. Install `python3` (recommended version 3.5 or greater) and `pip` using apt-get or tools like virtualenv or conda
    
-   5. Install all required packages from requirements.txt:
+   5. Install `mercurial` using apt-get (or your distribution's default package manager). Mercurial is required for the download of some dependencies during the next step.
+   
+   6. Install all required packages from requirements.txt:
    
         `pip install -r requirements.txt`
    
-   6. _Optional:_ If you wish to run the automated tests or use the containers framework for development purposes install docker.io:
+   7. _Optional:_ If you wish to run the automated tests or use the containers framework for development purposes install docker.io:
    
         `sudo apt-get install docker.io`
 
@@ -70,4 +72,4 @@ We always try to make Checkpot as modular and easy to understand as possible so 
  
 If you are a honeypot developer you can help your users set it up properly by adding tests for your honeypot.
   
-A guide for contributors can be found here.
+A guide for contributors can be found [here](checkpot.readthedocs.io/en/latest/guides_for_contributors.html).

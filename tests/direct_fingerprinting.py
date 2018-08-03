@@ -6,6 +6,7 @@ class DirectFingerprintTest(Test):
 
     name = "Direct Fingerprint Test"
     description = "Check if the nmap scan directly fingerprints any service as a honeypot"
+    karma_value = 100
 
     def run(self):
         """Check if the nmap scan directly fingerprints any service as a honeypot"""
@@ -32,6 +33,7 @@ class OSServiceCombinationTest(Test):
 
     name = "OS Service combination test"
     description = "Check if the OS and running services combination makes sense"
+    karma_value = 90
 
     windows_exclusive = ['ms-sql', 'iis', 'windows', 'microsoft']
     linux_exclusive = []
@@ -77,6 +79,7 @@ class DefaultServiceCombinationTest(Test):
 
     name = "Default Service Combination Test"
     description = "Check if the running services combination is the default configuration for popular Honeypots"
+    karma_value = 50
 
     # currently known honeypot configurations
     # this only makes sense for honeypots with many open ports
@@ -131,6 +134,7 @@ class DuplicateServicesCheck(Test):
 
     name = "Duplicate Services Check"
     description = "Check if the machine is running duplicate services"
+    karma_value = 30
 
     def run(self):
         """Check if the machine is running duplicate services"""

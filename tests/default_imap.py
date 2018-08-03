@@ -7,6 +7,8 @@ class DefaultIMAPBannerTest(Test):
 
     name = "Default IMAP Banner Test"
     description = "Tests usage of default IMAP banners"
+    karma_value = 90
+    doc_file = "default_banner.html"
 
     def run(self):
         """Check if content matches any known content"""

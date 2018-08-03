@@ -6,6 +6,7 @@ class DefaultTemplateFileTest(Test):
 
     name = "Default Template File Test"
     description = "Tests usage of default running templates"
+    karma_value = 100
 
     def run(self):
         """Check if content matches any known content"""

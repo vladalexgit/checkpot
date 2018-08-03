@@ -13,6 +13,7 @@ Welcome to Checkpot's documentation!
    behind_the_scenes
    guides_for_contributors
    modules
+   individual_test_manuals
 
 Indices and tables
 ==================

@@ -36,7 +36,7 @@ class TestPlatform:
             test.run()
 
             if verbose:
-                self.print_results(test.result, test.name, test.karma, test.report)
+                self.print_results(test.result, test.name, test.karma, test.report, test.doc_link)
 
         self.__results = [(test.name, test.report, test.result, test.karma) for test in self.test_list]
 
@@ -77,7 +77,7 @@ class TestPlatform:
         return ok, warnings, unknown, kp
 
     @staticmethod
-    def print_results(test_result, test_name, test_karma, test_report):
+    def print_results(test_result, test_name, test_karma, test_report, test_doc_link):
 
         assert isinstance(test_result, TestResult)
 
@@ -101,7 +101,14 @@ class TestPlatform:
               "{:^25}".format(colored(text, color=color)) + " " +
               "{:>+10}".format(test_karma))
 
-        print("\n> " + test_report + "\n")
+        print("\n> " + test_report)
+
+        if test_result != TestResult.NOT_APPLICABLE and test_result != TestResult.OK:
+            # show the suggested doc page
+            print(">>>", colored("For further details please refer to:\n\t", color='yellow'), test_doc_link)
+
+        print("\n")
+
 
     @staticmethod
     def print_header():

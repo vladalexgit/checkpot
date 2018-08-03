@@ -22,12 +22,14 @@ class Test:
     default_name = "UnknownName"
     default_karma = 10
 
+    doc_online_root = "http://checkpot.readthedocs.io/en/master/test_manuals/"
+    doc_file = "_not_found_manual.html"
     description = default_description
     name = default_name
-    karma_value = default_karma # number of karma points this test is worth
+    karma_value = default_karma  # number of karma points this test is worth
     __report = default_report
     __result = TestResult.UNKNOWN
-    __karma = 0 # final karma determined automatically after the test has submitted its results
+    __karma = 0  # final karma determined automatically after the test has submitted its results
 
     def __init__(self, target_honeypot=None):
         """
@@ -36,6 +38,7 @@ class Test:
         :param target_honeypot: optional target Honeypot (can also be set later)
         """
         self.__target_honeypot = target_honeypot
+        self.doc_link = self.doc_online_root + self.doc_file
         self.reset()
 
     def run(self):
