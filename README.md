@@ -72,4 +72,4 @@ We always try to make Checkpot as modular and easy to understand as possible so 
  
 If you are a honeypot developer you can help your users set it up properly by adding tests for your honeypot.
   
-A guide for contributors can be found [here](checkpot.readthedocs.io/en/latest/guides_for_contributors.html).
+A guide for contributors can be found [here](https://checkpot.readthedocs.io/en/latest/guides_for_contributors.html).
