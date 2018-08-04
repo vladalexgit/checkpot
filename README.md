@@ -58,9 +58,9 @@ A typical usage example would be: `python checkpot.py -t <IP> -l 3`
 
 ## Documentation
 
-You can read the documentation [here](checkpot.readthedocs.io).
+You can read the documentation [here](https://checkpot.readthedocs.io/en/master/).
 
-If you still have doubts on how something works you can contact us anytime on the [official Honeynet slack channel](honeynetpublic.slack.com) or open an issue here on github. We are here to help.
+If you still have doubts on how something works you can contact us anytime on the [official Honeynet slack channel](https://honeynetpublic.slack.com/) or open an issue here on github. We are here to help.
 
 Something not explained properly in the docs? Feel free to submit a pull request!
 
