@@ -2,7 +2,7 @@ import socket
 
 from .test import *
 
-import urllib
+import http
 
 
 class SMTPTest(Test):
@@ -71,15 +71,19 @@ class HTTPTest(Test):
 
     def check_http_implemented(self, server_address, port=80):
 
-        # try a simple urllib.request first
+        # try a simple http.client request first
 
         try:
 
-            request = urllib.request.urlopen('http://' + self.target_honeypot.ip + ':' + str(port) + '/',
-                                             timeout=5)
+            conn = http.client.HTTPConnection(server_address, port=port, timeout=5)
+            conn.request('HEAD', '/')
+            conn.getresponse()
+
             self.set_result(TestResult.OK, "HTTP implemented")
 
         except Exception as e:
+            # as a fallback measure run a manual test
+            # TODO extend this
 
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.settimeout(10)
