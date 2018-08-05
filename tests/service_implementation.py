@@ -2,7 +2,6 @@ import socket
 
 from .test import *
 
-import urllib
 import http
 
 
