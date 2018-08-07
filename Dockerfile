@@ -1,4 +1,3 @@
-#FROM ubuntu:xenial
 FROM python:3.6
 
 RUN mkdir checkpot
