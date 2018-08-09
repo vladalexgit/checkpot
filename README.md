@@ -1,6 +1,6 @@
-![logo](docs/source/images/small_logo.png)
+![logo](docs/source/images/small_logo.png =100x100)
 
-#&nbsp;Checkpot
+#Checkpot
 
 Honeypot Checker
 
