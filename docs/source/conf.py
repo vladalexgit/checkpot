@@ -21,8 +21,8 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'checkpot'
-copyright = '2018, Vlad Florea, The Honeynet Project'
-author = 'Vlad Florea, The Honeynet Project'
+copyright = '2018, Vlad Florea. | Proudly developed during Google Summer of Code 2018'
+author = 'Vlad Florea'
 
 # The short X.Y version
 version = '1.0'
@@ -90,6 +90,8 @@ html_theme = 'alabaster'
 # documentation.
 #
 # html_theme_options = {}
+
+html_logo = './images/small_logo.png'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
