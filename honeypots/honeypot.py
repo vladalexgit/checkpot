@@ -272,7 +272,7 @@ class Honeypot:
 
                 self.css.append(content)
 
-            except (urllib.error.URLError, socket.error) as e:
+            except Exception as e:
                 if self.__debug:
                     print('Failed to fetch stylesheet for site', self.ip, str(port), e)
 

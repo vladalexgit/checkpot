@@ -397,26 +397,6 @@ def main():
                   },
                   port_range='-')
 
-    # test telnetlogger
-    honeypot_test('telnetlogger',
-                  {
-                      direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
-                      direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
-                      direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
-                      default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
-                      default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
-                      default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
-                      default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
-                      default_telnet.DefaultTelnetBannerTest(): TestResult.WARNING,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
-                      default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
-                  })
-
     # test the interface
     interface_test()
 
