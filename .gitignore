@@ -15,3 +15,7 @@
 # skip PyCharm files
 
 /.idea
+
+# skip accept file
+
+.accepted

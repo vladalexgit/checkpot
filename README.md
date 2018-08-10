@@ -21,9 +21,10 @@ All our tests are based on default settings or bugs that can be changed/avoided 
 
 ## Disclaimer
 
-#### USE CHECKPOT AT YOUR OWN RISK!
- 
-#### THE AUTHORS OF THIS TOOL ARE NOT RESPONSIBLE FOR WHAT YOU CHOOSE TO DO WITH IT! YOU USE THIS TOOL AT YOUR OWN RISK!
+##### As this software is PROVIDED WITH ABSOLUTELY NO WARRANTY OF ANY KIND,
+##### YOU USE THIS SOFTWARE AT YOUR OWN RISK!
+
+##### By using this tool YOU TAKE FULL LEGAL RESPONSIBILITY FOR ANY POSSIBLE OUTCOME!
  
 Keep in mind that this tool is based on port scanning and interacts with services on the target system in most cases. Even a simple port scan can be illegal in some jurisdictions. Please consult all laws that apply to your use case and make sure you understand exactly how the app works before you use it.
  
@@ -31,12 +32,12 @@ Our recommendation to make sure you stay out of trouble is to only scan systems 
 
 ## _Temporary Notice_
 
-_This tool is still in very early stages of development. Please keep this in mind when using it and consult with the authors before attempting to contribute._
+_This tool is still in very early stages of development. Please keep this in mind when using it and contact the authors if you notice any problems (you can find all contact info at the bottom of this page)._
 
 ## How to install Checkpot
 
    1. Read the Disclaimer above very carefully. Remember: USE CHECKPOT AT YOUR OWN RISK!
-   2. If you do not understand the disclaimer stop now
+   2. If you do not understand the disclaimer stop now!
    3. Clone this repository locally:
    
         `git clone https://www.github.com/honeynet/checkpot.git`
@@ -65,8 +66,6 @@ You can read the documentation [here](https://checkpot.readthedocs.io/en/master/
 
 If you still have doubts on how something works you can contact us anytime on the [official Honeynet slack channel](https://honeynetpublic.slack.com/) or open an issue here on github. We are here to help.
 
-Something not explained properly in the docs? Feel free to submit a pull request!
-
 ## Contributions
 
 We welcome bug reports, suggestions for new features, new tests or improvements for existing tests.
@@ -74,5 +73,13 @@ We welcome bug reports, suggestions for new features, new tests or improvements 
 We always try to make Checkpot as modular and easy to understand as possible so everyone can contribute.
  
 If you are a honeypot developer you can help your users set it up properly by adding tests for your honeypot.
-  
-A guide for contributors can be found [here](https://checkpot.readthedocs.io/en/latest/guides_for_contributors.html).
+
+A guide for contributors can be found [here](checkpot.readthedocs.io/en/latest/guides_for_contributors.html).
+
+## Contact
+
+If you still have doubts on how something works, you are facing any issues or have any suggestions you can contact us anytime on the [official Honeynet slack channel](https://gsoc-slack.honeynet.org/) or open an issue here on github. We are here to help!
+
+##
+
+Proudly developed during [Google Summer of Code 2018](https://summerofcode.withgoogle.com/projects/#4742143558549504) for [The Honeynet Project](https://www.honeynet.org/).
