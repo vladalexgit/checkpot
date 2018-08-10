@@ -1,6 +1,6 @@
 ![logo](docs/source/images/small_logo.png)
 
-#Checkpot
+# Checkpot
 
 Honeypot Checker
 
@@ -62,9 +62,9 @@ A typical usage example would be: `python checkpot.py -t <IP> -l 3`
 
 ## Documentation
 
-You can read the documentation [here](checkpot.readthedocs.io).
+You can read the documentation [here](https://checkpot.readthedocs.io/en/master/).
 
-Something not explained properly in the docs? Feel free to submit a pull request!
+If you still have doubts on how something works you can contact us anytime on the [official Honeynet slack channel](https://honeynetpublic.slack.com/) or open an issue here on github. We are here to help.
 
 ## Contributions
 
@@ -73,7 +73,7 @@ We welcome bug reports, suggestions for new features, new tests or improvements 
 We always try to make Checkpot as modular and easy to understand as possible so everyone can contribute.
  
 If you are a honeypot developer you can help your users set it up properly by adding tests for your honeypot.
-  
+
 A guide for contributors can be found [here](checkpot.readthedocs.io/en/latest/guides_for_contributors.html).
 
 ## Contact
