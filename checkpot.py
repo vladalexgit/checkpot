@@ -160,9 +160,9 @@ def main(argv):
     if options["scan_level"] > 2:
         pass
 
-    tp = TestPlatform(test_list, hp)
+    tp = TestPlatform(test_list, hp, )
 
-    tp.run_tests(verbose=True)
+    tp.run_tests(verbose=True, brief=options["brief"])
 
 
 if __name__ == '__main__':

@@ -20,11 +20,12 @@ class TestPlatform:
         self.__results = []
         self.target_honeypot = target_honeypot
 
-    def run_tests(self, verbose=False):
+    def run_tests(self, verbose=False, brief=False):
         """
         Runs the list of tests on the target Honeypot
 
         :param verbose: print results of each test
+        :param brief: disable output for N/A tests
         """
         if verbose:
             self.print_header()
@@ -36,6 +37,10 @@ class TestPlatform:
             test.run()
 
             if verbose:
+
+                if brief and test.result == TestResult.NOT_APPLICABLE:
+                    continue
+
                 self.print_results(test.result, test.name, test.karma, test.report, test.doc_link)
 
         self.__results = [(test.name, test.report, test.result, test.karma) for test in self.test_list]
