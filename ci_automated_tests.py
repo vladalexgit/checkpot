@@ -134,35 +134,40 @@ def interface_test():
     # TODO add tests for long options too
 
     parsed = argv_parser.parse(['checkpot.py', '-t', '172.17.0.2', '-O', '-p', '20-100,102'])
-    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 5, 'port_range': '20-100,102', 'fast': False}
+    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 5, 'port_range': '20-100,102', 'fast': False,
+                'brief': False}
 
     if parsed != expected:
         print("ERROR: parsed != expected")
         sys.exit(1)
 
     parsed = argv_parser.parse(['checkpot.py', '-t', '172.17.0.2', '-p', '20-1000'])
-    expected = {'target': '172.17.0.2', 'scan_os': False, 'scan_level': 5, 'port_range': '20-1000', 'fast': False}
+    expected = {'target': '172.17.0.2', 'scan_os': False, 'scan_level': 5, 'port_range': '20-1000', 'fast': False,
+                'brief': False}
 
     if parsed != expected:
         print("ERROR: parsed != expected")
         sys.exit(1)
 
     parsed = argv_parser.parse(['checkpot.py', '-t', '172.17.0.2', '-O', '-l', '3'])
-    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 3, 'port_range': None, 'fast': False}
+    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 3, 'port_range': None, 'fast': False,
+                'brief': False}
 
     if parsed != expected:
         print("ERROR: parsed != expected")
         sys.exit(1)
 
     parsed = argv_parser.parse(['checkpot.py', '-O', '-t', '172.17.0.2', '-l', '3', '-f'])
-    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 3, 'port_range': None, 'fast': True}
+    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 3, 'port_range': None, 'fast': True,
+                'brief': False}
 
     if parsed != expected:
         print("ERROR: parsed != expected")
         sys.exit(1)
 
     parsed = argv_parser.parse(['checkpot.py', '-O', '-t', '172.17.0.2', '-l', '3'])
-    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 3, 'port_range': None, 'fast': False}
+    expected = {'target': '172.17.0.2', 'scan_os': True, 'scan_level': 3, 'port_range': None, 'fast': False,
+                'brief': False}
 
     if parsed != expected:
         print("ERROR: parsed != expected")
@@ -185,274 +190,274 @@ def main():
         "under certain conditions; run `python checkpot.py --show c` for details.\n"
     )
 
-    # test amun
-    honeypot_test('amun',
-                  {
-                      direct_fingerprinting.DirectFingerprintTest(): TestResult.WARNING,
-                      direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.WARNING,
-                      direct_fingerprinting.DuplicateServicesCheck(): TestResult.WARNING,
-                      default_ftp.DefaultFTPBannerTest(): TestResult.WARNING,
-                      service_implementation.HTTPTest(): TestResult.OK,
-                      default_http.DefaultWebsiteTest(): TestResult.WARNING,
-                      default_http.DefaultGlastopfWebsiteTest(): TestResult.OK,
-                      default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
-                      default_http.CertificateValidationTest(): TestResult.WARNING,
-                      default_imap.DefaultIMAPBannerTest(): TestResult.WARNING,
-                      default_smtp.DefaultSMTPBannerTest(): TestResult.WARNING,
-                      service_implementation.SMTPTest(): TestResult.OK,
-                      default_telnet.DefaultTelnetBannerTest(): TestResult.UNKNOWN,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
-                      default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
-                  },
-                  port_range='-')
-
-    # test artillery
-    honeypot_test('artillery',
-                  {
-                      direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
-                      direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.WARNING,
-                      direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
-                      default_ftp.DefaultFTPBannerTest(): TestResult.OK,
-                      service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
-                      default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
-                      default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
-                      default_smtp.DefaultSMTPBannerTest(): TestResult.OK,
-                      service_implementation.SMTPTest(): TestResult.WARNING,
-                      default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.WARNING,  # random reply
-                      default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
-                  },
-                  port_range='-')
-
-    # test beartrap
-    honeypot_test('beartrap',
-                  {
-                      direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
-                      direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
-                      direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
-                      default_ftp.DefaultFTPBannerTest(): TestResult.WARNING,
-                      service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
-                      default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
-                      default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
-                      default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
-                      default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
-                      default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
-                  })
-
-    # test conpot
-    honeypot_test('conpot',
-                  {
-                      direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
-                      direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
-                      direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
-                      default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.HTTPTest(): TestResult.OK,
-                      default_http.DefaultWebsiteTest(): TestResult.OK,
-                      default_http.DefaultGlastopfWebsiteTest(): TestResult.OK,
-                      default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
-                      default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
-                      default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
-                      default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
-                      default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
-                      default_templates.DefaultTemplateFileTest(): TestResult.WARNING
-                  },
-                  port_range='0-501,503-1000')
-
-    # test cowrie
-    honeypot_test('cowrie',
-                  {
-                      direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
-                      direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
-                      direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
-                      default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
-                      default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
-                      default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
-                      default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
-                      default_telnet.DefaultTelnetBannerTest(): TestResult.WARNING,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.OK,
-                      default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
-                  },
-                  port_range='-')
-
-    # test dionaea
-    honeypot_test('dionaea',
-                  {
-                      direct_fingerprinting.DirectFingerprintTest(): TestResult.WARNING,
-                      direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.WARNING,
-                      direct_fingerprinting.DuplicateServicesCheck(): TestResult.WARNING,
-                      default_ftp.DefaultFTPBannerTest(): TestResult.WARNING,
-                      service_implementation.HTTPTest(): TestResult.OK,
-                      default_http.DefaultWebsiteTest(): TestResult.WARNING,
-                      default_http.DefaultGlastopfWebsiteTest(): TestResult.OK,
-                      default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
-                      default_http.CertificateValidationTest(): TestResult.WARNING,
-                      default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
-                      default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
-                      default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
-                      default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
-                  },
-                  port_range='-')
-
-    # test glastopf
-    honeypot_test('glastopf',
-                  {
-                      direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
-                      direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
-                      direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
-                      default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.HTTPTest(): TestResult.OK,
-                      default_http.DefaultWebsiteTest(): TestResult.OK,
-                      default_http.DefaultGlastopfWebsiteTest(): TestResult.WARNING,
-                      default_http.DefaultStylesheetTest(): TestResult.WARNING,
-                      default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
-                      default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
-                      default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
-                      default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
-                      default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
-                  })
-
-    # test honeypy
-    honeypot_test('honeypy',
-                  {
-                      direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
-                      direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.WARNING,
-                      direct_fingerprinting.DuplicateServicesCheck(): TestResult.WARNING,
-                      default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
-                      default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
-                      default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
-                      default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
-                      default_telnet.DefaultTelnetBannerTest(): TestResult.WARNING,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
-                      default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
-                  },
-                  port_range='-')
-
-    # test dionaea
-    honeypot_test('honeything',
-                  {
-                      direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
-                      direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
-                      direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
-                      default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.HTTPTest(): TestResult.OK,
-                      default_http.DefaultWebsiteTest(): TestResult.WARNING,
-                      default_http.DefaultGlastopfWebsiteTest(): TestResult.OK,
-                      default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
-                      default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
-                      default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
-                      default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
-                      default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
-                      default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
-                  })
-
-    # test honeytrap
-    honeypot_test('honeytrap',
-                  {
-                      direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
-                      direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
-                      direct_fingerprinting.DuplicateServicesCheck(): TestResult.WARNING,
-                      default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
-                      default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
-                      default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
-                      default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
-                      default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.UNKNOWN,
-                      default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
-                  },
-                  port_range='-')
-
-    # test kippo
-    honeypot_test('kippo',
-                  {
-                    direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
-                    direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
-                    direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
-                    default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
-                    service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
-                    default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
-                    default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
-                    default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
-                    default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
-                    default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
-                    default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
-                    service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
-                    default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
-                    old_version_bugs.KippoErrorMessageBugTest(): TestResult.OK,
-                    default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
-                  },
-                  port_range='-')
-
-    # test mtpot
-    honeypot_test('mtpot',
-                  {
-                      direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
-                      direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
-                      direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
-                      default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
-                      default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
-                      default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
-                      default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
-                      default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
-                      default_telnet.DefaultTelnetBannerTest(): TestResult.WARNING,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
-                      default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
-                  })
-
-    # test shockpot
-    honeypot_test('shockpot',
-                  {
-                      direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
-                      direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
-                      direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
-                      default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.HTTPTest(): TestResult.OK,
-                      default_http.DefaultWebsiteTest(): TestResult.WARNING,
-                      default_http.DefaultGlastopfWebsiteTest(): TestResult.OK,
-                      default_http.DefaultStylesheetTest(): TestResult.OK,
-                      default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
-                      default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
-                      default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
-                      service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
-                      default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
-                      old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
-                      default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
-                  },
-                  port_range='-')
+    # # test amun
+    # honeypot_test('amun',
+    #               {
+    #                   direct_fingerprinting.DirectFingerprintTest(): TestResult.WARNING,
+    #                   direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.WARNING,
+    #                   direct_fingerprinting.DuplicateServicesCheck(): TestResult.WARNING,
+    #                   default_ftp.DefaultFTPBannerTest(): TestResult.WARNING,
+    #                   service_implementation.HTTPTest(): TestResult.OK,
+    #                   default_http.DefaultWebsiteTest(): TestResult.WARNING,
+    #                   default_http.DefaultGlastopfWebsiteTest(): TestResult.OK,
+    #                   default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.CertificateValidationTest(): TestResult.WARNING,
+    #                   default_imap.DefaultIMAPBannerTest(): TestResult.WARNING,
+    #                   default_smtp.DefaultSMTPBannerTest(): TestResult.WARNING,
+    #                   service_implementation.SMTPTest(): TestResult.OK,
+    #                   default_telnet.DefaultTelnetBannerTest(): TestResult.UNKNOWN,
+    #                   old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
+    #                   default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
+    #               },
+    #               port_range='-')
+    #
+    # # test artillery
+    # honeypot_test('artillery',
+    #               {
+    #                   direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
+    #                   direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.WARNING,
+    #                   direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
+    #                   default_ftp.DefaultFTPBannerTest(): TestResult.OK,
+    #                   service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
+    #                   default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   default_smtp.DefaultSMTPBannerTest(): TestResult.OK,
+    #                   service_implementation.SMTPTest(): TestResult.WARNING,
+    #                   default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   old_version_bugs.KippoErrorMessageBugTest(): TestResult.WARNING,  # random reply
+    #                   default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
+    #               },
+    #               port_range='-')
+    #
+    # # test beartrap
+    # honeypot_test('beartrap',
+    #               {
+    #                   direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
+    #                   direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
+    #                   direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
+    #                   default_ftp.DefaultFTPBannerTest(): TestResult.WARNING,
+    #                   service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
+    #                   default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
+    #                   default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
+    #                   default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
+    #               })
+    #
+    # # test conpot
+    # honeypot_test('conpot',
+    #               {
+    #                   direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
+    #                   direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
+    #                   direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
+    #                   default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.HTTPTest(): TestResult.OK,
+    #                   default_http.DefaultWebsiteTest(): TestResult.OK,
+    #                   default_http.DefaultGlastopfWebsiteTest(): TestResult.OK,
+    #                   default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
+    #                   default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
+    #                   default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
+    #                   default_templates.DefaultTemplateFileTest(): TestResult.WARNING
+    #               },
+    #               port_range='0-501,503-1000')
+    #
+    # # test cowrie
+    # honeypot_test('cowrie',
+    #               {
+    #                   direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
+    #                   direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
+    #                   direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
+    #                   default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
+    #                   default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
+    #                   default_telnet.DefaultTelnetBannerTest(): TestResult.WARNING,
+    #                   old_version_bugs.KippoErrorMessageBugTest(): TestResult.OK,
+    #                   default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
+    #               },
+    #               port_range='-')
+    #
+    # # test dionaea
+    # honeypot_test('dionaea',
+    #               {
+    #                   direct_fingerprinting.DirectFingerprintTest(): TestResult.WARNING,
+    #                   direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.WARNING,
+    #                   direct_fingerprinting.DuplicateServicesCheck(): TestResult.WARNING,
+    #                   default_ftp.DefaultFTPBannerTest(): TestResult.WARNING,
+    #                   service_implementation.HTTPTest(): TestResult.OK,
+    #                   default_http.DefaultWebsiteTest(): TestResult.WARNING,
+    #                   default_http.DefaultGlastopfWebsiteTest(): TestResult.OK,
+    #                   default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.CertificateValidationTest(): TestResult.WARNING,
+    #                   default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
+    #                   default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
+    #                   default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
+    #               },
+    #               port_range='-')
+    #
+    # # test glastopf
+    # honeypot_test('glastopf',
+    #               {
+    #                   direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
+    #                   direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
+    #                   direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
+    #                   default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.HTTPTest(): TestResult.OK,
+    #                   default_http.DefaultWebsiteTest(): TestResult.OK,
+    #                   default_http.DefaultGlastopfWebsiteTest(): TestResult.WARNING,
+    #                   default_http.DefaultStylesheetTest(): TestResult.WARNING,
+    #                   default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
+    #                   default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
+    #                   default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
+    #                   default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
+    #               })
+    #
+    # # test honeypy
+    # honeypot_test('honeypy',
+    #               {
+    #                   direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
+    #                   direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.WARNING,
+    #                   direct_fingerprinting.DuplicateServicesCheck(): TestResult.WARNING,
+    #                   default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
+    #                   default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
+    #                   default_telnet.DefaultTelnetBannerTest(): TestResult.WARNING,
+    #                   old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
+    #                   default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
+    #               },
+    #               port_range='-')
+    #
+    # # test dionaea
+    # honeypot_test('honeything',
+    #               {
+    #                   direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
+    #                   direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
+    #                   direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
+    #                   default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.HTTPTest(): TestResult.OK,
+    #                   default_http.DefaultWebsiteTest(): TestResult.WARNING,
+    #                   default_http.DefaultGlastopfWebsiteTest(): TestResult.OK,
+    #                   default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
+    #                   default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
+    #                   default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
+    #                   default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
+    #               })
+    #
+    # # test honeytrap
+    # honeypot_test('honeytrap',
+    #               {
+    #                   direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
+    #                   direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
+    #                   direct_fingerprinting.DuplicateServicesCheck(): TestResult.WARNING,
+    #                   default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
+    #                   default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
+    #                   default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   old_version_bugs.KippoErrorMessageBugTest(): TestResult.UNKNOWN,
+    #                   default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
+    #               },
+    #               port_range='-')
+    #
+    # # test kippo
+    # honeypot_test('kippo',
+    #               {
+    #                 direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
+    #                 direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
+    #                 direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
+    #                 default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                 service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
+    #                 default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
+    #                 default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
+    #                 default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
+    #                 default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
+    #                 default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                 default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                 service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
+    #                 default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
+    #                 old_version_bugs.KippoErrorMessageBugTest(): TestResult.OK,
+    #                 default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
+    #               },
+    #               port_range='-')
+    #
+    # # test mtpot
+    # honeypot_test('mtpot',
+    #               {
+    #                   direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
+    #                   direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
+    #                   direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
+    #                   default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.HTTPTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultWebsiteTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultGlastopfWebsiteTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.DefaultStylesheetTest(): TestResult.NOT_APPLICABLE,
+    #                   default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
+    #                   default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
+    #                   default_telnet.DefaultTelnetBannerTest(): TestResult.WARNING,
+    #                   old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
+    #                   default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
+    #               })
+    #
+    # # test shockpot
+    # honeypot_test('shockpot',
+    #               {
+    #                   direct_fingerprinting.DirectFingerprintTest(): TestResult.OK,
+    #                   direct_fingerprinting.DefaultServiceCombinationTest(): TestResult.OK,
+    #                   direct_fingerprinting.DuplicateServicesCheck(): TestResult.OK,
+    #                   default_ftp.DefaultFTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.HTTPTest(): TestResult.OK,
+    #                   default_http.DefaultWebsiteTest(): TestResult.WARNING,
+    #                   default_http.DefaultGlastopfWebsiteTest(): TestResult.OK,
+    #                   default_http.DefaultStylesheetTest(): TestResult.OK,
+    #                   default_http.CertificateValidationTest(): TestResult.NOT_APPLICABLE,
+    #                   default_imap.DefaultIMAPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   default_smtp.DefaultSMTPBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   service_implementation.SMTPTest(): TestResult.NOT_APPLICABLE,
+    #                   default_telnet.DefaultTelnetBannerTest(): TestResult.NOT_APPLICABLE,
+    #                   old_version_bugs.KippoErrorMessageBugTest(): TestResult.NOT_APPLICABLE,
+    #                   default_templates.DefaultTemplateFileTest(): TestResult.NOT_APPLICABLE
+    #               },
+    #               port_range='-')
 
     # test the interface
     interface_test()
