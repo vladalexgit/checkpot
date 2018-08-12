@@ -17,6 +17,7 @@ class DefaultTelnetBannerTest(Test):
             b'\xff\xfb\x03\xff\xfb\x01\xff\xfd\x1f\xff\xfd\x18\r\nlogin: ': "telnetlogger",
             b'\xff\xfd\x1flogin: ': "cowrie",
             b'\xff\xfb\x01\xff\xfb\x03\xff\xfc\'\xff\xfe\x01\xff\xfd\x03\xff\xfe"\xff\xfd\'\xff\xfd\x18\xff\xfe\x1f': "mtpot",
+            b'\xff\xfb\x01\xff\xfb\x03': "mtpot",
             b'\xff\xfb\x01': "mtpot",
             b'Debian GNU/Linux 7\r\nLogin: ': "honeypy"
         }
@@ -34,6 +35,8 @@ class DefaultTelnetBannerTest(Test):
             except ScanFailure as e:
                 self.set_result(TestResult.UNKNOWN, e)
                 continue
+
+            print(banner)
 
             if banner in known_banners:
                 self.set_result(TestResult.WARNING, "Default", known_banners[banner], "banner used")

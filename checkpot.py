@@ -58,17 +58,20 @@ from tests import *
 
 
 def first_run():
+    """Display terms the the first time user runs app"""
 
     acc_file = os.path.join(os.path.dirname(__file__), ".accepted")
 
     if os.path.isfile(acc_file):
         return
 
-    print("As this program is PROVIDED WITH ABSOLUTELY NO WARRANTY OF ANY KIND,\n"
-            "YOU USE THIS PROGRAM AT YOUR OWN RISK!\n"
-            "Please consult README.md for more information.\n"
-            "By using this tool YOU TAKE FULL LEGAL RESPONSIBILITY FOR ANY\n"
-            "POSSIBLE OUTCOME.\n")
+    print(
+        "As this program is PROVIDED WITH ABSOLUTELY NO WARRANTY OF ANY KIND,\n"
+        "YOU USE THIS PROGRAM AT YOUR OWN RISK!\n"
+        "Please consult README.md for more information.\n"
+        "By using this tool YOU TAKE FULL LEGAL RESPONSIBILITY FOR ANY\n"
+        "POSSIBLE OUTCOME.\n"
+    )
 
     print('Do you agree to these terms?')
     ans = input('Your answer [type in "i agree"/"no"]: ')
@@ -155,10 +158,6 @@ def main(argv):
         test_list.append(default_templates.DefaultTemplateFileTest())
 
     if options["scan_level"] > 2:
-        pass
-    if options["scan_level"] > 3:
-        pass
-    if options["scan_level"] > 4:
         pass
 
     tp = TestPlatform(test_list, hp)

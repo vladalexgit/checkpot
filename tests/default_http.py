@@ -93,8 +93,13 @@ class DefaultGlastopfWebsiteTest(Test):
         """Check if content matches known content"""
 
         try:
-            request = urllib.request.urlopen('http://www.gutenberg.org/files/42671/42671.txt', timeout=10)
+            try:
+                request = urllib.request.urlopen('http://www.gutenberg.org/files/42671/42671.txt', timeout=10)
+            except:
+                request = urllib.request.urlopen('http://www.gutenberg.org/files/42671/42671.txt', timeout=10)
+
             book = request.read().decode(request.headers.get_content_charset())
+
         except urllib.error.URLError:
             self.set_result(TestResult.UNKNOWN, 'failed to download gutenberg.org book content')
             return
