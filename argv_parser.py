@@ -61,6 +61,7 @@ def print_usage():
     print("\t-p / --ports <port range> -> scan a specific range of ports (e.g. 20-100)."
           " For all ports use -p -")
     print("\t-f / --fast -> Uses -Pn and -T5 for faster scans on local connections")
+    print("\t-b / --brief -> Disables NOT APPLICABLE tests for shorter output")
     print("\t-s / --show <c/w> -> Show copyright/warranty information")
 
 
@@ -77,11 +78,12 @@ def parse(argv):
         "scan_os": False,
         "scan_level": 5,
         "port_range": None,
-        "fast": False
+        "fast": False,
+        "brief": False
     }
 
-    short_options = 't:l:Op:fs:'
-    long_options = ['target=', 'level=', 'os-scan', 'ports', 'fast', 'show=']
+    short_options = 't:l:Op:fbs:'
+    long_options = ['target=', 'level=', 'os-scan', 'ports', 'fast', 'brief', 'show=']
 
     try:
         options, values = getopt.getopt(argv[1:], short_options, long_options)
@@ -102,6 +104,8 @@ def parse(argv):
             parsed["port_range"] = value
         elif option in ('-f', '--fast'):
             parsed["fast"] = True
+        elif option in ('-b', '--brief'):
+            parsed["brief"] = True
         elif option in ('-s', '--show'):
             if value == 'c':
                 print(
@@ -179,7 +183,7 @@ def parse(argv):
 
             exit(0)
 
-    # validate target
+    # validate target IP
     # TODO convert this to use exceptions if it gets too big
 
     if parsed["target"] is None:
