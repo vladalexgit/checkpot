@@ -9,7 +9,7 @@ Honeypot Checker
 
 ## Introduction
 
-Checkpot is aimed at security researchers who wish to check that their honeypots are properly set up so they can be as hard to detect as possible and attract high-quality traffic. According to recent studies, honeypots using default or incorrect settings are surprisingly wide spread all over the internet so we consider Checkpot to be very relevant.
+Checkpot is a honeypot checker: a tool meant to detect mistakes in the configuration of honeypots. It is aimed at security researchers who wish to check that their honeypots are properly set up, so they can be as hard to detect as possible and attract high-quality traffic. According to recent studies, honeypots using default or incorrect settings are surprisingly wide spread all over the internet so we consider Checkpot to be very relevant.
 
  _“Many researchers fail deploying honeypots that are easily detectable. There are trivial mistakes people can make when deploying a honeypot like leaving the default settings or templates. On the other hand there are some non-direct indicators of a honeypot including but not limited to running both Windows and Linux services on the same box or having two different ssh servers listening on the same IP. The goal of this project would be to create a simple and open source honeypot detection tool that would scan an IP looking for any traces of a honeypot and create a report with findings and their severity. Using this tool a researcher can scan their system before putting it online or in production and based on the report perform the necessary tuning.”_ - [Honeynet GSoC 2018 project proposal](https://www.honeynet.org/gsoc2018/ideas#honeypot-detection)
 
@@ -70,7 +70,7 @@ If you still have doubts on how something works you can contact us anytime on th
 
 We welcome bug reports, suggestions for new features, new tests or improvements for existing tests.
  
-We always try to make Checkpot as modular and easy to understand as possible so everyone can contribute.
+We always strive to make Checkpot as modular and easy to understand as possible so everyone can contribute.
  
 If you are a honeypot developer you can help your users set it up properly by adding tests for your honeypot.
 
