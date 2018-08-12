@@ -21,7 +21,7 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'checkpot'
-copyright = '2018, Vlad Florea. | Proudly developed during Google Summer of Code 2018'
+copyright = '2018, Vlad Florea. | Proudly developed during Google Summer of Code 2018 for The Honeynet Project'
 author = 'Vlad Florea'
 
 # The short X.Y version

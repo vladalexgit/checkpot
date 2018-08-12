@@ -14,6 +14,7 @@ class DefaultStylesheetTest(Test):
     name = "Default Website Stylesheet Test"
     description = "Test unchanged website stylesheet"
     karma_value = 30
+    doc_file = 'default_stylesheet.html'
 
     def run(self):
         """Check if content matches known content"""
@@ -48,6 +49,7 @@ class DefaultWebsiteTest(Test):
     name = "Default Website Test"
     description = "Test unchanged website content"
     karma_value = 60
+    doc_file = 'default_website.html'
 
     def run(self):
         """Check if webpage has a known hash"""
@@ -88,6 +90,7 @@ class DefaultGlastopfWebsiteTest(Test):
     name = "Default Glastopf Website Content Test"
     description = "Test unchanged source for website content"
     karma_value = 60
+    doc_file = 'default_glastopf_site.html'
 
     def run(self):
         """Check if content matches known content"""
@@ -141,6 +144,7 @@ class CertificateValidationTest(Test):
     name = "Certificate Validation Test"
     description = "Check validity of SSL certificates"
     karma_value = 20
+    doc_file = 'invalid_certificate.html'
 
     def run(self):
         """Check validity of SSL certificates"""
