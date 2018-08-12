@@ -30,5 +30,4 @@ install:
   # - docker image build --tag checkpot .
 
 script:
-  - python containers/build_all.py
-  - python ci_automated_tests.py
+  - python containers/build_all.py && python ci_automated_tests.py
