@@ -104,27 +104,78 @@ def parse(argv):
             parsed["fast"] = True
         elif option in ('-s', '--show'):
             if value == 'c':
-                pass
+                print(
+                    "Checkpot - Honeypot Checker\n"
+                    "Copyright (C) 2018  Vlad Florea\n\n"
+
+                    "This program is free software: you can redistribute it and/or modify\n"
+                    "it under the terms of the GNU General Public License as published by\n"
+                    "the Free Software Foundation, version 3 of the License.\n\n"
+
+                    "DISCLAIMER: All prerequisites (containers, additional programs, etc.)\n"
+                    "and libraries that might be needed to run this program are property\n"
+                    "of their original authors and carry their own separate licenses that\n"
+                    "you should read to inform yourself about their terms.\n\n"
+
+                    "This program is distributed in the hope that it will be useful,\n"
+                    "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+                    "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+                    "GNU General Public License for more details.\n\n"
+
+                    "As this software is PROVIDED WITH ABSOLUTELY NO WARRANTY OF ANY KIND,\n"
+                    "YOU USE THIS SOFTWARE AT YOUR OWN RISK!\n\n"
+
+                    "By using this tool YOU TAKE FULL LEGAL RESPONSIBILITY FOR ANY\n"
+                    "POSSIBLE OUTCOME.\n\n"
+
+                    "We strongly recommend that you read all the information in the README.md\n"
+                    "file (found in the root folder of this project) and even the\n"
+                    "documentation (which you can find locally in the /docs/ folder or\n"
+                    "at http://checkpot.readthedocs.io/) to make sure you fully\n"
+                    "understand how this tool works and consult all laws that apply\n"
+                    "to your use case.\n\n"
+
+                    "We strongly suggest that you keep this notice intact for all files.\n"
+
+                    "You should have received a copy of the GNU General Public License\n"
+                    "along with this program.  If not, see <https://www.gnu.org/licenses/>.\n"
+                    "The local copy of the license should be located in the root folder of the app\n"
+                    "in the file gpl-3.0.txt.\n\n"
+
+                    "You can contact the author and team at any time via the Checkpot official\n"
+                    "GitHub page: https://github.com/honeynet/checkpot or via the Honeynet\n"
+                    "official Slack channel: https://gsoc-slack.honeynet.org/ or\n"
+                    "                        https://honeynetpublic.slack.com/\n\n"
+
+                    "You can contact us at any time and with any question, we are here to help!\n\n"
+
+                    "If you consider any information in this copyright notice might be incorrect,\n"
+                    "outdated, arises any questions, raises any problems, etc. please contact us\n"
+                    "and we will make it our top priority to fix it. We have the deepest respect\n"
+                    "for the work of all authors and for all of our users.\n"
+                )
+
             elif value == 'w':
-                print("THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY\n"
-                        "APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT\n"
-                        'HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY\n'
-                        "OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,\n"
-                        "THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\n"
-                        "PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM\n"
-                        "IS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF\n"
-                        "ALL NECESSARY SERVICING, REPAIR OR CORRECTION.\n"
-                        "\n"
-                        "IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING\n"
-                        "WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS\n"
-                        "THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY\n"
-                        "GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE\n"
-                        "USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF\n"
-                        "DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD\n"
-                        "PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),\n"
-                        "EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF\n"
-                        "SUCH DAMAGES.\n"
-                      )
+                print(
+                    "THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY\n"
+                    "APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT\n"
+                    'HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY\n'
+                    "OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,\n"
+                    "THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\n"
+                    "PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM\n"
+                    "IS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF\n"
+                    "ALL NECESSARY SERVICING, REPAIR OR CORRECTION.\n"
+                    "\n"
+                    "IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING\n"
+                    "WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS\n"
+                    "THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY\n"
+                    "GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE\n"
+                    "USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF\n"
+                    "DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD\n"
+                    "PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),\n"
+                    "EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF\n"
+                    "SUCH DAMAGES.\n"
+                )
 
             exit(0)
 

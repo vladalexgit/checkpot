@@ -35,6 +35,8 @@ class DefaultTelnetBannerTest(Test):
                 self.set_result(TestResult.UNKNOWN, e)
                 continue
 
+            print("banner")
+
             if banner in known_banners:
                 self.set_result(TestResult.WARNING, "Default", known_banners[banner], "banner used")
                 return
