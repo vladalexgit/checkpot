@@ -11,6 +11,7 @@ class SMTPTest(Test):
     name = "SMTP Test"
     description = "Tests SMTP service implementation"
     karma_value = 60
+    doc_file = 'implementation.html'
 
     def run(self):
         """Verify service implements all methods in the SMTP specification"""
@@ -53,6 +54,7 @@ class HTTPTest(Test):
     name = "HTTP Test"
     description = "Tests HTTP service implementation"
     karma_value = 60
+    doc_file = 'implementation.html'
 
     def run(self):
         """Verify service implements all methods in the HTTP specification"""

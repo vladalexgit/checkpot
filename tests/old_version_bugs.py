@@ -8,6 +8,7 @@ class KippoErrorMessageBugTest(Test):
     name = "Kippo Error Message Bug Test"
     description = "Tests presence of an obsolte version of kippo"
     karma_value = 100
+    doc_file = 'old_version_bugs.html'
 
     def run(self):
         """Check if content matches any known content"""
