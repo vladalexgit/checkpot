@@ -1,4 +1,4 @@
-![logo](docs/source/images/small_logo.png)
+<img align="left" src="docs/source/images/small_logo.png">
 
 # Checkpot
 
@@ -6,6 +6,9 @@ Honeypot Checker
 
 [![Build Status](https://travis-ci.org/vladalexgit/checkpot.svg?branch=master)](https://travis-ci.org/vladalexgit/checkpot)
 [![Documentation Status](https://readthedocs.org/projects/checkpot/badge/?version=latest)](http://checkpot.readthedocs.io/en/latest/?badge=latest)
+
+<br />
+<br />
 
 ## Introduction
 
