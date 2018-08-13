@@ -1,4 +1,4 @@
-<img align="left" src="small_minimal.png">
+<img align="left" src="docs/source/images/small_logo.png">
 
 # Checkpot
 ## _Final report for GSoC 2018_
